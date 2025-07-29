@@ -55,7 +55,7 @@ const TradingPage = () => {
   if (windowWidth < 905) withDesktop = 'w-[35%]';
 
   return (
-    <div className={`h-[92vh] flex flex-col gap-2 xl:gap-4 container-trading relative z-40  ${isMobile ? 'px-2' : 'px-2'
+    <div className={`h-[92vh] flex flex-col gap-2 xl:gap-4 relative z-40 pt-4 ${isMobile ? 'px-2' : 'px-2'
       }`}>
       {!isMobile && <Interface />}
 
@@ -114,25 +114,20 @@ const TradingPage = () => {
             {
               !isSmallScreen && (
                 <>
-                  <Panel defaultSize={17} minSize={12} maxSize={25} className="h-full overflow-hidden">
-                    <div className={`flex ${isMobile ? 'flex-row w-full lg:h-[200px]' : 'flex-col '} xl:gap-2 gap-1 lg:overflow-hidden`}>
+                  <div className={`flex ${isMobile ? 'flex-row w-full lg:h-[200px]' : 'flex-col '} xl:gap-2 gap-1 lg:overflow-hidden mr-4`}>
                       <TokenInfo />
                       {!isMobile && <ListToken />}
                     </div>
-                  </Panel>
-                  <PanelResizeHandle className="w-[2px] m-1 bg-theme-neutral-800 hover:bg-neutral-600 transition-colors relative z-400" />
                 </>
               )
             }
 
-           
-
             {/* Center Column */}
-            <Panel defaultSize={65} minSize={40} maxSize={95} className="lg:overflow-hidden relative">
+            <Panel minSize={40} maxSize={95} className="lg:overflow-hidden relative">
               <PanelGroup direction="vertical" className="h-full">
                 {/* Chart Panel */}
                 <Panel defaultSize={60} minSize={30} maxSize={80} className="lg:overflow-hidden relative">
-                  <div className='dark:bg-theme-neutral-1000 shadow-inset bg-white rounded-xl p-2 md:p-4 overflow-auto transition-all duration-100 relative h-full'>
+                  <div className='dark:bg-theme-neutral-1000 shadow-inset bg-white rounded-md p-2 md:p-4 overflow-auto transition-all duration-100 relative h-full'>
                     <TradingViewChart className='h-full' />
                   </div>
                 </Panel>
@@ -142,7 +137,7 @@ const TradingPage = () => {
 
                 {/* Transaction History Panel */}
                 <Panel defaultSize={40} minSize={20} maxSize={60} className="lg:overflow-hidden relative">
-                  <div className='transition-all duration-100 overflow-hidden rounded-xl flex h-full'>
+                  <div className='transition-all duration-100 overflow-hidden rounded-md flex h-full'>
                     <div className='flex flex-1 w-full'>
                       <TransactionHistory />
                     </div>
@@ -155,7 +150,7 @@ const TradingPage = () => {
             <PanelResizeHandle className="w-[2px] m-1 bg-theme-neutral-800 hover:bg-neutral-600 transition-colors relative z-400" />
 
             {/* Right Column */}
-            <Panel defaultSize={20} minSize={5} maxSize={30} className="h-full overflow-hidden">
+            <Panel defaultSize={18} minSize={5} maxSize={30} className="h-full overflow-hidden">
               <div className='h-full overflow-auto'>
                 <Control />
               </div>
@@ -168,14 +163,14 @@ const TradingPage = () => {
             <div className="table sm:flex flex-col w-full h-full lg:overflow-hidden relative">
               <div
                 style={{ height: '300px' }}
-                className='dark:bg-theme-neutral-1000 shadow-inset bg-white rounded-xl p-2 md:p-4 overflow-auto transition-all duration-100 relative'
+                className='dark:bg-theme-neutral-1000 shadow-inset bg-white rounded-md p-2 md:p-4 overflow-auto transition-all duration-100 relative'
               >
                 <ChartMobile className='h-full' />
               </div>
 
               <div className='h-1 m-1 md:m-2 bg-theme-neutral-800 cursor-row-resize hover:bg-neutral-600 transition-colors relative z-400' />
 
-              <div className='transition-all duration-100 overflow-hidden rounded-xl flex'>
+              <div className='transition-all duration-100 overflow-hidden rounded-md flex'>
                 <div className='flex flex-1 w-full md:h-full h-[50vh] overflow-scroll'>
                   <TransactionHistory />
                 </div>
