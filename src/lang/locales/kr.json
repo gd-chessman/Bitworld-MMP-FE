@@ -1,5 +1,9 @@
 {
   "connect": "로그인",
+  "errors": {
+    "notFound": "페이지를 찾을 수 없습니다",
+    "goHome": "홈으로 이동"
+  },
   "phantomWarning": {
     "title": "알림",
     "message": "카피 트레이딩 기능을 사용하려면 Google 계정 또는 Telegram 계정으로 로그인해야 합니다.",
@@ -894,7 +898,8 @@
       "copied": "복사됨!",
       "copied_description": "주소가 클립보드에 복사되었습니다"
     },
-    "redirecting": "리다이렉팅 중..."
+    "redirecting": "리다이렉팅 중...",
+    "noData": "데이터가 없습니다"
   },
   "universal_account": {
     "google_auth_code": "Google 인증 코드",
@@ -1034,7 +1039,12 @@
     "country": "국가",
     "namePlaceholder": "이름을 입력하세요",
     "nicknamePlaceholder": "닉네임을 입력하세요",
-    "submit": "제출"
+    "submit": "제출",
+    "uid": "Bittworld UID 입력",
+    "nameRequired": "이름은 필수입니다",
+    "nicknameRequired": "닉네임은 필수입니다",
+    "submitFailed": "제출에 실패했습니다",
+    "submitSuccess": "제출에 성공했습니다"
   },
   "security": {
     "enter_password": "비밀번호를 입력하세요",
@@ -1220,6 +1230,7 @@
       "transactionHistory": "거래 내역",
       "member": "멤버",
       "creator": "생성자",
+      "stake": "스테이크",
       "stakeAmount": "스테이크 수량",
       "joinDate": "가입일",
       "role": "역할",
