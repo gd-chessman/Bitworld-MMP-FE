@@ -230,7 +230,7 @@ export default function TradingPanel({
                 order_qlty: Number(amount),
             })
 
-            if (result.success) {
+            if (result.status === 201 || result.status === 200) {
                 setAmount("0.00")
                 setPercentage(0)
                 setAmountUSD("0.00")
