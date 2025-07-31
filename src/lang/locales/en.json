@@ -472,7 +472,11 @@
     "confirmDeleteWalletAction": "Delete wallet",
     "cancel": "Cancel",
     "delete": "Delete",
-    "walletNameNote": "Note: Wallet name and nickname cannot be duplicated with existing wallet names and nicknames"
+    "walletNameNote": "Note: Wallet name and nickname cannot be duplicated with existing wallet names and nicknames",
+    "solBalance": "SOL Balance",
+    "usdtBalance": "USDT Balance",
+    "totalPortfolio": "Total Portfolio",
+    "tokens": "Tokens"
   },
   "searchPlaceholder": "Token Name/ Address",
   "languages": {
