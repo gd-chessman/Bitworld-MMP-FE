@@ -54,7 +54,7 @@ export const CustomRangeSlider: React.FC<CustomRangeSliderProps> = ({
                 />
                 
                 {/* Labels positioned over the slider track */}
-                <ul className="range-labels absolute top-3 left-0 right-0 flex justify-between pointer-events-none z-20">
+                <ul className="range-labels absolute top-2.5 2xl:top-3 left-0 2xl:left-[-1px] right-0 flex justify-between pointer-events-none z-20">
                     {marks.map((mark) => {
                         const isActive = activeMarks.includes(mark);
                         const isSelected = value >= mark;
@@ -67,7 +67,7 @@ export const CustomRangeSlider: React.FC<CustomRangeSliderProps> = ({
                                 }`}
                             >
                                 <div
-                                    className={`w-2 h-2 rounded-full transition-all duration-200 pointer-events-auto cursor-pointer hover:scale-125 mb-2 ${
+                                    className={`w-[10px] h-[10px] rounded-full transition-all duration-200 pointer-events-auto cursor-pointer hover:scale-125 mb-3 ${
                                         isSelected 
                                             ? 'bg-[#37adbf]' 
                                             : 'bg-[#b2b2b2]'
@@ -86,11 +86,11 @@ export const CustomRangeSlider: React.FC<CustomRangeSliderProps> = ({
 
             <style dangerouslySetInnerHTML={{
                 __html: `
-                                         .custom-range-slider input::-webkit-slider-thumb {
+                    .custom-range-slider input::-webkit-slider-thumb {
                          -webkit-appearance: none;
-                         width: 8px;
-                         height: 8px;
-                         margin: -4px 0 0;
+                         width: 10px;
+                         height: 10px;
+                         margin: -3px 0 0;
                          border-radius: 50%;
                          background: #37adbf;
                          cursor: pointer;
@@ -99,8 +99,8 @@ export const CustomRangeSlider: React.FC<CustomRangeSliderProps> = ({
                      }
 
                      .custom-range-slider input::-moz-range-thumb {
-                         width: 8px;
-                         height: 8px;
+                         width: 10px;
+                         height: 10px;
                          margin: -4px 0 0;
                          border-radius: 50%;
                          background: #37adbf;
@@ -110,8 +110,8 @@ export const CustomRangeSlider: React.FC<CustomRangeSliderProps> = ({
                      }
 
                      .custom-range-slider input::-ms-thumb {
-                         width: 8px;
-                         height: 8px;
+                         width: 10px;
+                         height: 10px;
                          margin: -4px 0 0;
                          border-radius: 50%;
                          background: #37adbf;

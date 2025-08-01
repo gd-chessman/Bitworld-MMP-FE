@@ -232,9 +232,9 @@ const Header = () => {
                                     }
                                 }}
                                 placeholder={t('searchPlaceholder')}
-                                className="rounded-full py-2 pl-10 pr-4 w-[18vw] 2xl:w-[13vw] text-sm focus:outline-none bg-gray-100 dark:bg-black text-gray-900 dark:text-neutral-200 focus:ring-1 focus:ring-blue-500 dark:focus:ring-[hsl(var(--ring))] max-h-[30px] border border-gray-500 placeholder:text-gray-500 dark:placeholder:text-neutral-400 placeholder:text-xs"
+                                className="rounded-md py-1.5 pl-10 pr-4 w-[18vw] 2xl:w-[13vw] text-sm focus:outline-none bg-gray-100 dark:bg-black text-gray-900 dark:text-neutral-200 focus:ring-1 focus:ring-blue-500 dark:focus:ring-[hsl(var(--ring))] max-h-[30px] border border-gray-500 placeholder:text-gray-500 dark:placeholder:text-neutral-400 placeholder:text-xs"
                             />
-                            <Search className="absolute left-3 top-2 h-4 w-4 text-gray-500 dark:text-muted-foreground" />
+                            <Search className="absolute left-3 top-2.5 2xl:top-2 h-4 w-4 text-gray-500 dark:text-muted-foreground" />
                         </div>
 
                         <Display />
@@ -254,7 +254,7 @@ const Header = () => {
                                 ) : (
                                     <DropdownMenu>
                                         <DropdownMenuTrigger asChild>
-                                            <button className="text-sm bg-theme-primary-500 text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[6px] rounded-full transition-colors whitespace-nowrap flex items-center gap-1 outline-none">
+                                            <button className="text-sm bg-theme-primary-500 text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 2xl:py-[6px] py-[3px] rounded-md transition-colors whitespace-nowrap flex items-center gap-1 outline-none">
                                                 <Wallet2 className="2xl:h-4 2xl:w-4 h-3 w-3 mr-1" />
                                                 <span className="2xl:text-sm text-xs hidden md:inline">{truncateString(walletInfor?.solana_address, 12)}</span>
                                                 <ChevronDown size={14} className="ml-1" />

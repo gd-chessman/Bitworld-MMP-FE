@@ -669,7 +669,7 @@ export default function PoolDetail() {
                                                             {formatDate(member.joinDate)}
                                                         </div>
                                                     </td>
-                                                    <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
+                                                    <td className="px-4 sm:px-6 py-3 whitespace-nowrap flex gap-2 items-center">
                                                         <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${member.isCreator
                                                             ? 'bg-purple-100 text-purple-800'
                                                             : 'bg-gray-100 text-gray-800'

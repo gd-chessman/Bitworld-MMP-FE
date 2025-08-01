@@ -25,17 +25,17 @@ export const PercentageButtons: React.FC<PercentageButtonsProps> = ({
     onEditKeyPress,
 }) => {
     return (
-        <div className="flex items-center justify-between 2xl:gap-2 gap-1 mt-4">
+        <div className="flex items-center justify-between 2xl:gap-2 gap-1 mt-5">
             {percentageValues.map((percent, index) => (
                 <div key={index} className="relative">
                     {editingIndex === index ? (
-                        <div className="flex items-center max-w-[40px] 2xl:gap-2 gap-[2px] bg-gray-100 dark:bg-neutral-700 rounded-md">
+                        <div className="flex items-center 2xl:gap-2 gap-[2px] bg-gray-100 dark:bg-neutral-700 rounded-md">
                             <input
                                 type="number"
                                 value={editValue}
                                 onChange={(e) => setEditValue(e.target.value)}
                                 onKeyDown={(e) => onEditKeyPress(e, index)}
-                                className="w-full bg-transparent 2xl:text-sm text-xs text-gray-900 dark:text-neutral-200 xl:px-2 px-1 py-2 rounded-md focus:outline-none"
+                                className="w-full max-w-[40px] bg-transparent 2xl:text-sm text-xs text-gray-900 dark:text-neutral-200 xl:px-2 px-1 py-2 rounded-md focus:outline-none"
                                 min="1"
                                 max="100"
                                 autoFocus

@@ -262,7 +262,7 @@ export default function LiquidityPools() {
         <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
             {/* Main Content */}
             <main className="px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-10">
-                <div className="md:container mx-auto lg:max-w-7xl">
+                <div className="2xl:container mx-auto ">
                     <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-theme-primary-500 mb-6 sm:mb-8 lg:mb-12">BITTWORLD POOL</h1>
 
                     {/* Search and Actions */}
