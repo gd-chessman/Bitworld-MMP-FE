@@ -174,8 +174,17 @@ export default function LiquidityPools() {
                 describe: createForm.description,
                 initialAmount: createForm.amount,
             };
-            console.log(poolData)
-            await createPoolMutation.mutateAsync(poolData);
+            const res = await createPoolMutation.mutateAsync(poolData);
+            if (res.statusCode == 200 || res.statusCode == 201) {
+                setIsCreateModalOpen(false)
+                setCreateForm({
+                    name: "",
+                    description: "",
+                    image: null,
+                    amount: 1000000,
+                    required: false
+                })
+            }
         } catch (error: any) {
             console.error('Create pool error:', error);
             const errorMessage = error.response?.data?.message;
@@ -261,7 +270,7 @@ export default function LiquidityPools() {
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString();
     };
-    
+
     const formatInputNumber = (value: string | number) => {
         if (!value) return ''
         const numValue = typeof value === 'string' ? value.replace(/,/g, '') : value
