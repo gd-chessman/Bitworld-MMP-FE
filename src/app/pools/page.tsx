@@ -271,7 +271,7 @@ export default function LiquidityPools() {
     }
 
     return (
-        <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
+        <div className="flex-1 bg-white dark:bg-black text-gray-900 dark:text-white">
             {/* Main Content */}
             <main className="px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-10">
                 <div className="2xl:container mx-auto ">
@@ -396,9 +396,9 @@ export default function LiquidityPools() {
 
                     {/* Tablet Optimized Table */}
                     <div className="hidden sm:block lg:hidden overflow-hidden z-20 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900">
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto scrollbar-thin max-h-[60vh] scroll-smooth">
                             <table className="w-full">
-                                <thead className="bg-gray-50 dark:bg-gray-800">
+                                <thead className="bg-gray-50 dark:bg-gray-800 sticky top-0 z-10 shadow-sm">
                                     <tr>
                                         <th className="px-2 py-2 text-left text-xs font-medium text-gray-700 dark:text-gray-300 w-[5%]">&ensp;</th>
                                         <th className="px-2 py-2 text-left text-xs font-medium text-gray-700 dark:text-gray-300 w-[30%]">{t('pools.poolName')}</th>
@@ -467,9 +467,9 @@ export default function LiquidityPools() {
 
                     {/* Desktop Full Table */}
                     <div className="hidden lg:block overflow-hidden z-20 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-900">
-                        <div className="overflow-x-auto -mx-4 sm:mx-0">
+                        <div className="overflow-x-auto scrollbar-thin max-h-[65vh] scroll-smooth">
                             <table className="min-w-[800px] w-full">
-                                <thead className="bg-gray-50 dark:bg-gray-800">
+                                <thead className="bg-gray-50 dark:bg-gray-800 sticky top-0 z-10 shadow-sm">
                                     <tr>
                                         <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-[2%]">&ensp;</th>
                                         <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-auto">{t('pools.poolName')}</th>

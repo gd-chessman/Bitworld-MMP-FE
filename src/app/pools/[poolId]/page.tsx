@@ -220,7 +220,7 @@ export default function PoolDetail() {
     const isCreator = poolDetail.userStakeInfo?.isCreator || false
 
     return (
-        <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
+        <div className="flex-1 bg-white dark:bg-black text-gray-900 dark:text-white">
             {/* Header - Responsive */}
             <div className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 mb-4 sm:mb-5">
                 <div className="px-3 sm:px-4 lg:px-8 py-3 sm:py-2">
@@ -535,6 +535,9 @@ export default function PoolDetail() {
                                                 >
                                                     {isStaking || stakePoolMutation.isPending ? t('pools.detailPage.staking') : t('pools.detailPage.stakeNow')}
                                                 </Button>
+                                                <div className="text-[9px] text-red-400 italic mt-1">
+                                                    {t('pools.detailPage.virtualAssetsWarning')}
+                                                </div>
                                             </div>
                                         ) : (
                                             <div className="text-center">

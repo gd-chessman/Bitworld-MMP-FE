@@ -1190,6 +1190,7 @@
       "manage": "Manage",
       "overview": "Overview",
       "members": "Members",
+      "virtualAssetsWarning": "*Virtual assets are high-risk products and may result in loss of investment funds.",
       "transactions": "Transactions",
       "totalVolume": "Total Volume",
       "membersCount": "Members",
