@@ -341,7 +341,7 @@ function TransactionHistoryContent() {
                 <th className="2xl:px-4 px-2 py-1.5 2xl:py-2 text-left 2xl:text-xs text-[10px] text-gray-700 dark:text-neutral-200 font-medium w-[11%]">{t("transactionHistory.price")}</th>
                 <th className="2xl:px-4 px-2 py-1.5 2xl:py-2 text-left 2xl:text-xs text-[10px] text-gray-700 dark:text-neutral-200 font-medium w-[9%]">{t("transactionHistory.amount")}</th>
                 <th className="2xl:px-4 px-2 py-1.5 2xl:py-2 text-left 2xl:text-xs text-[10px] text-gray-700 dark:text-neutral-200 font-medium w-[12%]">{t("transactionHistory.total")}</th>
-                <th className="xl:block hidden 2xl:px-4 px-2 py-1.5 2xl:py-2 text-left 2xl:text-xs text-[10px] text-gray-700 dark:text-neutral-200 font-medium">{t("transactionHistory.source")}</th>
+                {/* <th className="xl:block hidden 2xl:px-4 px-2 py-1.5 2xl:py-2 text-left 2xl:text-xs text-[10px] text-gray-700 dark:text-neutral-200 font-medium">{t("transactionHistory.source")}</th> */}
                 <th className="2xl:px-4 px-2 py-1.5 2xl:py-2 text-left 2xl:text-xs text-[10px] text-gray-700 dark:text-neutral-200 font-medium w-[12%]">{t("transactionHistory.transactionHash")}</th>
                 <th className="2xl:px-4 px-2 py-1.5 2xl:py-2 text-left 2xl:text-xs text-[10px] text-gray-700 dark:text-neutral-200 font-medium w-[11%]">{t("transactionHistory.status")}</th>
                 <th className="2xl:px-4 px-2 py-1.5 2xl:py-2 text-left 2xl:text-xs text-[10px] text-gray-700 dark:text-neutral-200 font-medium w-[12%]">{t("transactionHistory.address")}</th>
@@ -365,9 +365,9 @@ function TransactionHistoryContent() {
                   <td className={`2xl:px-4 px-1 2xl:text-xs text-[10px] py-2 font-medium truncate ${order.type === "buy" ? "text-green-400 dark:text-green-300" : "text-pink-500 dark:text-pink-400"}`}>
                     ${(order.priceUsd * order.amount).toFixed(6)}
                   </td>
-                  <td className="2xl:px-4 xl:block hidden px-1 text-gray-600 dark:text-neutral-300 2xl:text-xs text-[10px] py-2 font-medium truncate">
+                  {/* <td className="2xl:px-4 xl:block hidden px-1 text-gray-600 dark:text-neutral-300 2xl:text-xs text-[10px] py-2 font-medium truncate">
                     {order.program}
-                  </td>
+                  </td> */}
                   <td className="2xl:px-4 px-1 text-gray-600 dark:text-neutral-300 2xl:text-xs text-[10px] py-2 font-medium truncate">
                     {truncateString(order.tx, 10)}<button onClick={() => {
                       navigator.clipboard.writeText(order.tx)
