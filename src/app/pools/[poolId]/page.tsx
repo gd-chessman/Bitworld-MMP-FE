@@ -27,6 +27,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/ui/alert-dialog"
+import { Checkbox } from "@/ui/checkbox"
 
 interface PoolMember {
     memberId: number
@@ -59,6 +60,7 @@ export default function PoolDetail() {
     const { isAuthenticated } = useAuth()
     const { t } = useLang()
     const queryClient = useQueryClient()
+    const [required, setRequired] = useState(false)
 
     // State
     const [activeTab, setActiveTab] = useState<'overview' | 'members' | 'transactions'>('overview')
@@ -870,20 +872,29 @@ export default function PoolDetail() {
             </div>
 
             <AlertDialog open={isConfirmingStake} onOpenChange={setIsConfirmingStake}>
-                <AlertDialogContent className="bg-white dark:bg-gray-800 max-w-sm sm:max-w-md">
+                <AlertDialogContent className="bg-white dark:bg-gray-800 max-w-sm sm:max-w-lg">
                     <AlertDialogHeader>
                         <AlertDialogTitle className="text-base sm:text-lg">{t('pools.detailPage.confirmStake')}</AlertDialogTitle>
-                        <AlertDialogDescription className="text-sm sm:text-base">
+                        <AlertDialogDescription className="text-sm">
                             {t('pools.detailPage.confirmStakeMessage').replace('{amount}', formatNumber(stakeAmount)).replace('{poolName}', poolDetail.name)}
-                            <div className="text-xs text-red-500 dark:text-red-400 italic leading-4 mt-2">{t('pools.lockNote')}</div>
-                            <div className="text-xs text-red-500 dark:text-red-400 italic leading-4 ">{t('pools.required')}</div>
+                            <div className="flex items-start gap-2 mt-2">
+                            <Checkbox
+                                id="pool-required"
+                                checked={required}
+                                onCheckedChange={(checked) => setRequired(checked === true)}
+                            />
+                            <div className="flex flex-col items-start gap-2 ">
+                                <div className="text-[10px] text-red-500 dark:text-red-400 italic leading-[9px]">{t('pools.lockNote')}</div>
+                                <div className="text-[10px] text-red-500 dark:text-red-400 italic leading-[9px]">{t('pools.required')}</div>
+                            </div>
+                        </div>
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter className="flex-col sm:flex-row gap-2">
-                        <AlertDialogCancel onClick={() => setIsConfirmingStake(false)} className="w-full sm:w-auto">
+                        <AlertDialogCancel onClick={() => setIsConfirmingStake(false)} className="w-full sm:w-auto max-h-[30px]">
                             {t('pools.detailPage.cancel')}
                         </AlertDialogCancel>
-                        <AlertDialogAction className="bg-theme-primary-500 hover:bg-green-500 text-white w-full sm:w-auto" onClick={() => {
+                        <AlertDialogAction disabled={!required} className="bg-theme-primary-500 max-h-[30px] hover:bg-green-500 text-white w-full sm:w-auto" onClick={() => {
                             setIsConfirmingStake(false)
                             setIsStaking(true)
                             const stakeData: StakePoolRequest = {
