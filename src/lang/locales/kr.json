@@ -1196,7 +1196,7 @@
     "uidLeader": "UID 리더",
     "leaderAddress": "리더 주소",
     "members": "멤버",
-    "volume": "총거래량",
+    "volume": "총누적수량",
     "created": "생성일",
     "action": "액션",
     "uploadImage": "클릭하여 업로드",
