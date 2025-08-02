@@ -261,6 +261,14 @@ export default function LiquidityPools() {
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString();
     };
+    
+    const formatInputNumber = (value: string | number) => {
+        if (!value) return ''
+        const numValue = typeof value === 'string' ? value.replace(/,/g, '') : value
+        const num = Number(numValue)
+        if (isNaN(num)) return ''
+        return new Intl.NumberFormat().format(num)
+    }
 
     return (
         <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
@@ -622,9 +630,15 @@ export default function LiquidityPools() {
                             </Label>
                             <Input
                                 id="pool-amount"
-                                type="number"
-                                value={createForm.amount}
-                                onChange={(e) => setCreateForm(prev => ({ ...prev, amount: Number(e.target.value) }))}
+                                type="text"
+                                value={formatInputNumber(createForm.amount)}
+                                onChange={(e) => {
+                                    const cleanValue = e.target.value.replace(/[^\d]/g, '') // Chỉ cho phép số
+                                    const num = Number(cleanValue)
+                                    if (!isNaN(num)) {
+                                        setCreateForm(prev => ({ ...prev, amount: num }))
+                                    }
+                                }}
                                 placeholder={t('pools.amountPlaceholder')}
                                 className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 text-sm sm:text-base focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
                             />

@@ -161,6 +161,29 @@ export default function PoolDetail() {
         return new Intl.NumberFormat().format(num)
     }
 
+    const formatInputNumber = (value: string | number) => {
+        if (!value) return ''
+        const numValue = typeof value === 'string' ? value.replace(/,/g, '') : value
+        const num = Number(numValue)
+        if (isNaN(num)) return ''
+        return new Intl.NumberFormat().format(num)
+    }
+
+    const parseInputNumber = (value: string) => {
+        if (!value) return 0
+        const cleanValue = value.replace(/[^\d]/g, '') // Chỉ cho phép số
+        const num = Number(cleanValue)
+        return isNaN(num) ? 0 : num
+    }
+
+    const handleInputChange = (value: string) => {
+        const cleanValue = value.replace(/[^\d]/g, '') // Chỉ cho phép số
+        const num = Number(cleanValue)
+        if (!isNaN(num)) {
+            setStakeAmount(num)
+        }
+    }
+
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString()
     }
@@ -494,10 +517,9 @@ export default function PoolDetail() {
                                                         {t('pools.detailPage.amountToStake')}
                                                     </label>
                                                     <input
-                                                        type="number"
-                                                        value={stakeAmount || ''}
-                                                        onChange={(e) => setStakeAmount(Number(e.target.value))}
-                                                        min="1000000"
+                                                        type="text"
+                                                        value={formatInputNumber(stakeAmount)}
+                                                        onChange={(e) => handleInputChange(e.target.value)}
                                                         className="w-full px-3 outline-none py-3 sm:py-2 text-base border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-theme-primary-500 focus:border-transparent"
                                                         placeholder={t('pools.detailPage.enterAmount')}
                                                     />
@@ -534,10 +556,9 @@ export default function PoolDetail() {
                                                         {t('pools.detailPage.amountToStake')}
                                                     </label>
                                                     <input
-                                                        type="number"
-                                                        value={stakeAmount || ''}
-                                                        onChange={(e) => setStakeAmount(Number(e.target.value))}
-                                                        min="1000000"
+                                                        type="text"
+                                                        value={formatInputNumber(stakeAmount)}
+                                                        onChange={(e) => handleInputChange(e.target.value)}
                                                         className="w-full px-3 py-3 sm:py-2 text-base outline-none border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-theme-primary-500 focus:border-transparent"
                                                         placeholder={t('pools.detailPage.enterAmount')}
                                                     />
