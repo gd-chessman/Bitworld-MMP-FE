@@ -399,8 +399,7 @@ const Header = () => {
                                         </div>
                                     </Link>
                                 </nav>
-                                <LangToggle className='!bg-transparent border-none !pl-5' showArrow={true} />
-
+                                <LangToggle className='!bg-transparent border-none !pl-5' showArrow={true} onLanguageChange={() => setIsMobileMenuOpen(false)} />
 
                                 {/* Mobile Actions */}
                                 <div className="mt-auto p-4 space-y-4">
