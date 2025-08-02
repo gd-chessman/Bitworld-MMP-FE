@@ -22,12 +22,14 @@ import {
     type CreatePoolRequest,
     type StakePoolRequest
 } from "@/services/api/PoolServices"
+import { Checkbox } from "@/ui/checkbox"
 
 interface CreatePoolForm {
     name: string
     description: string
     image: File | null
     amount: number
+    required?: boolean
 }
 
 type PoolFilterType = 'all' | 'created' | 'joined'
@@ -72,7 +74,8 @@ export default function LiquidityPools() {
         name: "",
         description: "",
         image: null,
-        amount: 1000000 // Minimum amount theo tài liệu
+        amount: 1000000,
+        required: false
     })
     const [imagePreview, setImagePreview] = useState<string | null>(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -161,6 +164,7 @@ export default function LiquidityPools() {
             return
         }
 
+
         setIsSubmitting(true)
 
         try {
@@ -168,7 +172,7 @@ export default function LiquidityPools() {
                 name: createForm.name,
                 logo: createForm.image || "",
                 describe: createForm.description,
-                initialAmount: createForm.amount
+                initialAmount: createForm.amount,
             };
             console.log(poolData)
             await createPoolMutation.mutateAsync(poolData);
@@ -639,13 +643,23 @@ export default function LiquidityPools() {
                                 className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 min-h-[80px] sm:min-h-[100px] text-sm sm:text-base focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
                             />
                         </div>
-                        <div className="text-xs text-red-500 dark:text-red-400 italic leading-4">{t('pools.lockNote')}</div>
+                        <div className="flex items-start gap-2">
+                            <Checkbox
+                                id="pool-required"
+                                checked={createForm.required}
+                                onCheckedChange={(checked) => setCreateForm(prev => ({ ...prev, required: checked === true }))}
+                            />
+                            <div className="flex flex-col items-start gap-1">
+                                <div className="text-xs text-red-500 dark:text-red-400 italic leading-4">{t('pools.lockNote')}</div>
+                                <div className="text-xs text-red-500 dark:text-red-400 italic leading-4">{t('pools.required')}</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="flex justify-center w-full items-center mt-4">
                         <Button
                             onClick={handleCreatePool}
-                            disabled={isSubmitting || createPoolMutation.isPending}
+                            disabled={isSubmitting || createPoolMutation.isPending || !createForm.required}
                             className="bg-theme-primary-500 text-white font-semibold hover:bg-green-500 text-sm sm:text-base px-6 py-2"
                         >
                             {(isSubmitting || createPoolMutation.isPending) ? t('pools.creating') : t('pools.createBtn')}

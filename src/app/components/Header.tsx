@@ -213,11 +213,11 @@ const Header = () => {
                     </button>
 
                     <div className='hidden lg:flex items-center gap-2 2xl:gap-6'>
-                        {/* {isAuthenticated && walletInfor && (
-                            <button className=' dark:bg-theme-primary-500 2xl:text-sm text-xs linear-gradient-blue text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[6px] rounded-full transition-colors whitespace-nowrap flex flex-col'>
+                        {isAuthenticated && walletInfor && (
+                            <button className=' dark:bg-theme-primary-500 2xl:text-sm text-xs linear-gradient-blue text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[6px] rounded-md transition-colors whitespace-nowrap flex flex-col'>
                                 {walletInfor.solana_balance} SOL &ensp; {'$' + formatNumberWithSuffix3(walletInfor.solana_balance_usd)}
                             </button>
-                        )} */}
+                        )}
                         <div className="relative">
                             <input
                                 type="text"

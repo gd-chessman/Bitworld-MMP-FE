@@ -85,58 +85,6 @@ export default function PoolDetail() {
         queryFn: () => getAirdropPoolDetailV1(parseInt(poolId)),
         enabled: isAuthenticated && !!poolId,
     })
-    const newFormat = {
-        "success": true,
-        "message": "Get pool detail transactions successfully",
-        "data": {
-            "poolId": 3,
-            "name": "Poll",
-            "slug": "pool-2",
-            "logo": "",
-            "describe": "WhatTheFont uses deep learning to search our collection of over 133,000 font styles and find the best match for the fonts in your photo. It even works with connected scripts and when there’s more than one font in an image. Just upload an image, click the font you want to identify, then check out the results.",
-            "memberCount": 3,
-            "totalVolume": 10000000,
-            "creationDate": "2025-07-28T16:57:01.648Z",
-            "endDate": null,
-            "status": "active",
-            "transactionHash": "5iudi96uW7jotcrxjs7rWq4fphajnfdWvdcG2Yxt9Kzy",
-            "creatorAddress": "5iudi96uW7jotcrxjs7rWq4fphajnfdWvdcG2Yxt9Kzy",
-            "creatorBittworldUid": "1232132132",
-            "transactions": [
-                {
-                    "transactionId": 3,
-                    "memberId": 3255321,
-                    "solanaAddress": "5iudi96uW7jotcrxjs7rWq4fphajnfdWvdcG2Yxt9Kzy",
-                    "bittworldUid": "1232132132",
-                    "nickname": "HoangPool",
-                    "isCreator": false,
-                    "stakeAmount": 10000000,
-                    "transactionDate": "2025-07-28T16:59:01.953Z",
-                    "status": "active",
-                    "transactionHash": null
-                },
-                {
-                    "transactionId": 0,
-                    "memberId": 3255321,
-                    "solanaAddress": "5iudi96uW7jotcrxjs7rWq4fphajnfdWvdcG2Yxt9Kzy",
-                    "bittworldUid": "1232132132",
-                    "nickname": "HoangPool",
-                    "isCreator": true,
-                    "stakeAmount": 10000000,
-                    "transactionDate": "2025-07-28T16:57:01.648Z",
-                    "status": "active",
-                    "transactionHash": "5iudi96uW7jotcrxjs7rWq4fphajnfdWvdcG2Yxt9Kzy"
-                }
-            ],
-            "userStakeInfo": {
-                "isCreator": true,
-                "joinStatus": "active",
-                "joinDate": "2025-07-28T16:59:01.953Z",
-                "totalStaked": 20000000,
-                "stakeCount": 1
-            }
-        }
-    }
 
     console.log("poolDetailV1", poolDetailV1)
 
@@ -184,7 +132,7 @@ export default function PoolDetail() {
     })
 
     const handleStake = async () => {
-        if (stakeAmount < 1000000) {
+        if (stakeAmount && stakeAmount < 1000000) {
             toast.error(t('pools.detailPage.minimumStakeAmount'))
             return
         }
@@ -372,7 +320,7 @@ export default function PoolDetail() {
                                 </div>
                                 <div className="min-w-0 flex-1">
                                     <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 capitalize truncate">{t('pools.detailPage.status')}</p>
-                                    <p className="text-sm sm:text-base font-semibold uppercase truncate">{poolDetail.status}</p>
+                                    <p className="text-sm sm:text-base font-semibold uppercase truncate">{t(`pools.detailPage.${poolDetail.status}`)}</p>
                                 </div>
                             </div>
                         </div>
@@ -410,7 +358,7 @@ export default function PoolDetail() {
                                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                                         }`}
                                 >
-                                    {t('pools.detailPage.transactions')} ({poolDetailV1.data.transactions.filter((tx: PoolTransaction) => tx.transactionId !== 0).length})
+                                    {t('pools.detailPage.transactions')}
                                 </button>
                             )}
                         </nav>
@@ -499,7 +447,7 @@ export default function PoolDetail() {
                                                     poolDetail.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
                                                         'bg-red-100 text-red-800'
                                                     }`}>
-                                                    {poolDetail.status}
+                                                    {t(`pools.detailPage.${poolDetail.status}`)}
                                                 </span>
                                             </div>
                                             {poolDetail.transactionHash && (
@@ -547,7 +495,7 @@ export default function PoolDetail() {
                                                     </label>
                                                     <input
                                                         type="number"
-                                                        value={stakeAmount}
+                                                        value={stakeAmount || ''}
                                                         onChange={(e) => setStakeAmount(Number(e.target.value))}
                                                         min="1000000"
                                                         className="w-full px-3 outline-none py-3 sm:py-2 text-base border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-theme-primary-500 focus:border-transparent"
@@ -587,7 +535,7 @@ export default function PoolDetail() {
                                                     </label>
                                                     <input
                                                         type="number"
-                                                        value={stakeAmount}
+                                                        value={stakeAmount || ''}
                                                         onChange={(e) => setStakeAmount(Number(e.target.value))}
                                                         min="1000000"
                                                         className="w-full px-3 py-3 sm:py-2 text-base outline-none border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-theme-primary-500 focus:border-transparent"
@@ -600,8 +548,8 @@ export default function PoolDetail() {
 
                                                 <Button
                                                     onClick={handleStake}
-                                                    disabled={isStaking || stakePoolMutation.isPending}
-                                                    className="w-full bg-theme-primary-500 hover:bg-green-500 text-white mt-4 py-3 sm:py-2 text-base"
+                                                    disabled={isStaking || stakePoolMutation.isPending || !stakeAmount}
+                                                    className={`w-full hover:bg-green-500 text-white mt-4 py-3 sm:py-2 text-base ${!stakeAmount ? 'opacity-50 cursor-not-allowed' : ' '}`}
                                                 >
                                                     {isStaking || stakePoolMutation.isPending ? t('pools.detailPage.staking') : t('pools.detailPage.stakeNow')}
                                                 </Button>
@@ -760,6 +708,9 @@ export default function PoolDetail() {
                                         <thead className="bg-gray-50 dark:bg-gray-700">
                                             <tr>
                                                 <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                    BITTWORLD UID
+                                                </th>
+                                                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                                     {t('pools.detailPage.user')}
                                                 </th>
                                                 <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -778,8 +729,17 @@ export default function PoolDetail() {
                                             </tr>
                                         </thead>
                                         <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                                            {transactions.filter((tx: PoolTransaction) => tx.transactionId !== 0).map((tx: PoolTransaction) => (
+                                            {transactions.map((tx: PoolTransaction) => (
                                                 <tr key={tx.transactionId}>
+                                                    <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
+                                                        <div className="text-sm text-yellow-500 italic flex items-center gap-2 cursor-pointer" onClick={() => {
+                                                            navigator.clipboard.writeText(tx.bittworldUid)
+                                                            toast.success(t('pools.detailPage.copiedToClipboard'))
+                                                        }}>
+                                                            {tx.bittworldUid}
+                                                            <Copy className="w-3 h-3" />
+                                                        </div>
+                                                    </td>
                                                     <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
                                                         <div className="text-sm text-gray-900 dark:text-white">
                                                             {tx.nickname}
@@ -803,7 +763,7 @@ export default function PoolDetail() {
                                                             {formatDateTime(tx.transactionDate)}
                                                         </div>
                                                         <div className="text-xs text-gray-400">
-                                                            {tx.status}
+                                                            {t(`pools.detailPage.${tx.status}`)}
                                                         </div>
                                                     </td>
                                                     <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
@@ -817,14 +777,13 @@ export default function PoolDetail() {
                                                     </td>
                                                     <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
                                                         <div className="flex flex-col gap-1">
-                                                            <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                                                                {t('pools.detailPage.stake')}
-                                                            </span>
-                                                            {tx.isCreator && (
+                                                            {tx.isCreator ? (
                                                                 <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">
                                                                     {t('pools.detailPage.creator')}
                                                                 </span>
-                                                            )}
+                                                            ) : <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                                                {t('pools.detailPage.stake')}
+                                                            </span>}
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -893,6 +852,7 @@ export default function PoolDetail() {
                         <AlertDialogDescription className="text-sm sm:text-base">
                             {t('pools.detailPage.confirmStakeMessage').replace('{amount}', formatNumber(stakeAmount)).replace('{poolName}', poolDetail.name)}
                             <div className="text-xs text-red-500 dark:text-red-400 italic leading-4 mt-2">{t('pools.lockNote')}</div>
+                            <div className="text-xs text-red-500 dark:text-red-400 italic leading-4 ">{t('pools.required')}</div>
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter className="flex-col sm:flex-row gap-2">
