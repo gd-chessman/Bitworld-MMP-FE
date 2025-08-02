@@ -304,6 +304,7 @@ export default function WalletPage() {
     const filteredTokens = tokenList?.tokens?.filter((token: Token) =>
         token.token_symbol === "SOL" ||
         token.token_symbol === "USDT" ||
+        token.token_symbol === "BITT" ||
         token.token_balance_usd >= 0.005
     ) || [];
     console.log("filteredTokens", filteredTokens)

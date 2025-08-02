@@ -268,7 +268,7 @@ const Header = () => {
                                                     <div className='p-3 dark:bg-gray-800 bg-gray-500 rounded-md'>
                                                         {isAuthenticated && walletInfor && (
                                                             <div className='flex flex-col gap-1'>
-                                                                <span className='text-white'>Tổng giá trị</span>
+                                                                <span className='text-white'>{t('totalValue')}</span>
                                                                 <span className='text-lg font-semibold text-white'>{formatNumberWithSuffix3(walletInfor.solana_balance_usd)} USD </span>
                                                                 <div className='dark:text-[#8B5CF6] text-[#00beeb] font-semibold'><span className='text-sm italic text-white dark:text-text-gray-400'>≈ {walletInfor.solana_balance} </span> SOL</div>
                                                             </div>

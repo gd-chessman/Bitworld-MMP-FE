@@ -9,6 +9,7 @@
     "message": "Copy trade feature only supports accounts logged in via Telegram or Google",
     "understand": "I understand"
   },
+  "totalValue": "Total Value",
   "over view": "Overview",
   "overview": {
     "launchToken": {
