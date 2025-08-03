@@ -80,7 +80,7 @@ const SwapInterface = React.memo(({
                   type="text"
                   value={fromAmount}
                   onChange={(e) => handleFromAmountChange(e.target.value)}
-                  className={`${classes.inputText} max-w-[100px] md:max-w-auto h-8 outline-none bg-gray-1000 border-none rounded-md text-right p-0 text-white pr-3 placeholder:text-gray-400 placeholder:text-sm`}
+                  className={`${classes.inputText} w-[100px] md:w-auto h-8 outline-none bg-gray-1000 border-none rounded-md text-right p-0 text-white pr-3 placeholder:text-gray-400 placeholder:text-sm`}
                   placeholder="0.00"
                 />
                 
