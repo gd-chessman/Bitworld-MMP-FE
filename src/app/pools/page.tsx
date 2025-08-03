@@ -88,6 +88,14 @@ export default function LiquidityPools() {
         onSuccess: (data) => {
             toast.success(t('pools.poolCreatedSuccess'));
             queryClient.invalidateQueries({ queryKey: ["airdrop-pools"] });
+            setIsCreateModalOpen(false)
+            setCreateForm({
+                name: "",
+                description: "",
+                image: null,
+                amount: 1000000
+            })
+            setImagePreview(null)
             handleCloseModal();
         }
     });
@@ -164,7 +172,6 @@ export default function LiquidityPools() {
             return
         }
 
-
         setIsSubmitting(true)
 
         try {
@@ -174,7 +181,6 @@ export default function LiquidityPools() {
                 describe: createForm.description,
                 initialAmount: createForm.amount,
             };
-            console.log(poolData)
             await createPoolMutation.mutateAsync(poolData);
         } catch (error: any) {
             console.error('Create pool error:', error);
@@ -447,15 +453,9 @@ export default function LiquidityPools() {
                                                 <Button
                                                     size="sm"
                                                     className="bg-transparent border border-theme-primary-500 text-theme-primary-500 dark:text-white hover:bg-theme-primary-500 hover:text-white text-xs px-2 py-1"
-                                                    onClick={() => {
-                                                        if (pool.userStakeInfo?.isCreator) {
-                                                            router.push(`/pools/${pool.poolId}`);
-                                                        } else {
-                                                            handleStakePool(pool.poolId, 1000000);
-                                                        }
-                                                    }}
+                                                    onClick={() => router.push(`/pools/${pool.poolId}`)}
                                                 >
-                                                    {pool.userStakeInfo?.isCreator ? t('pools.detail') : t('pools.join')}
+                                                    {t('pools.detail')}
                                                 </Button>
                                             </td>
                                         </tr>
