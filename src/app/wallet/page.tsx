@@ -2,7 +2,7 @@
 import { getInforWallet, getListBuyToken } from "@/services/api/TelegramWalletService";
 import { formatNumberWithSuffix3, truncateString } from "@/utils/format";
 import { useQuery } from "@tanstack/react-query";
-import { Copy, Check, ChevronDown, ArrowUpFromLine, ArrowDownToLine } from "lucide-react";
+import { Copy, Check, ChevronDown, ArrowUpFromLine, ArrowDownToLine, ArrowLeftRight } from "lucide-react";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useLang } from '@/lang';
@@ -479,14 +479,14 @@ export default function WalletPage() {
                     </div>
 
                     {/* Swap Button */}
-                    <div className="flex justify-center mt-6">
+                    {/* <div className="flex justify-center mt-6">
                         <button
                             onClick={() => setIsSwapModalOpen(true)}
                             className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-3 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-105 shadow-lg"
                         >
                             💱 Swap Tokens
                         </button>
-                    </div>
+                    </div> */}
 
                     <div className="w-full flex flex-col xl:gap-4 gap-2">
                         {/* Assets Section */}
@@ -574,12 +574,13 @@ export default function WalletPage() {
                                                             <th className={tableHeaderStyles}>{t('wallet.price')}</th>
                                                             <th className={tableHeaderStyles}>{t('wallet.value')}</th>
                                                             <th className={tableHeaderStyles}>{t('wallet.address')}</th>
+                                                            <th className={tableHeaderStyles}>&ensp;</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         {filteredTokens.map((token: Token, index: number) => (
-                                                            <tr key={index} className="border-t border-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onClick={() => router.push(`/trading?address=${token.token_address}`)}>
-                                                                <td className={tableCellStyles}>
+                                                            <tr key={index} className="border-t border-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                                                                <td className={tableCellStyles}  onClick={() => router.push(`/trading?address=${token.token_address}`)}>
                                                                     <div className="flex items-center gap-2">
                                                                         {token.token_logo_url && (
                                                                             <img
@@ -623,7 +624,16 @@ export default function WalletPage() {
                                                                                 <Copy className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                                                             )}
                                                                         </button>
+                                                                        
                                                                     </div>
+
+                                                                </td>
+                                                                <td>
+                                                                    {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
+                                                                        <div className="flex justify-center items-center" onClick={() => setIsSwapModalOpen(true)}>
+                                                                            <ArrowLeftRight className="w-4 h-4 text-gray-500" />
+                                                                        </div>
+                                                                    )}
                                                                 </td>
                                                             </tr>
                                                         ))}
@@ -655,10 +665,15 @@ export default function WalletPage() {
                                                                     }}
                                                                 />
                                                             )}
-                                                            <div className="min-w-0 flex gap-2">
+                                                            <div className="min-w-0 flex gap-2 items-center">
                                                                 <div className="font-medium dark:text-theme-neutral-100 text-black text-sm truncate">{token.token_name}</div>
-                                                                <div className="text-xs dark:text-gray-400 text-black">{token.token_symbol}</div>
+                                                                <div className="text-xs dark:text-gray-400 text-black ">{token.token_symbol}</div>
                                                             </div>
+                                                            {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
+                                                                <div className="flex justify-center items-center" onClick={() => setIsSwapModalOpen(true)}>
+                                                                    <ArrowLeftRight className="w-4 h-4 text-gray-500" />
+                                                                </div>
+                                                            )}
                                                         </div>
                                                         {/* Token Address */}
                                                         <div className="flex items-center gap-2">
@@ -675,6 +690,7 @@ export default function WalletPage() {
                                                             >
                                                                 <Copy className="w-4 h-4" />
                                                             </button>
+                                                            
                                                         </div>
                                                     </div>
 
