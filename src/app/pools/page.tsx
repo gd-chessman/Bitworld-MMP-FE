@@ -267,7 +267,7 @@ export default function LiquidityPools() {
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString();
     };
-    
+
     const formatInputNumber = (value: string | number) => {
         if (!value) return ''
         const numValue = typeof value === 'string' ? value.replace(/,/g, '') : value
