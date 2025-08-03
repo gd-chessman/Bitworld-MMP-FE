@@ -575,7 +575,7 @@ export default function PoolDetail() {
                                                 <Button
                                                     onClick={handleStake}
                                                     disabled={isStaking || stakePoolMutation.isPending || !stakeAmount}
-                                                    className={`w-full hover:bg-green-500 text-white mt-4 py-3 sm:py-2 text-base ${!stakeAmount ? 'opacity-50 cursor-not-allowed' : ' '}`}
+                                                    className={`w-full bg-theme-primary-500 hover:bg-theme-primary-600 text-white mt-4 py-3 sm:py-2 text-base ${!stakeAmount ? 'opacity-50 cursor-not-allowed' : ' '}`}
                                                 >
                                                     {isStaking || stakePoolMutation.isPending ? t('pools.detailPage.staking') : t('pools.detailPage.stakeNow')}
                                                 </Button>

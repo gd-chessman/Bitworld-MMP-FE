@@ -4,3 +4,4 @@ export * as SolonaTokenService from './SolonaTokenService';
 export * as ChatService from './ChatService';
 export * as HistoryTransactionWallet from './HistoryTransactionWallet';
 export * as GoogleService from './GoogleService';
+export * as SwapService from './SwapService';

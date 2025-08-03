@@ -9,6 +9,7 @@ import { useLang } from '@/lang';
 import { useRouter } from "next/navigation";
 import ModalSignin from "../components/ModalSignin";
 import { toast } from 'react-hot-toast';
+import SwapModal from "../components/swap-modal";
 
 interface Token {
     token_address: string;
@@ -291,6 +292,7 @@ export default function WalletPage() {
     const router = useRouter();
 
     const [copyStates, setCopyStates] = useState<{ [key: string]: boolean }>({});
+    const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
     const { isAuthenticated } = useAuth();
 
     const { data: tokenList, refetch: refetchTokenList, isLoading: isLoadingTokenList } = useQuery({
@@ -476,7 +478,15 @@ export default function WalletPage() {
                         )}
                     </div>
 
-
+                    {/* Swap Button */}
+                    <div className="flex justify-center mt-6">
+                        <button
+                            onClick={() => setIsSwapModalOpen(true)}
+                            className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-3 px-8 rounded-xl text-lg transition-all duration-300 hover:scale-105 shadow-lg"
+                        >
+                            💱 Swap Tokens
+                        </button>
+                    </div>
 
                     <div className="w-full flex flex-col xl:gap-4 gap-2">
                         {/* Assets Section */}
@@ -696,6 +706,7 @@ export default function WalletPage() {
             </div>
 
             <ModalSignin isOpen={!isAuthenticated} onClose={() => { }} />
+            <SwapModal isOpen={isSwapModalOpen} onClose={() => setIsSwapModalOpen(false)} />
         </>
     );
 }

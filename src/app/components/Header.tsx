@@ -14,7 +14,7 @@ import {
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter, usePathname } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { getInforWallet } from '@/services/api/TelegramWalletService';
+import { getBalanceInfo, getInforWallet } from '@/services/api/TelegramWalletService';
 import { formatNumberWithSuffix3, truncateString } from '@/utils/format';
 import notify from './notify'
 // Removed NotifyProvider import - using Toaster from ClientLayout
@@ -54,7 +54,15 @@ const Header = () => {
         staleTime: 30000,
         enabled: isAuthenticated,
     });
-    console.log(walletInfor)
+    
+    const { data: balanceInfo, refetch: refetchBalanceInfo } = useQuery({
+        queryKey: ["balance-info"],
+        queryFn: getBalanceInfo,
+        refetchInterval: 30000,
+        staleTime: 30000,
+        enabled: isAuthenticated,
+    });
+    console.log(balanceInfo)
 
     useEffect(() => {
         setMounted(true);
@@ -96,15 +104,6 @@ const Header = () => {
             window.removeEventListener('resize', checkMobile);
         };
     }, []);
-
-    const handleSelectWallet = useCallback(() => {
-        if (isMobile) {
-            // For mobile, we'll use the dropdown in MobileWalletSelector
-            return;
-        }
-        // For desktop, open the dialog
-        setIsWalletDialogOpen(true);
-    }, [isMobile]);
 
     const [tokens, setTokens] = useState<any[]>([]);
 
@@ -218,7 +217,7 @@ const Header = () => {
                                 {walletInfor.solana_balance} SOL &ensp; {'$' + formatNumberWithSuffix3(walletInfor.solana_balance_usd)}
                             </button>
                         )}
-                        <div className="relative">
+                        <div className="relative ml-4">
                             <input
                                 type="text"
                                 value={searchQuery}
