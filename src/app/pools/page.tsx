@@ -549,7 +549,7 @@ export default function LiquidityPools() {
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
                                                 {pool?.creatorBittworldUid || "N/A"}
                                             </td>
-                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-yellow-500 italic flex items-center min-h-12 gap-2">
+                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-yellow-500 italic flex items-center md:min-h-16 gap-2">
                                                 {truncateString(pool.creatorAddress, 12)}
                                                 <Copy className="w-3 h-3" />
                                             </td>
