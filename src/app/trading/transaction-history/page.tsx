@@ -11,6 +11,8 @@ import { useLang } from "@/lang/useLang"
 import { getTokenInforByAddress } from "@/services/api/SolonaTokenService"
 import { useAuth } from "@/hooks/useAuth"
 import { useRouter } from "next/navigation"
+import { ArrowLeftRight } from "lucide-react"
+import SwapModal from "@/app/components/swap-modal"
 
 type Transaction = {
   time: string
@@ -41,6 +43,7 @@ function TransactionHistoryContent() {
   const [error, setError] = useState<string | null>(null);
   const [realTimeTransactions, setRealTimeTransactions] = useState<any[]>([]);
   const [realTimeTransactionsMy, setRealTimeTransactionsMy] = useState<any[]>([]);
+  const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
 
   const searchParams = useSearchParams();
   const address = searchParams?.get("address");
@@ -90,6 +93,7 @@ function TransactionHistoryContent() {
   const filteredTokens = (tokenList && 'tokens' in tokenList ? tokenList.tokens : []).filter((token: any) =>
     token.token_symbol === "SOL" ||
     token.token_symbol === "USDT" ||
+    token.token_symbol === "BITT" ||
     token.token_balance_usd >= 0.005
   );
 
@@ -678,15 +682,16 @@ function TransactionHistoryContent() {
                     <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-auto">{t("wallet.token")}</th>
                     <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[15%]">{t("wallet.balance")}</th>
                     <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[15%]">{t("wallet.price")}</th>
-                    <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[15%]">{t("wallet.value")}</th>
+                    <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[12%]">{t("wallet.value")}</th>
                     <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[20%]">{t("wallet.address")}</th>
+                    <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[5%]"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredTokens.map((token: any, index: number) => (
-                    <tr key={index} className={`hover:bg-gray-100 dark:hover:bg-neutral-800/30 border-b border-gray-100 dark:border-neutral-800/50 cursor-pointer ${index % 2 === 0 ? 'bg-gray-50 dark:bg-[#1A1A1A]' : 'bg-white dark:bg-[#0F0F0F]'}`} onClick={() => router.push(`/trading?address=${token.token_address}`)}>
+                    <tr key={index} className={`hover:bg-gray-100 dark:hover:bg-neutral-800/30 border-b border-gray-100 dark:border-neutral-800/50 cursor-pointer ${index % 2 === 0 ? 'bg-gray-50 dark:bg-[#1A1A1A]' : 'bg-white dark:bg-[#0F0F0F]'}`} >
                       <td className="px-4 py-2 text-gray-600 dark:text-neutral-300 text-xs font-medium flex-1">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2" >
                           {token.token_logo_url && (
                             <img
                               src={token.token_logo_url}
@@ -733,6 +738,13 @@ function TransactionHistoryContent() {
                             </svg>
                           </button>
                         </div>
+                      </td>
+                      <td className="px-4 py-2 text-gray-600 dark:text-neutral-300 text-xs font-medium truncate">
+                        {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
+                          <div className="flex justify-center items-center" onClick={() => setIsSwapModalOpen(true)}>
+                            <ArrowLeftRight className="w-4 h-4 text-gray-500" />
+                          </div>
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -862,6 +874,7 @@ function TransactionHistoryContent() {
                 renderAssetsTable()}
         </div>
       </div>
+      <SwapModal isOpen={isSwapModalOpen} onClose={() => setIsSwapModalOpen(false)} />
     </div>
   )
 }

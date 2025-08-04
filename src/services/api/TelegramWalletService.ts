@@ -25,6 +25,17 @@ export const getInforWallet = async ()=>{
     }
 }
 
+export const getBalanceInfo = async ()=>{
+    try {
+        const temp = await axiosClient.get("/telegram-wallets/balance-info")
+        return temp.data.data;
+    } catch (error: any) {
+        console.log(error)
+        return error;
+    }
+}
+
+
 export const getPrivate = async (password: string)=>{
     try {
         const temp = await axiosClient.post("/telegram-wallets/private-keys", {password})
