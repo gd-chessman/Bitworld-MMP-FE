@@ -1187,6 +1187,7 @@
     "required": "Do you agree with the pool?",
     "filterCreated": "Created",
     "filterJoined": "Joined",
+    "filterRanking": "Ranking",
     "loadingPools": "Loading pools...",
     "poolName": "Pool Name",
     "uidLeader": "UID Leader",

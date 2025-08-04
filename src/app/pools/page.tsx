@@ -32,7 +32,7 @@ interface CreatePoolForm {
     required?: boolean
 }
 
-type PoolFilterType = 'all' | 'created' | 'joined'
+type PoolFilterType = 'all' | 'created' | 'joined' | 'ranking'
 
 export default function LiquidityPools() {
     const router = useRouter();
@@ -51,7 +51,7 @@ export default function LiquidityPools() {
     // Query để lấy danh sách airdrop pools với filter
     const { data: poolsResponse, isLoading: isLoadingPools } = useQuery({
         queryKey: ["airdrop-pools", activeFilter],
-        queryFn: () => getAirdropPools('creationDate', 'desc', activeFilter === 'all' ? undefined : activeFilter),
+        queryFn: () => getAirdropPools('creationDate', 'desc', activeFilter === 'all' || activeFilter === 'ranking' ? undefined : activeFilter),
         enabled: isAuthenticated,
     });
 
@@ -238,22 +238,28 @@ export default function LiquidityPools() {
     const pools = poolsResponse?.data || [];
 
     // Filter pools theo search query
-    const filteredPools = pools.filter((pool: AirdropPool) =>
+    let filteredPools = pools.filter((pool: AirdropPool) =>
         pool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         pool.slug.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    // Sort pools by totalVolume if ranking filter is active
+    if (activeFilter === 'ranking') {
+        filteredPools = [...filteredPools].sort((a, b) => b.totalVolume - a.totalVolume);
+    }
 
     // Tính số lượng pools cho mỗi tab (sẽ được cập nhật khi có API riêng cho từng tab)
     const getPoolCount = (filterType: PoolFilterType) => {
         if (filterType === 'all') return pools.length;
         if (filterType === 'created') return pools.filter((pool: AirdropPool) => pool.userStakeInfo?.isCreator).length;
         if (filterType === 'joined') return pools.filter((pool: AirdropPool) => pool.userStakeInfo && !pool.userStakeInfo.isCreator).length;
+        if (filterType === 'ranking') return pools.length;
         return 0;
     };
 
     useEffect(() => {
         if (isFirstRender.current && pools.length > 0) {
-            setListNumberTab([getPoolCount('all'), getPoolCount('created'), getPoolCount('joined')])
+            setListNumberTab([getPoolCount('all'), getPoolCount('created'), getPoolCount('joined'), getPoolCount('ranking')])
             isFirstRender.current = false
         }
     }, [pools])
@@ -276,6 +282,32 @@ export default function LiquidityPools() {
         return new Intl.NumberFormat().format(num)
     }
 
+    const getColorRanking = (index: number) => {
+        if (activeFilter === 'ranking' && index === 0) {
+            return "bg-gradient-to-r from-[#068b81] to-[#026669]";
+        } else if (activeFilter === 'ranking' && index === 1) {
+            return "bg-gradient-to-r from-[#569200] to-[#1C5400]";
+        } else if (activeFilter === 'ranking' && index === 2) {
+            return "bg-gradient-to-r from-[#0059D0] to-[#002F92]";
+        } else if (activeFilter === 'ranking' && index === 3) {
+            return "bg-gradient-to-r from-[#A68807] to-[#A46104]";
+        }
+        return "";
+    }
+    const getImgRanking = (index: number) => {
+        if (activeFilter === 'ranking' && index === 0) {
+            return  <img src={"/firsth.png"} alt="ranking" className="w-10 h-12" />
+        } else if (activeFilter === 'ranking' && index === 1) {
+            return <img src={"/sectionth.png"} alt="ranking" className="w-10 h-12" />
+        } else if (activeFilter === 'ranking' && index === 2) {
+            return <img src={"/threeth.png"} alt="ranking" className="w-10 h-12" />
+        } else if (activeFilter === 'ranking' && index === 3) {
+            return <img src={"/fourth.png"} alt="ranking" className="w-10 h-12" />
+        }else{
+            return index + 1
+        }
+    }
+
     return (
         <div className="flex-1 bg-white dark:bg-black text-gray-900 dark:text-white">
             {/* Main Content */}
@@ -295,6 +327,15 @@ export default function LiquidityPools() {
                                     onClick={() => handleFilterChange('all')}
                                 >
                                     {t('pools.filterAll')}
+                                </Button>
+                                <Button
+                                    className={`text-xs flex-1 sm:text-sm font-medium px-3 sm:px-4 py-2 sm:py-2 h-auto sm:max-h-[30px] w-full sm:w-auto transition-colors ${activeFilter === 'ranking'
+                                        ? 'text-theme-primary-500 underline underline-offset-8'
+                                        : 'bg-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                                        }`}
+                                    onClick={() => handleFilterChange('ranking')}
+                                >
+                                    {t('pools.filterRanking')}
                                 </Button>
                                 <Button
                                     className={`text-xs flex-1 sm:text-sm font-medium px-3 sm:px-4 py-2 sm:py-2 h-auto sm:max-h-[30px] w-full sm:w-auto transition-colors ${activeFilter === 'created'
@@ -350,8 +391,8 @@ export default function LiquidityPools() {
 
                     {/* Mobile Card Layout */}
                     <div className="sm:hidden space-y-3">
-                        {filteredPools.map((pool: AirdropPool) => (
-                            <div key={pool.poolId} className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm dark:shadow-none">
+                        {filteredPools.map((pool: AirdropPool, index: number) => (
+                            <div key={pool.poolId} className={`bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm dark:shadow-none ${getColorRanking(index)}`}>
                                 <div className="flex items-center justify-between mb-3">
                                     <div className="flex items-center gap-3">
                                         <img
@@ -365,12 +406,12 @@ export default function LiquidityPools() {
                                         />
                                         <div>
                                             <div className="font-medium text-sm text-gray-900 dark:text-white">{pool.name}</div>
-                                            <div className="text-xs text-gray-500 dark:text-gray-400">{pool.memberCount} {t('pools.members')}</div>
+                                            <div className="text-xs text-gray-500 dark:text-white">{pool.memberCount} {t('pools.members')}</div>
                                         </div>
                                     </div>
                                     <button
                                         onClick={() => toggleFavorite(pool.poolId.toString())}
-                                        className="text-gray-400 hover:text-yellow-500 dark:text-gray-500 dark:hover:text-yellow-400 transition-colors p-1"
+                                        className="text-white hover:text-yellow-500 dark:text-white dark:hover:text-yellow-400 transition-colors p-1"
                                     >
                                         <Star className={`w-5 h-5 ${favoritePools.includes(pool.poolId.toString()) ? "fill-yellow-500 text-yellow-500 dark:fill-yellow-400 dark:text-yellow-400" : ""}`} />
                                     </button>
@@ -378,11 +419,11 @@ export default function LiquidityPools() {
 
                                 <div className="space-y-2 text-xs mb-3">
                                     <div className="flex justify-between">
-                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.volume')}:</span>
+                                        <span className="text-gray-500 dark:text-white">{t('pools.volume')}:</span>
                                         <span className="font-mono text-gray-900 dark:text-white">{formatNumber(pool.totalVolume)}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.created')}:</span>
+                                        <span className="text-gray-500 dark:text-white">{t('pools.created')}:</span>
                                         <span className="text-gray-900 dark:text-white">{formatDate(pool.creationDate)}</span>
                                     </div>
                                 </div>
@@ -483,18 +524,13 @@ export default function LiquidityPools() {
                                 </thead>
                                 <tbody>
                                     {filteredPools.map((pool: AirdropPool, index: number) => (
-                                        <tr key={pool.poolId} className={`border-t border-gray-200 dark:border-gray-700 ${index % 2 === 0 ? "bg-white dark:bg-[#171717]" : "bg-gray-50 dark:bg-[#525252]/60"}`}>
-                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-gray-300">
+                                        <tr key={pool.poolId} className={`border-t border-gray-200 dark:border-gray-700 ${getColorRanking(index)} ${index % 2 === 0 ? "bg-white dark:bg-[#171717]" : "bg-gray-50 dark:bg-[#525252]/60"}`}>
+                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
                                                 <div className="flex items-center gap-3">
-                                                    <button
-                                                        onClick={() => toggleFavorite(pool.poolId.toString())}
-                                                        className="text-gray-400 hover:text-yellow-500 dark:text-gray-500 dark:hover:text-yellow-400 transition-colors"
-                                                    >
-                                                        <Star className={`w-4 h-4 ${favoritePools.includes(pool.poolId.toString()) ? "fill-yellow-500 text-yellow-500 dark:fill-yellow-400 dark:text-yellow-400" : ""}`} />
-                                                    </button>
+                                                <div className="w-10 h-12 flex items-center justify-center">{getImgRanking(index)}</div>
                                                 </div>
                                             </td>
-                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-gray-300">
+                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
                                                 <div className="flex items-center gap-3">
                                                     <img
                                                         src={pool.logo || "/logo.png"}
@@ -510,23 +546,23 @@ export default function LiquidityPools() {
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-gray-300">
+                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
                                                 {pool?.creatorBittworldUid || "N/A"}
                                             </td>
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-yellow-500 italic flex items-center min-h-12 gap-2">
                                                 {truncateString(pool.creatorAddress, 12)}
                                                 <Copy className="w-3 h-3" />
                                             </td>
-                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-gray-300">
+                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
                                                 {pool.memberCount}
                                             </td>
-                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-[#53DAE6]">
-                                                <span className="font-mono">{formatNumber(pool.totalVolume)}</span>
+                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-[#6ae1ec]">
+                                                <span className="font-mono font-semibold">{formatNumber(pool.totalVolume)}</span>
                                             </td>
-                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm italic text-gray-900 dark:text-gray-300">
+                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm italic text-gray-900 dark:text-white">
                                                 {formatDate(pool.creationDate)}
                                             </td>
-                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-gray-300">
+                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
                                                 <Button
                                                     size="sm"
                                                     className="bg-transparent border border-theme-primary-500 text-theme-primary-500 dark:text-white hover:bg-theme-primary-500 hover:text-white text-xs px-4 py-1"
