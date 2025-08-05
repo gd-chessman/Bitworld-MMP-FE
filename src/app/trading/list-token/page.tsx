@@ -425,7 +425,7 @@ const ListToken = () => {
                             return (
                                 <div
                                     key={i}
-                                    className="flex items-center gap-2 justify-between border-b 2xl:h-[45px] h-[35px] border-neutral-800 group dark:hover:bg-neutral-800/50 hover:bg-theme-green-300 rounded "
+                                    className="flex items-center gap-2 justify-between border-b 2xl:h-[45px] h-[37px] border-neutral-800 group dark:hover:bg-neutral-800/50 hover:bg-theme-green-300 rounded "
                                 >
                                     <div className='flex items-center'>
                                         <button
@@ -484,7 +484,7 @@ const ListToken = () => {
                                                 <span className='text-xs font-light dark:text-neutral-300 text-neutral-800'>{item.symbol}</span>
                                             </div>
                                         </div>
-                                        <div className="text-right pr-3 flex flex-col gap-1 cursor-pointer" onClick={() => handleChangeToken(address)}>
+                                        <div className="text-right pr-3 flex flex-col sm:gap-1 cursor-pointer" onClick={() => handleChangeToken(address)}>
                                             <span className='dark:text-theme-neutral-100 text-theme-neutral-800 text-xs font-medium'>${formatNumberWithSuffix(item.volume_usd)}</span>
                                             {activeTab === "new" ? (
                                                 <span className="text-xs font-medium dark:text-theme-neutral-100 text-theme-neutral-800">

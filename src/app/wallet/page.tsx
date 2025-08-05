@@ -653,8 +653,9 @@ export default function WalletPage() {
                                             filteredTokens.map((token: Token, index: number) => (
                                                 <div key={index} className={assetCardStyles}>
                                                     {/* Token Info Header */}
-                                                    <div className={`w-fit ${assetHeaderStyles} flex-col `}>
-                                                        <div className={assetTokenStyles}>
+                                                    <div className={`w-fit ${assetHeaderStyles} flex-col w-full`}>
+                                                        <div className={`${assetTokenStyles} justify-between w-full`}>
+                                                            <div className="flex items-center gap-2">
                                                             {token.token_logo_url && (
                                                                 <img
                                                                     src={token.token_logo_url}
@@ -669,9 +670,10 @@ export default function WalletPage() {
                                                                 <div className="font-medium dark:text-theme-neutral-100 text-black text-sm truncate">{token.token_name}</div>
                                                                 <div className="text-xs dark:text-gray-400 text-black ">{token.token_symbol}</div>
                                                             </div>
+                                                            </div>
                                                             {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
                                                                 <div className="flex justify-center items-center" onClick={() => setIsSwapModalOpen(true)}>
-                                                                    <ArrowLeftRight className="w-4 h-4 text-gray-500" />
+                                                                    <ArrowLeftRight className="w-4 h-4 text-theme-primary-500" /> &ensp; {t('swap.swap')}
                                                                 </div>
                                                             )}
                                                         </div>

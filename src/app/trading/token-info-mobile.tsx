@@ -113,8 +113,8 @@ export default function TokenInfoMobile({
                 <div className="mt-2">
                     <div className="space-y-2">
                         {/* Market Stats */}
-                        <div className="dark:bg-theme-neutral-1000 bg-white lg:box-shadow-info shadow-inset rounded-md md:p-4 p-2">
-                            <div className="grid grid-cols-2 gap-3">
+                        <div className="dark:bg-theme-neutral-1000 bg-white lg:box-shadow-info shadow-inset rounded-md md:p-4 p-0">
+                            <div className="grid grid-cols-4 gap-2">
                                 <div className="border-linear-200 border-1 border-theme-primary-400 rounded-lg p-2 flex flex-col items-center justify-center">
                                     <div className="text-xs dark:text-theme-neutral-100 text-theme-neutral-1000 font-semibold mb-1.5">{t('trading.tokenInfo.marketCap')}</div>
                                     <div className="font-medium text-sm dark:text-theme-neutral-100 text-theme-neutral-1000 flex items-center">
@@ -152,7 +152,7 @@ export default function TokenInfoMobile({
                         </div>
 
                         {/* Time Frame Stats */}
-                        <div className="dark:bg-theme-neutral-1000 bg-white lg:box-shadow-info shadow-inset rounded-md md:p-4 p-2">
+                        <div className="dark:bg-theme-neutral-1000 bg-white lg:box-shadow-info shadow-inset rounded-md md:p-4 p-0">
                             <div className="grid grid-cols-4 gap-2">
                                 {(['5m', '1h', '4h', '24h'] as TimeFrame[]).map((tf) => (
                                     <button

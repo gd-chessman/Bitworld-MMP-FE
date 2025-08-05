@@ -1,5 +1,6 @@
 {
   "connect": "Connect",
+  "myWallet": "My Asset",
   "errors": {
     "notFound": "Page not found",
     "goHome": "Go to home"

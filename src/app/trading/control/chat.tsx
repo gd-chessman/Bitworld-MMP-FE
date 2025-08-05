@@ -186,7 +186,7 @@ const ChatTradingContent = () => {
                                          focus:outline-none focus:ring-2 focus:ring-theme-primary-400/50 
                                          placeholder-gray-400 dark:placeholder-gray-500 text-xs
                                          border border-gray-200 dark:border-neutral-700 h-[30px]
-                                         shadow-sm hover:border-theme-primary-400/30 transition-colors placeholder:text-xs"
+                                         shadow-sm hover:border-theme-primary-400/30 transition-colors placeholder:text-sm outline-none"
               />
               <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
                 <button

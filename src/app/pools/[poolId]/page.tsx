@@ -409,7 +409,7 @@ export default function PoolDetail() {
                                                 : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                                                 }`}
                                         >
-                                            {t('pools.detailPage.members')} ({members.length})
+                                            {t('pools.detailPage.members')} 
                                         </button>
                                     )
                                 }
@@ -421,7 +421,7 @@ export default function PoolDetail() {
                                             : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                                             }`}
                                     >
-                                        {t('pools.detailPage.transactions')} ({poolDetailV1.data.transactions.filter((tx: PoolTransaction) => tx.transactionId !== 0).length})
+                                        {t('pools.detailPage.transactions')} 
                                     </button>
                                 )}
                             </div>
@@ -489,15 +489,15 @@ export default function PoolDetail() {
                                             )}
                                             {poolDetail.userStakeInfo && (
                                                 <>
-                                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0">
+                                                    <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
                                                         <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.poolStake')}</span>
                                                         <span className="font-mono text-[#53DAE6]">{formatNumber(poolDetail.userStakeInfo.totalStaked)}</span>
                                                     </div>
-                                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0">
+                                                    <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
                                                         <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.stakeCount')}</span>
                                                         <span>{poolDetail.userStakeInfo.stakeCount}</span>
                                                     </div>
-                                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0">
+                                                    <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
                                                         <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.joinDate')}</span>
                                                         <span className="text-gray-500 dark:text-gray-400 italic text-xs sm:text-sm">{formatDate(poolDetail.userStakeInfo.joinDate)}</span>
                                                     </div>
@@ -696,7 +696,7 @@ export default function PoolDetail() {
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <span className="text-gray-500 dark:text-gray-400">Join Date:</span>
+                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.joinDate')}:</span> 
                                                         <div className="text-gray-900 dark:text-white">
                                                             {formatDate(member.joinDate)}
                                                         </div>
@@ -826,11 +826,11 @@ export default function PoolDetail() {
                                                 <div className="flex items-center justify-between">
                                                     <div className="flex flex-col gap-1">
                                                         <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                                                            Stake
+                                                            {t('pools.detailPage.stake')}
                                                         </span>
                                                         {tx.isCreator && (
                                                             <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">
-                                                                Creator
+                                                                {t('pools.detailPage.creator')}
                                                             </span>
                                                         )}
                                                     </div>
@@ -841,13 +841,13 @@ export default function PoolDetail() {
 
                                                 <div className="grid grid-cols-2 gap-3 text-sm">
                                                     <div>
-                                                        <span className="text-gray-500 dark:text-gray-400">Amount:</span>
+                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.amount')}:</span>
                                                         <div className="font-mono text-gray-900 dark:text-white">
                                                             {formatNumber(tx.stakeAmount)}
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <span className="text-gray-500 dark:text-gray-400">User:</span>
+                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.user')}:</span>
                                                         <div className="text-gray-900 dark:text-white truncate">
                                                             {tx.nickname}
                                                         </div>
@@ -859,7 +859,7 @@ export default function PoolDetail() {
                                                 </div>
 
                                                 <div className="text-xs text-gray-400">
-                                                    Status: {tx.status}
+                                                    {t('pools.detailPage.status')}: {t(`pools.detailPage.${tx.status}`)}
                                                 </div>
                                             </div>
                                         ))}

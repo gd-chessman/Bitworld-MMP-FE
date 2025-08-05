@@ -458,7 +458,7 @@ const SwapModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className={`${classes.modal} outline-none overflow-y-auto bg-[#121619] max-h-[60vh] md:max-h-[80vh] border-gray-700 text-white`} onPointerDownOutside={(e) => e.preventDefault()}>
+      <DialogContent className={`${classes.modal} outline-none overflow-y-auto bg-[#121619] max-h-[55vh] md:max-h-[80vh] border-gray-700 text-white`} onPointerDownOutside={(e) => e.preventDefault()}>
         <DialogHeader className="flex flex-row items-center justify-between max-h-10">
           <DialogTitle className={`${classes.title} font-bold text-white max-h-10`}>{t('swap.swap')}</DialogTitle>
         </DialogHeader>

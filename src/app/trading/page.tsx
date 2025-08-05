@@ -95,9 +95,9 @@ const TradingPage = () => {
             )}
 
             {/* Sidebar */}
-            <div className={`fixed left-0 top-12 md:h-full h-[calc(100vh-115px)] w-[360px] bg-white dark:bg-theme-neutral-1000 shadow-xl z-50 transform transition-transform duration-300 ease-in-out rounded-r-xl ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+            <div className={`fixed left-0 top-12 md:h-full h-[calc(100vh-115px)] sm:w-[360px] w-full bg-white dark:bg-theme-neutral-1000 shadow-xl z-50 transform transition-transform duration-300 ease-in-out rounded-r-xl ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
               }`}>
-              <div className="flex flex-col h-full p-2 gap-4 overflow-y-auto">
+              <div className="flex flex-col h-full p-2 gap-2 sm:gap-4 overflow-y-auto">
                 <TokenInfo />
                 <ListToken />
               </div>
