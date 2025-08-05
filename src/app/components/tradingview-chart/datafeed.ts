@@ -184,9 +184,9 @@ export class MockDatafeed {
       supported_resolutions: ['1s', '5s', '15s', '1', '5', '1h', '4h', '1D', '1W', '1MN'],
       exchanges: [
         {
-          value: 'MEMEPUMP',
-          name: 'MEMEPUMP',
-          desc: 'MEMEPUMP',
+          value: 'BITTWORLD',
+          name: 'BITTWORLD',
+          desc: 'BITTWORLD',
         },
       ],
       symbols_types: [
@@ -204,7 +204,7 @@ export class MockDatafeed {
       symbol: this.symbol,
       full_name: this.symbol,
       description: this.symbol,
-      exchange: 'MEMEPUMP',
+      exchange: 'BITTWORLD',
       type: 'crypto',
     }]);
   }
@@ -217,7 +217,7 @@ export class MockDatafeed {
         type: 'crypto',
         session: '24x7',
         timezone: 'UTC',
-        exchange: 'MEMEPUMP',
+        exchange: 'BITTWORLD',
         minmov: 1,
         pricescale: 100000000, // Adjust based on your needs
         has_intraday: true,

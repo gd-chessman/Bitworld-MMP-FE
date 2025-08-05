@@ -165,7 +165,7 @@ const Header = () => {
                                 />
                             </Link>
                             {/* Desktop Navigation */}
-                            <nav className='hidden md:flex items-center xl:gap-[3vw]'>
+                            <nav className='hidden md:flex items-center gap-10 xl:gap-[3vw]'>
                                 {listSidebar.map((item, index) => (
                                     <Link
                                         href={item.href}
@@ -213,7 +213,7 @@ const Header = () => {
 
                     <div className='hidden lg:flex items-center gap-2 2xl:gap-6'>
                         {isAuthenticated && walletInfor && (
-                            <button className=' dark:bg-theme-primary-500 2xl:text-sm text-xs linear-gradient-blue text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[6px] rounded-md transition-colors whitespace-nowrap flex flex-col'>
+                            <button className=' bg-theme-primary-500 2xl:text-sm text-xs linear-gradient-blue text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[6px] rounded-md transition-colors whitespace-nowrap flex flex-col'>
                                 {walletInfor.solana_balance} SOL &ensp; {'$' + formatNumberWithSuffix3(walletInfor.solana_balance_usd)}
                             </button>
                         )}
@@ -233,7 +233,7 @@ const Header = () => {
                                 placeholder={t('searchPlaceholder')}
                                 className="rounded-md py-1.5 pl-10 pr-4 w-[18vw] 2xl:w-[13vw] text-sm focus:outline-none bg-gray-100 dark:bg-black text-gray-900 dark:text-neutral-200 focus:ring-1 focus:ring-blue-500 dark:focus:ring-[hsl(var(--ring))] max-h-[30px] border border-gray-500 placeholder:text-gray-500 dark:placeholder:text-neutral-400 placeholder:text-xs"
                             />
-                            <Search className="absolute left-3 top-2.5 2xl:top-2 h-4 w-4 text-gray-500 dark:text-muted-foreground" />
+                            <Search className="absolute left-3 top-2 2xl:top-2 h-4 w-4 text-gray-500 dark:text-muted-foreground" />
                         </div>
 
                         <Display />
@@ -246,7 +246,7 @@ const Header = () => {
                                             setIsSigninModalOpen(true);
                                             setIsMobileMenuOpen(false);
                                         }}
-                                        className="text-sm bg-theme-primary-500 text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[6px] rounded-full transition-colors whitespace-nowrap flex items-center gap-1"
+                                        className="text-sm bg-theme-primary-500 text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[4px] rounded-md transition-colors whitespace-nowrap flex items-center gap-1"
                                     >
                                         {t('connect')}
                                     </button>
@@ -416,7 +416,7 @@ const Header = () => {
                                     </div>
                                     {isAuthenticated && walletInfor && (
                                         <div className="flex flex-col space-y-2">
-                                            <button className='text-sm bg-theme-primary-500 text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[6px] rounded-full transition-colors whitespace-nowrap'>
+                                            <button className='text-sm bg-theme-primary-500 text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[6px] rounded-md transition-colors whitespace-nowrap'>
                                                 {walletInfor.solana_balance} SOL &ensp; {'$' + formatNumberWithSuffix3(walletInfor.solana_balance_usd)}
                                             </button>
                                         </div>
@@ -431,7 +431,7 @@ const Header = () => {
                                                             setIsSigninModalOpen(true);
                                                             setIsMobileMenuOpen(false);
                                                         }}
-                                                        className="linear-gradient-light bg-theme-primary-500 text-black dark:text-neutral-100 font-medium px-6 py-3 rounded-full transition-colors"
+                                                        className="linear-gradient-light bg-theme-primary-500 text-black dark:text-neutral-100 font-medium px-6 py-3 rounded-md transition-colors"
                                                     >
                                                         {t('connect')}
                                                     </button>
@@ -442,7 +442,7 @@ const Header = () => {
                                                             setIsMobileMenuOpen(false);
                                                             refetch();
                                                         }}
-                                                        className="text-sm bg-theme-primary-500 text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[6px] rounded-full transition-colors whitespace-nowrap"
+                                                        className="text-sm bg-theme-primary-500 text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[6px] rounded-md transition-colors whitespace-nowrap"
                                                     >
                                                         {t('header.wallet.logout')}
                                                     </button>

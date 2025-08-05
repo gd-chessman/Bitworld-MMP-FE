@@ -37,7 +37,7 @@ export const CustomRangeSlider: React.FC<CustomRangeSliderProps> = ({
 
     return (
         <div className={`custom-range-slider ${className}`}>
-            <div className="relative w-full h-8">
+            <div className="relative w-full h-8 mx-1">
                 {/* Input range */}
                 <input
                     ref={inputRef}
@@ -46,7 +46,7 @@ export const CustomRangeSlider: React.FC<CustomRangeSliderProps> = ({
                     max={max}
                     value={value}
                     onChange={handleInputChange}
-                    className="w-[96%] absolute top-4 h-0 appearance-none cursor-pointer z-30"
+                    className="w-[100%] absolute top-4 h-0 appearance-none cursor-pointer z-30"
                     style={{
                         background: 'transparent',
                         outline: 'none'
@@ -55,26 +55,43 @@ export const CustomRangeSlider: React.FC<CustomRangeSliderProps> = ({
                 
                 {/* Labels positioned over the slider track */}
                 <ul className="range-labels absolute top-2.5 2xl:top-3 left-0 2xl:left-[-1px] right-0 flex justify-between pointer-events-none z-20">
-                    {marks.map((mark) => {
+                    {marks.map((mark, index) => {
                         const isActive = activeMarks.includes(mark);
                         const isSelected = value >= mark;
-                        
+                        let styleIndex;
+                        switch (index) {
+                            case 0:
+                                styleIndex = 'items-start';
+                                break;
+                            case 1:
+                                styleIndex = 'items-center ml-1.5';
+                                break;
+                            case 2:
+                                styleIndex = 'items-end ';
+                                break;
+                            case 3:
+                                styleIndex = 'items-end ml-1';
+                                break;
+                            case 4:
+                                styleIndex = 'items-end';
+                                break;
+                        }
                         return (
                             <li
                                 key={mark}
-                                className={`relative flex flex-col items-center transition-colors duration-200 ${
+                                className={`relative flex flex-col ${styleIndex} transition-colors duration-200 ${
                                     isActive ? 'text-[#37adbf]' : 'text-[#b2b2b2]'
                                 }`}
                             >
                                 <div
-                                    className={`w-[10px] h-[10px] rounded-full transition-all duration-200 pointer-events-auto cursor-pointer hover:scale-125 mb-3 ${
+                                    className={`w-[10px] h-[10px] rounded-full transition-all duration-200 pointer-events-auto cursor-pointer mb-3 ${
                                         isSelected 
                                             ? 'bg-[#37adbf]' 
                                             : 'bg-[#b2b2b2]'
                                     }`}
                                     onClick={() => handleMarkClick(mark)}
                                 />
-                                <span className="text-xs font-medium pointer-events-auto cursor-pointer hover:scale-110 transition-transform"
+                                <span className="text-xs font-medium pointer-events-auto cursor-pointer "
                                       onClick={() => handleMarkClick(mark)}>
                                     {mark}%
                                 </span>
@@ -150,9 +167,7 @@ export const CustomRangeSlider: React.FC<CustomRangeSliderProps> = ({
                         outline: none;
                     }
 
-                    .range-labels li:hover {
-                        transform: scale(1.1);
-                    }
+                    
                 `
             }} />
         </div>

@@ -322,31 +322,29 @@ export default function TradingPanel({
                     </div>
 
                     {/* Percentage Controls */}
-                    {(!isDirectAmountInput || mode !== "buy") && (
-                        <div className="mb-1">
-                            <CustomRangeSlider
-                                min={0}
-                                max={100}
-                                value={percentage}
-                                onChange={(newPercentage) => {
-                                    setPercentage(newPercentage)
-                                    setIsDirectAmountInput(false)
-                                    if (isConnected) {
-                                        const balance = mode === "buy" ? tradeAmount?.sol_balance || 0 : tradeAmount?.token_balance || 0
-                                        const newAmount = ((balance * newPercentage) / 100).toFixed(6)
-                                        setAmount(newAmount)
-                                        validateAmount(Number(newAmount))
-                                        if (mode === "buy") {
-                                            const numericAmount = Number(newAmount)
-                                            setAmountUSD((numericAmount * exchangeRate).toFixed(2))
-                                        }
+                    <div className="mb-1">
+                        <CustomRangeSlider
+                            min={0}
+                            max={100}
+                            value={percentage}
+                            onChange={(newPercentage) => {
+                                setPercentage(newPercentage)
+                                setIsDirectAmountInput(false)
+                                if (isConnected) {
+                                    const balance = mode === "buy" ? tradeAmount?.sol_balance || 0 : tradeAmount?.token_balance || 0
+                                    const newAmount = ((balance * newPercentage) / 100).toFixed(6)
+                                    setAmount(newAmount)
+                                    validateAmount(Number(newAmount))
+                                    if (mode === "buy") {
+                                        const numericAmount = Number(newAmount)
+                                        setAmountUSD((numericAmount * exchangeRate).toFixed(2))
                                     }
-                                }}
-                                marks={[0, 25, 50, 75, 100]}
-                                className="w-full"
-                            />
-                        </div>
-                    )}
+                                }
+                            }}
+                            marks={[0, 25, 50, 75, 100]}
+                            className="w-full"
+                        />
+                    </div>
 
                     <PercentageButtons
                         percentageValues={percentageValues}
