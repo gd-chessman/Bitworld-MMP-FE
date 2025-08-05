@@ -431,7 +431,7 @@ const Header = () => {
                                                             setIsSigninModalOpen(true);
                                                             setIsMobileMenuOpen(false);
                                                         }}
-                                                        className="linear-gradient-light bg-theme-primary-500 text-black dark:text-neutral-100 font-medium px-6 py-3 rounded-md transition-colors"
+                                                        className="linear-gradient-light bg-theme-primary-500 text-black font-medium px-6 py-3 rounded-md transition-colors"
                                                     >
                                                         {t('connect')}
                                                     </button>
