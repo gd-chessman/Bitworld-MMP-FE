@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link';
-import { ChevronDown, LogOut, Search, Wallet2, Menu, X, LayoutDashboard, Coins, LineChart, Wallet as WalletIcon, Moon, Sun, EyeOff, ShieldCheck, FileCheck, LinkIcon, Shield, Store, Copy, Divide, ArrowDownToLine, ArrowUpFromLine } from 'lucide-react';
+import { ChevronDown, LogOut, Search, Wallet2, Menu, X, LayoutDashboard, Coins, LineChart, Wallet as WalletIcon, Moon, Sun, EyeOff, ShieldCheck, FileCheck, LinkIcon, Shield, Store, Copy, Divide, ArrowDownToLine, ArrowUpFromLine, Link2 } from 'lucide-react';
 import { useLang } from '@/lang/useLang';
 import Display from '@/app/components/Display';
 import {
@@ -143,6 +143,12 @@ const Header = () => {
             icon: WalletIcon,
             logoPump: false,
             isPhantomConnected: !phantomConnected,
+        },
+        {
+            name: "BITTWORLD CEX",
+            icon: Link2,
+            href: "https://www.bittworld.com",
+            logoPump: false,
         }
     ]
     return (
@@ -151,30 +157,45 @@ const Header = () => {
             <header className="sticky top-0 w-full bg-white dark:bg-[#141414] border-b dark:border-none shadow-lg border-gray-200 dark:border-gray-800" style={{ zIndex: 55 }}>
                 <div className='flex items-center justify-between px-4 2xl:px-10 2xl:py-2 py-1 '>
                     <div className='flex gap-4'>
-                        <div className='flex items-center gap-[3vw]'>
+                        <div className='flex items-center gap-[2vw]'>
                             <Link href={defaultAddress} className="flex items-center">
                                 <img
                                     src="/bitworld-logo-light.png"
                                     alt="logo"
-                                    className="h-6 md:h-8 block dark:hidden"
+                                    className="h-6 xl:h-8 block dark:hidden"
                                 />
                                 <img
                                     src="/bitworld-logo.png"
                                     alt="logo"
-                                    className="h-6 md:h-8 hidden dark:block"
+                                    className="h-6 xl:h-8 hidden dark:block"
                                 />
                             </Link>
                             {/* Desktop Navigation */}
-                            <nav className='hidden md:flex items-center gap-10 xl:gap-[3vw]'>
-                                {listSidebar.map((item, index) => (
-                                    <Link
-                                        href={item.href}
-                                        key={index}
-                                        className={`hover:text-theme-primary-500 2xl:text-sm capitalize transition-colors flex text-xs items-center gap-2 ${pathname === item.href ? 'text-theme-primary-500 font-semibold' : ''}`}
-                                    >
-                                        {item.name}
-                                    </Link>
-                                ))}
+                            <nav className='hidden md:flex items-center gap-4 xl:gap-[2vw]'>
+                                {listSidebar.map((item, index) => {
+                                    const isExternalLink = item.href.startsWith('http');
+                                    const Component = isExternalLink ? 'a' : Link;
+                                    const props = isExternalLink 
+                                        ? { 
+                                            href: item.href, 
+                                            target: "_blank", 
+                                            rel: "noopener noreferrer",
+                                            className: `hover:text-theme-primary-500 2xl:text-sm text-xs capitalize transition-colors flex text-xs items-center gap-2 ${pathname === item.href ? 'text-theme-primary-500 font-semibold' : ''}`
+                                          }
+                                        : { 
+                                            href: item.href,
+                                            className: `hover:text-theme-primary-500 2xl:text-sm text-xs capitalize transition-colors flex text-xs items-center gap-2 ${pathname === item.href ? 'text-theme-primary-500 font-semibold' : ''}`
+                                          };
+                                    
+                                    return (
+                                        <Component
+                                            key={index}
+                                            {...props}
+                                        >
+                                            {item.name}
+                                        </Component>
+                                    );
+                                })}
                             </nav>
                         </div>
 
@@ -213,7 +234,7 @@ const Header = () => {
 
                     <div className='hidden lg:flex items-center gap-2 2xl:gap-6'>
                         {isAuthenticated && walletInfor && (
-                            <button className=' bg-theme-primary-500 2xl:text-sm text-xs linear-gradient-blue text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[6px] rounded-md transition-colors whitespace-nowrap flex flex-col'>
+                            <button className=' bg-theme-primary-500 2xl:text-sm text-xs linear-gradient-blue text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 lg:px-3.5 py-[6px] rounded-md transition-colors whitespace-nowrap flex flex-col'>
                                {t("myWallet")} {walletInfor.solana_balance} SOL &ensp; {'$' + formatNumberWithSuffix3(walletInfor.solana_balance_usd)}
                             </button>
                         )}
@@ -231,7 +252,7 @@ const Header = () => {
                                     }
                                 }}
                                 placeholder={t('searchPlaceholder')}
-                                className="rounded-md py-1.5 pl-10 pr-4 w-[18vw] 2xl:w-[13vw] text-sm focus:outline-none bg-gray-100 dark:bg-black text-gray-900 dark:text-neutral-200 focus:ring-1 focus:ring-blue-500 dark:focus:ring-[hsl(var(--ring))] max-h-[30px] border border-gray-500 placeholder:text-gray-500 dark:placeholder:text-neutral-400 placeholder:text-xs"
+                                className="rounded-md py-1.5 pl-10 pr-4 w-[16vw] 2xl:w-[13vw] text-sm focus:outline-none bg-gray-100 dark:bg-black text-gray-900 dark:text-neutral-200 focus:ring-1 focus:ring-blue-500 dark:focus:ring-[hsl(var(--ring))] max-h-[30px] border border-gray-500 placeholder:text-gray-500 dark:placeholder:text-neutral-400 placeholder:text-xs"
                             />
                             <Search className="absolute left-3 top-2 2xl:top-2 h-4 w-4 text-gray-500 dark:text-muted-foreground" />
                         </div>
@@ -356,15 +377,31 @@ const Header = () => {
                                 <nav className="flex flex-col p-4 space-y-3">
                                     {listSidebar.map((item, index) => {
                                         const Icon = item.icon;
-                                        return <Link
-                                            href={item.href}
-                                            key={index}
-                                            onClick={() => setIsMobileMenuOpen(false)}
-                                            className={`hover:text-theme-primary-500 text-theme-neutral-100 md:dark:text-theme-neutral-300 capitalize transition-colors text-lg py-2 flex items-center gap-3 ${pathname === item.href ? 'gradient-hover font-semibold' : ''}`}
-                                        >
-                                            <Icon className="h-5 w-5" />
-                                            {item.name}
-                                        </Link>
+                                        const isExternalLink = item.href.startsWith('http');
+                                        const Component = isExternalLink ? 'a' : Link;
+                                        const props = isExternalLink 
+                                            ? { 
+                                                href: item.href, 
+                                                target: "_blank", 
+                                                rel: "noopener noreferrer",
+                                                onClick: () => setIsMobileMenuOpen(false),
+                                                className: `hover:text-theme-primary-500 text-theme-neutral-100 md:dark:text-theme-neutral-300 capitalize transition-colors text-lg py-2 flex items-center gap-3 ${pathname === item.href ? 'gradient-hover font-semibold' : ''}`
+                                              }
+                                            : { 
+                                                href: item.href,
+                                                onClick: () => setIsMobileMenuOpen(false),
+                                                className: `hover:text-theme-primary-500 text-theme-neutral-100 md:dark:text-theme-neutral-300 capitalize transition-colors text-lg py-2 flex items-center gap-3 ${pathname === item.href ? 'gradient-hover font-semibold' : ''}`
+                                              };
+                                        
+                                        return (
+                                            <Component
+                                                key={index}
+                                                {...props}
+                                            >
+                                                <Icon className="h-5 w-5" />
+                                                {item.name}
+                                            </Component>
+                                        );
                                     })}
                                     <Link
                                         href="/universal-account?type=deposit"

@@ -168,7 +168,7 @@ const TradingPage = () => {
                 <TradingViewChart className='h-full' />
               </div>
 
-              <div className='h-1 m-1 md:m-2 bg-theme-neutral-800 cursor-row-resize hover:bg-neutral-600 transition-colors relative z-400' />
+              {/* <div className='h-1 m-1 md:m-2 bg-theme-neutral-800 cursor-row-resize hover:bg-neutral-600 transition-colors relative z-400' /> */}
 
               <div className='transition-all duration-100 overflow-hidden rounded-md flex'>
                 <div className='flex flex-1 w-full md:h-full h-[50vh] overflow-scroll'>
