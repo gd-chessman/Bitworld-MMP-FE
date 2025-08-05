@@ -574,7 +574,7 @@ export default function WalletPage() {
                                                             <th className={tableHeaderStyles}>{t('wallet.price')}</th>
                                                             <th className={tableHeaderStyles}>{t('wallet.value')}</th>
                                                             <th className={tableHeaderStyles}>{t('wallet.address')}</th>
-                                                            <th className={`${tableHeaderStyles} text-center !text-theme-primary-500`}>Swap (SOL / USDT)</th>
+                                                            <th className={`${tableHeaderStyles} text-center !text-theme-primary-500`}>{t('swap.swap')} (SOL / USDT)</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -631,7 +631,7 @@ export default function WalletPage() {
                                                                 <td>
                                                                     {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
                                                                         <div className="flex justify-center items-center" onClick={() => setIsSwapModalOpen(true)}>
-                                                                            <ArrowLeftRight className="w-5 h-5 text-white" /> &ensp; Swap
+                                                                            <ArrowLeftRight className="w-5 h-5 text-white" /> &ensp; {t('swap.swap')}
                                                                         </div>
                                                                     )}
                                                                 </td>

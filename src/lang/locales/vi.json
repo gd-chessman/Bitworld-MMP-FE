@@ -1331,5 +1331,11 @@
       "enterAmount": "Nhập số lượng",
       "insufficient_token_balance": "Số dư token không đủ. Hiện tại: {current}, Cần: {required}"
     }
+  },
+  "modalSignin": {
+    "agreeToTerms": "Đồng ý các",
+    "termsOfService": "điều khoản sử dụng",
+    "ofBittworld": "của Bittworld",
+    "loginWithGoogle": "Đăng nhập bằng"
   }
 }

@@ -1309,5 +1309,11 @@
     "buy": "구매",
     "enterValidAmounts": "유효한 수량을 입력해 주세요",
     "enterValidNumbers": "유효한 숫자를 입력해 주세요"
+  },
+  "modalSignin": {
+    "agreeToTerms": "Bittworld 이용약관에 동의합니다",
+    "termsOfService": "",
+    "ofBittworld": "",
+    "loginWithGoogle": "Google로 로그인"
   }
 }

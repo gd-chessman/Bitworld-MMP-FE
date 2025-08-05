@@ -778,6 +778,9 @@
       "tos": "利用規約",
       "privacypolicy": "プライバシーポリシー",
       "ref": "紹介",
+      "connect": "接続",
+      "welcome": "私たちのプラットフォームへようこそ",
+      "connect_with_us": "複数の柔軟なログイン方法で私たちと接続してください",
       "security": "セキュリティ",
       "disconnectPhantom": "Phantomの切断"
     },
@@ -1276,5 +1279,11 @@
       "enterAmount": "数量を入力",
       "insufficient_token_balance": "トークン残高が不足しています。現在: {current}, 必要: {required}"
     }
+  },
+  "modalSignin": {
+    "agreeToTerms": "以下の",
+    "termsOfService": "利用規約",
+    "ofBittworld": "に同意します",
+    "loginWithGoogle": "Googleでログイン"
   }
 }

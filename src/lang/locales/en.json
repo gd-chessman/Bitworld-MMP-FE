@@ -1163,6 +1163,12 @@
     "enterValidNumbers": "Please enter valid numbers",
     "insufficientSOL": "Insufficient SOL balance"
   },
+  "modalSignin": {
+    "agreeToTerms": "I agree to the",
+    "termsOfService": "Terms of Service",
+    "ofBittworld": "of Bittworld",
+    "loginWithGoogle": "Login with"
+  },
   "pools": {
     "title": "Liquidity Pools",
     "tab": "Pools",

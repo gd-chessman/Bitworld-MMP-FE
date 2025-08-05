@@ -57,7 +57,7 @@ export default function ModalSignin({ isOpen, onClose }: ModalSigninProps) {
         <div className="py-5 px-8 bg-white mx-2 dark:bg-stone-950 rounded-lg shadow-[0px_0px_4px_0px_rgba(232,232,232,0.50)] dark:shadow-[0px_0px_4px_0px_rgba(0,0,0,0.50)] outline outline-1 outline-offset-[-1px] outline-theme-primary-500 backdrop-blur-[5px]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-theme-primary-500 mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-400">Loading...</p>
+            <p className="text-gray-600 dark:text-gray-400">{t('common.loading')}</p>
           </div>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function ModalSignin({ isOpen, onClose }: ModalSigninProps) {
                 className="text-xs" 
                 onClick={handleCheckboxClick}
               >
-                Đồng ý các <span className="text-theme-primary-500">điều khoản sử dụng</span> của Bittworld
+                {t('modalSignin.agreeToTerms')} <span className="text-theme-primary-500">{t('modalSignin.termsOfService')}</span> {t('modalSignin.ofBittworld')}
               </button>
             </div>
             
@@ -111,7 +111,7 @@ export default function ModalSignin({ isOpen, onClose }: ModalSigninProps) {
                       : 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
                   }`}
                 >
-                  Login with <div className="w-8 h-8 overflow-hidden cursor-pointer rounded-full flex items-center justify-center bg-gray-100 dark:bg-gray-800" onClick={handleGoogleSignIn}>
+                  {t('modalSignin.loginWithGoogle')} <div className="w-8 h-8 overflow-hidden cursor-pointer rounded-full flex items-center justify-center bg-gray-100 dark:bg-gray-800" onClick={handleGoogleSignIn}>
                     <img
                       src="https://img.icons8.com/color/48/google-logo.png"
                       alt="google" 
