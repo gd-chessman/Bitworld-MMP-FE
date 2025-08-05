@@ -684,7 +684,7 @@ function TransactionHistoryContent() {
                     <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[15%]">{t("wallet.price")}</th>
                     <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[12%]">{t("wallet.value")}</th>
                     <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[20%]">{t("wallet.address")}</th>
-                    <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[5%]"></th>
+                    <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[15%] text-[10px]">{t('swap.swap')} (SOL/ USDT)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -703,7 +703,7 @@ function TransactionHistoryContent() {
                             />
                           )}
                           <div>
-                            <div className="font-medium text-neutral-900 dark:text-theme-neutral-100 text-xs sm:text-sm">{token.token_name}</div>
+                            <div className="font-medium text-neutral-900 dark:text-theme-neutral-100 text-xs">{token.token_name}</div>
                             <div className="text-[10px] sm:text-xs text-neutral-600 dark:text-gray-400">{token.token_symbol}</div>
                           </div>
                         </div>
@@ -742,7 +742,7 @@ function TransactionHistoryContent() {
                       <td className="px-4 py-2 text-gray-600 dark:text-neutral-300 text-xs font-medium truncate">
                         {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
                           <div className="flex justify-center items-center" onClick={() => setIsSwapModalOpen(true)}>
-                            <ArrowLeftRight className="w-4 h-4 text-gray-500" />
+                            <ArrowLeftRight className="w-4 h-4 text-white" /> &ensp; {t('swap.swap')}
                           </div>
                         )}
                       </td>
@@ -765,21 +765,28 @@ function TransactionHistoryContent() {
               <div key={index} className={`p-3 border-b border-theme-neutral-800/40 dark:border-neutral-800/50 hover:bg-gray-50 dark:hover:bg-neutral-800/30 cursor-pointer ${index % 2 === 0 ? 'bg-gray-50 dark:bg-[#1A1A1A]' : 'bg-white dark:bg-[#0F0F0F]'}`} onClick={() => router.push(`/trading?address=${token.token_address}`)}>
                 {/* Token Info Header */}
                 <div className="flex items-start gap-2 mb-3">
-                  <div className="flex items-center gap-2 flex-1 min-w-0">
-                    {token.token_logo_url && (
-                      <img
-                        src={token.token_logo_url}
-                        alt={token.token_name}
-                        className="w-8 h-8 rounded-full"
-                        onError={(e) => {
-                          e.currentTarget.src = '/placeholder.png';
-                        }}
-                      />
-                    )}
-                    <div className="min-w-0 flex gap-2">
-                      <div className="font-medium dark:text-theme-neutral-100 text-black text-sm truncate">{token.token_name}</div>
-                      <div className="text-xs dark:text-gray-400 text-black">{token.token_symbol}</div>
+                  <div className="flex items-center gap-2 justify-between flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      {token.token_logo_url && (
+                        <img
+                          src={token.token_logo_url}
+                          alt={token.token_name}
+                          className="w-8 h-8 rounded-full"
+                          onError={(e) => {
+                            e.currentTarget.src = '/placeholder.png';
+                          }}
+                        />
+                      )}
+                      <div className="min-w-0 flex gap-2">
+                        <div className="font-medium dark:text-theme-neutral-100 text-black text-sm truncate">{token.token_name}</div>
+                        <div className="text-xs dark:text-gray-400 text-black">{token.token_symbol}</div>
+                      </div>
                     </div>
+                    {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
+                      <div className="flex justify-center items-center bg-theme-neutral-800 px-3 py-1 rounded-md" onClick={() => setIsSwapModalOpen(true)}>
+                        <ArrowLeftRight className="w-4 h-4 text-theme-primary-500" /> &ensp; {t('swap.swap')}
+                      </div>
+                    )}
                   </div>
                 </div>
 
