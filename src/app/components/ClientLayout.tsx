@@ -48,12 +48,14 @@ export default function ClientLayout({
           </main>
           {isAuthenticated && shouldShowComponents && <Chat />}
           <Toaster 
-            position="top-right"
+            position="top-center"
             toastOptions={{
               duration: 4000,
               style: {
                 background: '#363636',
                 color: '#fff',
+                minWidth: '500px',
+                zIndex: 9999,
               },
               success: {
                 duration: 3000,
@@ -61,12 +63,26 @@ export default function ClientLayout({
                   primary: '#4ade80',
                   secondary: '#fff',
                 },
+                style: {
+                  background: '#10b981',
+                  color: '#fff',
+                  borderRadius: '8px',
+                  
+                  zIndex: 9999,
+                },
               },
               error: {
                 duration: 4000,
                 iconTheme: {
                   primary: '#ef4444',
                   secondary: '#fff',
+                },
+                style: {
+                  background: '#ef4444',
+                  color: '#fff',
+                  borderRadius: '8px',
+                  padding: '4px',
+                  zIndex: 9999,
                 },
               },
             }}
