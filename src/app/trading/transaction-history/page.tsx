@@ -846,7 +846,7 @@ function TransactionHistoryContent() {
 
   return (
     <div className="shadow-inset dark:bg-theme-neutral-1000 rounded-md p-2 2xl:p-3 lg:overflow-hidden bg-white dark:bg-neutral-1000 flex flex-col w-full h-full ">
-      <div className="flex border-gray-200 dark:border-neutral-800 2xl:h-[30px] h-[20px] bg-gray-100  rounded-md dark:bg-[#333] overflow-x-auto md:overflow-x-hidden mb-1">
+      <div className="flex border-gray-200 dark:border-neutral-800 2xl:h-[30px] h-[24px] bg-gray-100  rounded-md dark:bg-[#333] overflow-x-auto md:overflow-x-hidden mb-1">
         <button
           className={`flex-1 rounded-sm text-[9px] 2xl:text-sm cursor-pointer font-medium uppercase text-center ${activeTab === "all" ? "text-white bg-theme-primary-500" : "text-gray-500 dark:text-neutral-400"}`}
           onClick={() => setActiveTab("all")}
@@ -860,13 +860,13 @@ function TransactionHistoryContent() {
           {t("transactionHistory.myTransactions")}
         </button>
         <button
-          className={`px-4 md:flex-1 rounded-sm cursor-pointer text-[9px] 2xl:text-sm font-medium uppercase text-center ${activeTab === "holder" ? "text-white bg-theme-primary-500" : "text-gray-500 dark:text-neutral-400"}`}
+          className={`px-5 md:flex-1 rounded-sm cursor-pointer text-[9px] 2xl:text-sm font-medium uppercase text-center ${activeTab === "holder" ? "text-white bg-theme-primary-500" : "text-gray-500 dark:text-neutral-400"}`}
           onClick={() => setActiveTab("holder")}
         >
           {t("transactionHistory.holders")}
         </button>
         <button
-          className={`px-4 md:flex-1 rounded-sm cursor-pointer text-[9px] 2xl:text-sm font-medium uppercase text-center ${activeTab === "asset" ? "text-white bg-theme-primary-500" : "text-red-500 dark:text-red-500"}`}
+          className={`px-5 md:flex-1 rounded-sm cursor-pointer text-[9px] 2xl:text-sm font-medium uppercase text-center ${activeTab === "asset" ? "text-white bg-theme-primary-500" : "text-red-500 dark:text-red-500"}`}
           onClick={() => setActiveTab("asset")}
         >
           {t("transactionHistory.assets")}
