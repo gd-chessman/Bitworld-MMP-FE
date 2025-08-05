@@ -783,7 +783,7 @@ function TransactionHistoryContent() {
                       </div>
                     </div>
                     {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
-                      <div className="flex justify-center items-center bg-theme-neutral-800 px-3 py-1 rounded-md" onClick={() => setIsSwapModalOpen(true)}>
+                      <div className="flex justify-center items-center dark:bg-theme-neutral-800 bg-theme-neutral-200 px-3 py-1 rounded-md" onClick={() => setIsSwapModalOpen(true)}>
                         <ArrowLeftRight className="w-4 h-4 text-theme-primary-500" /> &ensp; {t('swap.swap')}
                       </div>
                     )}
