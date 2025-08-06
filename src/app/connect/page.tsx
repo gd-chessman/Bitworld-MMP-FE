@@ -257,6 +257,7 @@ const Connect = () => {
             setForgotPasswordCode('');
             setNewPassword('');
             setActiveTab('login');
+            setIsForgot(false);
         } catch (error: any) {
             if (error.response?.data?.message === 'Invalid verification code') {
                 toast.error(t('connectPage.messages.invalidVerificationCode'));
