@@ -263,10 +263,7 @@ const Header = () => {
                             <>
                                 {!isAuthenticated && !phantomConnected ? (
                                     <button
-                                        onClick={() => {
-                                            setIsSigninModalOpen(true);
-                                            setIsMobileMenuOpen(false);
-                                        }}
+                                        onClick={() => router.push('/connect?tab=login')}
                                         className="text-sm bg-theme-primary-500 text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 md:px-4 py-[4px] rounded-md transition-colors whitespace-nowrap flex items-center gap-1"
                                     >
                                         {t('connect')}
@@ -464,10 +461,7 @@ const Header = () => {
                                             <>
                                                 {!isAuthenticated && !phantomConnected ? (
                                                     <button
-                                                        onClick={() => {
-                                                            setIsSigninModalOpen(true);
-                                                            setIsMobileMenuOpen(false);
-                                                        }}
+                                                        onClick={() => router.push('/connect?tab=login')}
                                                         className="linear-gradient-light bg-theme-primary-500 text-black font-medium px-6 py-3 rounded-md transition-colors"
                                                     >
                                                         {t('connect')}

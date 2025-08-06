@@ -573,7 +573,6 @@ export default function WalletPage() {
                                                             <th className={tableHeaderStyles}>{t('wallet.balance')}</th>
                                                             <th className={tableHeaderStyles}>{t('wallet.price')}</th>
                                                             <th className={tableHeaderStyles}>{t('wallet.value')}</th>
-                                                            <th className={tableHeaderStyles}>{t('wallet.address')}</th>
                                                             <th className={`${tableHeaderStyles} text-center !text-theme-primary-500`}>{t('swap.swap')} (SOL / USDT)</th>
                                                         </tr>
                                                     </thead>
@@ -607,27 +606,7 @@ export default function WalletPage() {
                                                                 <td className={tableCellStyles}>
                                                                     ${token.token_balance_usd.toFixed(6)}
                                                                 </td>
-                                                                <td className={tableCellStyles}>
-                                                                    <div className="flex items-center gap-2">
-                                                                        <span className="truncate max-w-[100px] sm:max-w-[120px]">{truncateString(token.token_address, 12)}</span>
-                                                                        <button
-                                                                            onClick={(e) => {
-                                                                                e.stopPropagation();
-                                                                                navigator.clipboard.writeText(token.token_address);
-                                                                                toast.success(t('connectMasterModal.copyAddress.copied'));
-                                                                            }}
-                                                                            className="text-neutral-600 hover:text-neutral-900 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
-                                                                        >
-                                                                            {copyStates[token.token_address] ? (
-                                                                                <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500" />
-                                                                            ) : (
-                                                                                <Copy className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                                                                            )}
-                                                                        </button>
-                                                                        
-                                                                    </div>
-
-                                                                </td>
+                                                              
                                                                 <td>
                                                                     {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
                                                                         <div className="flex justify-center items-center" onClick={() => setIsSwapModalOpen(true)}>
@@ -676,23 +655,6 @@ export default function WalletPage() {
                                                                     <ArrowLeftRight className="w-4 h-4 text-theme-primary-500" /> &ensp; {t('swap.swap')}
                                                                 </div>
                                                             )}
-                                                        </div>
-                                                        {/* Token Address */}
-                                                        <div className="flex items-center gap-2">
-                                                            <span className="text-xs dark:text-neutral-200 text-black truncate flex-1">
-                                                                {truncateString(token.token_address, 12)}
-                                                            </span>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    navigator.clipboard.writeText(token.token_address);
-                                                                    toast.success(t('connectMasterModal.copyAddress.copied'));
-                                                                }}
-                                                                className="text-gray-400 hover:text-gray-200 p-1 transition-colors"
-                                                            >
-                                                                <Copy className="w-4 h-4" />
-                                                            </button>
-                                                            
                                                         </div>
                                                     </div>
 

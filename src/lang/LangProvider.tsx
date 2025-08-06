@@ -7,8 +7,8 @@ import viTranslations from "./locales/vi.json";
 import jpTranslations from "./locales/jp.json";
 
 const translations = {
+  kr: krTranslations, // Ưu tiên tiếng Hàn lên đầu
   en: enTranslations,
-  kr: krTranslations,
   vi: viTranslations,
   jp: jpTranslations,
 };
@@ -34,23 +34,23 @@ export const LangProvider: React.FC<LangProviderProps> = ({
   langConfig 
 }) => {
   const [mounted, setMounted] = useState(false);
-  const [lang, setLang] = useState<LangCodes>('kr'); // Khởi tạo tạm thời
+  const [lang, setLang] = useState<LangCodes>('kr'); // Khởi tạo mặc định là tiếng Hàn
 
   useEffect(() => {
     setMounted(true);
     
-    // Ưu tiên thứ tự: localStorage > initialLang > browser language > default
+    // Ưu tiên thứ tự: localStorage > initialLang > browser language > default (kr)
     const savedLang = localStorage.getItem("lang") as LangCodes;
     const detectedLang = detectBrowserLanguage();
     
-    let finalLang: LangCodes = 'en';
+    let finalLang: LangCodes = 'kr'; // Mặc định là tiếng Hàn
     
     if (savedLang && ['en', 'vi', 'kr', 'jp'].includes(savedLang)) {
       finalLang = savedLang;
     } else if (initialLang && ['en', 'vi', 'kr', 'jp'].includes(initialLang)) {
       finalLang = initialLang;
     } else {
-      finalLang = "en";
+      finalLang = "kr"; // Sử dụng ngôn ngữ được phát hiện từ trình duyệt
     }
     
     setLang(finalLang);

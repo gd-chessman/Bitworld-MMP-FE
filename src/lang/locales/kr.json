@@ -1316,5 +1316,86 @@
     "termsOfService": "",
     "ofBittworld": "",
     "loginWithGoogle": "Google로 로그인"
+  },
+  "connectPage": {
+    "title": "계정 연결",
+    "tabs": {
+      "login": "로그인",
+      "register": "회원가입"
+    },
+    "login": {
+      "title": "로그인",
+      "email": "이메일",
+      "emailPlaceholder": "이메일을 입력하세요",
+      "password": "비밀번호",
+      "passwordPlaceholder": "비밀번호를 입력하세요",
+      "forgotPassword": "비밀번호를 잊으셨나요?",
+      "loginButton": "로그인",
+      "loggingIn": "로그인 중...",
+      "backToLogin": "로그인으로 돌아가기"
+    },
+    "register": {
+      "title": "회원가입",
+      "email": "이메일",
+      "emailPlaceholder": "인증 코드를 받을 이메일을 입력하세요",
+      "verificationCode": "인증 코드",
+      "verificationCodePlaceholder": "인증 코드를 입력하세요",
+      "resendCode": "재전송",
+      "resendCodeWithTimer": "재전송 ({seconds}초)",
+      "sendCode": "코드 전송",
+      "sendingCode": "코드 전송 중...",
+      "fullName": "전체 이름",
+      "fullNamePlaceholder": "전체 이름을 입력하세요",
+      "nickname": "닉네임",
+      "nicknamePlaceholder": "닉네임을 입력하세요",
+      "country": "국가",
+      "countryPlaceholder": "국가를 선택하세요",
+      "bitworldUid": "Bitworld UID",
+      "bitworldUidPlaceholder": "Bitworld UID를 입력하세요",
+      "referralCode": "추천 코드 (선택사항)",
+      "referralCodePlaceholder": "추천 코드를 입력하세요",
+      "password": "비밀번호",
+      "passwordPlaceholder": "비밀번호를 입력하세요",
+      "registerButton": "회원가입",
+      "registering": "회원가입 중...",
+      "changeEmail": "변경",
+      "emailDisplay": "이메일: {email}"
+    },
+    "forgotPassword": {
+      "title": "비밀번호 찾기",
+      "email": "이메일",
+      "emailPlaceholder": "이메일을 입력하세요",
+      "sendCode": "코드 전송",
+      "sendingCode": "코드 전송 중...",
+      "verificationCode": "인증 코드",
+      "verificationCodePlaceholder": "인증 코드를 입력하세요",
+      "resendCode": "재전송",
+      "resendCodeWithTimer": "재전송 ({seconds}초)",
+      "newPassword": "새 비밀번호",
+      "newPasswordPlaceholder": "새 비밀번호를 입력하세요",
+      "changePassword": "비밀번호 변경",
+      "changingPassword": "비밀번호 변경 중...",
+      "backToEmail": "이메일로 돌아가기",
+      "backToCode": "코드로 돌아가기"
+    },
+    "countries": {
+      "kr": "한국",
+      "jp": "일본",
+      "vn": "베트남",
+      "en": "영어"
+    },
+    "messages": {
+      "verificationCodeSent": "인증 코드가 전송되었습니다. 이메일을 확인하고 인증 코드를 입력하세요",
+      "verificationCodeResent": "인증 코드가 재전송되었습니다. 이메일을 확인하세요",
+      "loginSuccess": "로그인 성공! {name}님 환영합니다!",
+      "registerSuccess": "회원가입 성공! 계정이 성공적으로 생성되었습니다!",
+      "passwordChangeSuccess": "비밀번호 변경 성공! 비밀번호가 성공적으로 변경되었습니다!",
+      "verificationCodeError": "인증 코드 전송 중 오류가 발생했습니다",
+      "loginError": "로그인 중 오류가 발생했습니다",
+      "registerError": "회원가입 중 오류가 발생했습니다",
+      "passwordChangeError": "비밀번호 변경 중 오류가 발생했습니다",
+      "emailAlreadyExists": "이미 존재하는 이메일입니다. 다른 이메일을 사용하거나 로그인을 시도하세요",
+      "invalidVerificationCode": "재설정 코드가 유효하지 않거나 만료되었습니다"
+    }
   }
 }

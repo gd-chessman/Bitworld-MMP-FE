@@ -1,15 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/app/components/Header";
 import "@/libs/fontawesome";
 import { LangProvider } from "@/lang/LangProvider";
 import { ThemeProvider } from "@/theme/ThemeProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import dynamic from 'next/dynamic';
-import VideoBackground from "./VideoBackground";
 import { useAuth } from "@/hooks/useAuth";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { Toaster } from 'react-hot-toast';
 
@@ -24,6 +23,7 @@ export default function ClientLayout({
 }>) {
   const { isAuthenticated } = useAuth();
   const pathname = usePathname();
+  const router = useRouter();
   useAnalytics();
   const [queryClient] = useState(
     () =>
@@ -35,18 +35,21 @@ export default function ClientLayout({
         },
       })
   );
-
-  const shouldShowComponents = !pathname?.includes('tos') && !pathname?.includes('privacypolicy');
+  useEffect(() => {
+    if (!isAuthenticated && !pathname.includes('/trading')) {
+      router.push('/connect');
+    }
+  }, [isAuthenticated, pathname, router]);
 
   return (
     <QueryClientProvider client={queryClient}>
       <LangProvider>
         <ThemeProvider>
-          {shouldShowComponents && <Header />}
-          <main className="bg-white/80 dark:bg-[#000000a8] overflow-x-hidden flex-1">
-            {children}
-          </main>
-          {isAuthenticated && shouldShowComponents && <Chat />}
+            {<Header />}
+            <main className="bg-white/80 dark:bg-[#000000a8] overflow-x-hidden flex-1">
+              {children}
+            </main>
+            {isAuthenticated && <Chat />}
           <Toaster 
             position="top-center"
             toastOptions={{
@@ -54,7 +57,6 @@ export default function ClientLayout({
               style: {
                 background: '#363636',
                 color: '#fff',
-                minWidth: '500px',
                 zIndex: 9999,
               },
               success: {

@@ -1337,5 +1337,84 @@
     "termsOfService": "điều khoản sử dụng",
     "ofBittworld": "của Bittworld",
     "loginWithGoogle": "Đăng nhập bằng"
+  },
+  "connectPage": {
+    "title": "Kết nối tài khoản",
+    "tabs": {
+      "login": "Đăng nhập",
+      "register": "Đăng ký"
+    },
+    "login": {
+      "title": "Đăng nhập",
+      "email": "Email",
+      "emailPlaceholder": "Nhập email của bạn",
+      "password": "Mật khẩu",
+      "passwordPlaceholder": "Nhập mật khẩu",
+      "forgotPassword": "Quên mật khẩu?",
+      "loginButton": "Đăng nhập",
+      "loggingIn": "Đang đăng nhập...",
+      "backToLogin": "Quay lại đăng nhập"
+    },
+    "register": {
+      "title": "Đăng ký",
+      "email": "Email",
+      "emailPlaceholder": "Nhập email để nhận mã xác thực",
+      "verificationCode": "Mã xác thực",
+      "verificationCodePlaceholder": "Nhập mã xác thực",
+      "resendCode": "Gửi lại",
+      "resendCodeWithTimer": "Gửi lại ({seconds}s)",
+      "sendCode": "Gửi mã xác thực",
+      "sendingCode": "Đang gửi mã...",
+      "fullName": "Họ và tên",
+      "fullNamePlaceholder": "Nhập họ và tên",
+      "nickname": "Biệt danh",
+      "nicknamePlaceholder": "Nhập biệt danh",
+      "country": "Quốc gia",
+      "countryPlaceholder": "Chọn quốc gia",
+      "bitworldUid": "Bitworld UID",
+      "bitworldUidPlaceholder": "Nhập Bitworld UID",
+      "referralCode": "Mã giới thiệu (tùy chọn)",
+      "referralCodePlaceholder": "Nhập mã giới thiệu",
+      "password": "Mật khẩu",
+      "passwordPlaceholder": "Nhập mật khẩu",
+      "registerButton": "Đăng ký",
+      "registering": "Đang đăng ký...",
+      "changeEmail": "Thay đổi",
+      "emailDisplay": "Email: {email}"
+    },
+    "forgotPassword": {
+      "title": "Quên mật khẩu",
+      "email": "Email",
+      "emailPlaceholder": "Nhập email của bạn",
+      "sendCode": "Gửi mã xác thực",
+      "sendingCode": "Đang gửi mã...",
+      "verificationCode": "Mã xác thực",
+      "verificationCodePlaceholder": "Nhập mã xác thực",
+      "resendCode": "Gửi lại",
+      "resendCodeWithTimer": "Gửi lại ({seconds}s)",
+      "newPassword": "Mật khẩu mới",
+      "newPasswordPlaceholder": "Nhập mật khẩu mới",
+      "changePassword": "Đổi mật khẩu",
+      "changingPassword": "Đang đổi mật khẩu...",
+      "backToEmail": "Quay lại email",
+      "backToCode": "Quay lại mã"
+    },
+    "countries": {
+      "kr": "Hàn Quốc",
+      "jp": "Nhật Bản",
+      "vn": "Việt Nam",
+      "en": "Tiếng Anh"
+    },
+    "messages": {
+      "verificationCodeSent": "Mã xác thực đã được gửi. Vui lòng kiểm tra email của bạn và nhập mã xác thực",
+      "verificationCodeResent": "Mã xác thực đã được gửi lại. Vui lòng kiểm tra email của bạn",
+      "loginSuccess": "Đăng nhập thành công! Chào mừng {name} quay trở lại!",
+      "registerSuccess": "Đăng ký thành công! Tài khoản của bạn đã được tạo thành công!",
+      "passwordChangeSuccess": "Đổi mật khẩu thành công! Mật khẩu của bạn đã được thay đổi thành công!",
+      "verificationCodeError": "Có lỗi xảy ra khi gửi mã xác thực",
+      "loginError": "Có lỗi xảy ra khi đăng nhập",
+      "registerError": "Có lỗi xảy ra khi đăng ký",
+      "passwordChangeError": "Có lỗi xảy ra khi đổi mật khẩu"
+    }
   }
 }

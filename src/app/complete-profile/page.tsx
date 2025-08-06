@@ -104,7 +104,7 @@ export default function CompleteProfile() {
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="bittworld_uid">BITTWORD UID</Label>
+                            <Label htmlFor="bittworld_uid">BITTWORLD UID</Label>
                             <Input
                                 id="bittworld_uid"
                                 {...register("bittworld_uid", {

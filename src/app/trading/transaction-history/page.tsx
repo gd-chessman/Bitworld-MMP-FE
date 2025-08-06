@@ -683,7 +683,6 @@ function TransactionHistoryContent() {
                     <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[15%]">{t("wallet.balance")}</th>
                     <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[15%]">{t("wallet.price")}</th>
                     <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[12%]">{t("wallet.value")}</th>
-                    <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[20%]">{t("wallet.address")}</th>
                     <th className="px-4 py-2 text-left text-gray-700 dark:text-neutral-200 font-medium w-[15%] text-[10px]">{t('swap.swap')} (SOL/ USDT)</th>
                   </tr>
                 </thead>
@@ -716,28 +715,6 @@ function TransactionHistoryContent() {
                       </td>
                       <td className="px-4 py-2 text-gray-600 dark:text-neutral-300 text-xs font-medium truncate">
                         ${token.token_balance_usd.toFixed(5)}
-                      </td>
-                      <td className="px-4 py-2 text-yellow-500 text-xs font-medium">
-                        <div className="flex items-center gap-2">
-                          <span className="truncate max-w-[100px] sm:max-w-[120px]">{truncateString(token.token_address, 12)}</span>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              navigator.clipboard.writeText(token.token_address);
-                            }}
-                            className="text-neutral-600 hover:text-neutral-900 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
-                          >
-                            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path
-                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          </button>
-                        </div>
                       </td>
                       <td className="px-4 py-2 text-gray-600 dark:text-neutral-300 text-xs font-medium truncate">
                         {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
@@ -808,31 +785,6 @@ function TransactionHistoryContent() {
                     <div className="text-xs dark:text-gray-400 text-black mb-1">{t("wallet.value")}</div>
                     <div className="text-sm sm:text-base font-medium dark:text-theme-neutral-100 text-black">
                       ${token.token_balance_usd.toFixed(5)}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-xs dark:text-gray-400 text-black mb-1">{t("wallet.address")}</div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium dark:text-theme-neutral-100 text-black truncate max-w-[120px]">
-                        {truncateString(token.token_address, 12)}
-                      </span>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigator.clipboard.writeText(token.token_address);
-                        }}
-                        className="text-neutral-600 hover:text-neutral-900 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
-                      >
-                        <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </button>
                     </div>
                   </div>
                 </div>

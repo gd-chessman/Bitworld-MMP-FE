@@ -19,9 +19,9 @@ export const langConfig: {
     { id: 2, name: "English", code: "en", translationKey: "languages.english", flag: "https://flagcdn.com/w40/gb.png" }
   ],
   langsApp: {
+    kr,
     en,
     vi,
-    kr,
     jp,
   }
 };
@@ -29,7 +29,7 @@ export const langConfig: {
 // Hàm phát hiện ngôn ngữ của trình duyệt
 export const detectBrowserLanguage = (): LangCodes => {
   if (typeof window === 'undefined') {
-    return 'en'; // Fallback cho SSR
+    return 'kr'; // Fallback cho SSR
   }
 
   const browserLang = navigator.language || navigator.languages?.[0] || 'kr';
@@ -60,7 +60,7 @@ export const detectBrowserLanguage = (): LangCodes => {
     return primaryMatch;
   }
 
-  return 'en'; // Fallback mặc định
+  return 'kr'; // Fallback mặc định
 };
 
 // Hàm hỗ trợ lấy dữ liệu từ object lồng nhau

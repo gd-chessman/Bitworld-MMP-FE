@@ -52,7 +52,7 @@ export default function TermsOfServiceModal({ isOpen, onAccept, onDecline }: Ter
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleDecline()}>
-      <DialogContent className="max-w-2xl max-h-[80vh] flex flex-col">
+      <DialogContent className="max-w-2xl max-h-[80vh] flex flex-col bg-white dark:bg-stone-950">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-theme-primary-500">
             {lang === 'kr' && '이용약관 동의'}

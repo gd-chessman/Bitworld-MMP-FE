@@ -1285,5 +1285,84 @@
     "termsOfService": "利用規約",
     "ofBittworld": "に同意します",
     "loginWithGoogle": "Googleでログイン"
+  },
+  "connectPage": {
+    "title": "アカウント接続",
+    "tabs": {
+      "login": "ログイン",
+      "register": "登録"
+    },
+    "login": {
+      "title": "ログイン",
+      "email": "メールアドレス",
+      "emailPlaceholder": "メールアドレスを入力してください",
+      "password": "パスワード",
+      "passwordPlaceholder": "パスワードを入力してください",
+      "forgotPassword": "パスワードをお忘れですか？",
+      "loginButton": "ログイン",
+      "loggingIn": "ログイン中...",
+      "backToLogin": "ログインに戻る"
+    },
+    "register": {
+      "title": "登録",
+      "email": "メールアドレス",
+      "emailPlaceholder": "認証コードを受け取るメールアドレスを入力してください",
+      "verificationCode": "認証コード",
+      "verificationCodePlaceholder": "認証コードを入力してください",
+      "resendCode": "再送信",
+      "resendCodeWithTimer": "再送信 ({seconds}秒)",
+      "sendCode": "コード送信",
+      "sendingCode": "コード送信中...",
+      "fullName": "氏名",
+      "fullNamePlaceholder": "氏名を入力してください",
+      "nickname": "ニックネーム",
+      "nicknamePlaceholder": "ニックネームを入力してください",
+      "country": "国",
+      "countryPlaceholder": "国を選択してください",
+      "bitworldUid": "Bitworld UID",
+      "bitworldUidPlaceholder": "Bitworld UIDを入力してください",
+      "referralCode": "紹介コード（任意）",
+      "referralCodePlaceholder": "紹介コードを入力してください",
+      "password": "パスワード",
+      "passwordPlaceholder": "パスワードを入力してください",
+      "registerButton": "登録",
+      "registering": "登録中...",
+      "changeEmail": "変更",
+      "emailDisplay": "メールアドレス: {email}"
+    },
+    "forgotPassword": {
+      "title": "パスワードを忘れた場合",
+      "email": "メールアドレス",
+      "emailPlaceholder": "メールアドレスを入力してください",
+      "sendCode": "コード送信",
+      "sendingCode": "コード送信中...",
+      "verificationCode": "認証コード",
+      "verificationCodePlaceholder": "認証コードを入力してください",
+      "resendCode": "再送信",
+      "resendCodeWithTimer": "再送信 ({seconds}秒)",
+      "newPassword": "新しいパスワード",
+      "newPasswordPlaceholder": "新しいパスワードを入力してください",
+      "changePassword": "パスワード変更",
+      "changingPassword": "パスワード変更中...",
+      "backToEmail": "メールアドレスに戻る",
+      "backToCode": "コードに戻る"
+    },
+    "countries": {
+      "kr": "韓国",
+      "jp": "日本",
+      "vn": "ベトナム",
+      "en": "英語"
+    },
+    "messages": {
+      "verificationCodeSent": "認証コードが送信されました。メールを確認して認証コードを入力してください",
+      "verificationCodeResent": "認証コードが再送信されました。メールを確認してください",
+      "loginSuccess": "ログインに成功しました！{name}さん、おかえりなさい！",
+      "registerSuccess": "登録に成功しました！アカウントが正常に作成されました！",
+      "passwordChangeSuccess": "パスワード変更に成功しました！パスワードが正常に変更されました！",
+      "verificationCodeError": "認証コード送信中にエラーが発生しました",
+      "loginError": "ログイン中にエラーが発生しました",
+      "registerError": "登録中にエラーが発生しました",
+      "passwordChangeError": "パスワード変更中にエラーが発生しました"
+    }
   }
 }

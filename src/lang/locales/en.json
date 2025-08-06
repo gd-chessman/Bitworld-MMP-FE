@@ -1275,5 +1275,86 @@
       "enterAmount": "Enter amount",
       "insufficient_token_balance": "Insufficient token balance. Current: {current}, Required: {required}"
     }
+  },
+  "connectPage": {
+    "title": "Connect Account",
+    "tabs": {
+      "login": "Login",
+      "register": "Register"
+    },
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "forgotPassword": "Forgot password?",
+      "loginButton": "Login",
+      "loggingIn": "Logging in...",
+      "backToLogin": "Back to login"
+    },
+    "register": {
+      "title": "Register",
+      "email": "Email",
+      "emailPlaceholder": "Enter email to receive verification code",
+      "verificationCode": "Verification Code",
+      "verificationCodePlaceholder": "Enter verification code",
+      "resendCode": "Resend",
+      "resendCodeWithTimer": "Resend ({seconds}s)",
+      "sendCode": "Send Code",
+      "sendingCode": "Sending code...",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter your full name",
+      "nickname": "Nickname",
+      "nicknamePlaceholder": "Enter your nickname",
+      "country": "Country",
+      "countryPlaceholder": "Select country",
+      "bitworldUid": "Bitworld UID",
+      "bitworldUidPlaceholder": "Enter Bitworld UID",
+      "referralCode": "Referral Code (optional)",
+      "referralCodePlaceholder": "Enter referral code",
+      "password": "Password",
+      "passwordPlaceholder": "Enter password",
+      "registerButton": "Register",
+      "registering": "Registering...",
+      "changeEmail": "Change",
+      "emailDisplay": "Email: {email}"
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "sendCode": "Send Code",
+      "sendingCode": "Sending code...",
+      "verificationCode": "Verification Code",
+      "verificationCodePlaceholder": "Enter verification code",
+      "resendCode": "Resend",
+      "resendCodeWithTimer": "Resend ({seconds}s)",
+      "newPassword": "New Password",
+      "newPasswordPlaceholder": "Enter new password",
+      "changePassword": "Change Password",
+      "changingPassword": "Changing password...",
+      "backToEmail": "Back to email",
+      "backToCode": "Back to code"
+    },
+    "countries": {
+      "kr": "Korea",
+      "jp": "Japan",
+      "vn": "Vietnam",
+      "en": "English"
+    },
+    "messages": {
+      "verificationCodeSent": "Verification code has been sent. Please check your email and enter the verification code",
+      "verificationCodeResent": "Verification code has been resent. Please check your email",
+      "loginSuccess": "Login successful! Welcome back {name}!",
+      "registerSuccess": "Registration successful! Your account has been created successfully!",
+      "passwordChangeSuccess": "Password changed successfully! Your password has been changed successfully!",
+      "verificationCodeError": "An error occurred while sending verification code",
+      "loginError": "An error occurred while logging in",
+      "registerError": "An error occurred while registering",
+      "passwordChangeError": "An error occurred while changing password",
+      "emailAlreadyExists": "Email already exists. Please use a different email or try to login",
+      "invalidVerificationCode": "Invalid or expired reset code"
+    }
   }
 }

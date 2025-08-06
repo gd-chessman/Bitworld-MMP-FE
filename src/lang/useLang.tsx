@@ -60,7 +60,7 @@ export const useLang = () => {
 
 // Hook để phát hiện ngôn ngữ của trình duyệt
 export const useBrowserLanguage = () => {
-  const [browserLang, setBrowserLang] = useState<LangCodes>('kr');
+  const [browserLang, setBrowserLang] = useState<LangCodes>('kr'); // Mặc định là tiếng Hàn
   const [isDetecting, setIsDetecting] = useState(true);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export const useBrowserLanguage = () => {
         setBrowserLang(detected);
       } catch (error) {
         console.warn('Failed to detect browser language:', error);
-        setBrowserLang('kr');
+        setBrowserLang('kr'); // Fallback về tiếng Hàn
       } finally {
         setIsDetecting(false);
       }

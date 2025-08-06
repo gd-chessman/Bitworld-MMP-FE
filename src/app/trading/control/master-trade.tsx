@@ -49,7 +49,7 @@ export default function MasterTradeChat() {
 
     return (
         <div className="h-full flex flex-col w-full px-1 pt-2 2xl:px-3 2xl:pt-2 relative">
-            <div className="flex-none flex 2xl:h-[30px] h-[23px] bg-gray-300 rounded-md relative dark:bg-theme-neutral-800">
+            <div className="flex-none flex xl:h-[30px] h-[23px] bg-gray-300 rounded-md relative dark:bg-theme-neutral-800">
                 <button
                     className={`px-[14%] rounded-md text-xs cursor-pointer font-medium uppercase text-center ${activeTab === "chatAll" ? "bg-theme-primary-500" : "text-neutral-400"
                         }`}

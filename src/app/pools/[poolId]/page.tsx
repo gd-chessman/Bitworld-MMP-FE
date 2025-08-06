@@ -409,7 +409,7 @@ export default function PoolDetail() {
                                                 : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                                                 }`}
                                         >
-                                            {t('pools.detailPage.members')} 
+                                            {t('pools.detailPage.members')}
                                         </button>
                                     )
                                 }
@@ -421,7 +421,7 @@ export default function PoolDetail() {
                                             : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                                             }`}
                                     >
-                                        {t('pools.detailPage.transactions')} 
+                                        {t('pools.detailPage.transactions')}
                                     </button>
                                 )}
                             </div>
@@ -650,15 +650,13 @@ export default function PoolDetail() {
                                                             }`}>
                                                             {member.isCreator ? t('pools.detailPage.creator') : t('pools.detailPage.member')}
                                                         </span>
-                                                        <div className="mt-1">
-                                                            <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${member.status === 'active' ? 'bg-green-100 text-green-800' :
-                                                                member.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                                                                    member.status === 'withdraw' ? 'bg-blue-100 text-blue-800' :
-                                                                        'bg-red-100 text-red-800'
-                                                                }`}>
-                                                                {member.status}
-                                                            </span>
-                                                        </div>
+                                                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${member.status === 'active' ? 'bg-green-100 text-green-800' :
+                                                            member.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                                                                member.status === 'withdraw' ? 'bg-blue-100 text-blue-800' :
+                                                                    'bg-red-100 text-red-800'
+                                                            }`}>
+                                                            {member.status}
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             ))}
@@ -696,7 +694,7 @@ export default function PoolDetail() {
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.joinDate')}:</span> 
+                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.joinDate')}:</span>
                                                         <div className="text-gray-900 dark:text-white">
                                                             {formatDate(member.joinDate)}
                                                         </div>
@@ -726,7 +724,7 @@ export default function PoolDetail() {
                         )}
 
                         {/* Transactions Tab */}
-                        {activeTab === 'transactions' && (
+                        {activeTab === 'transactions' && transactions?.length > 0 && (
                             <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
                                 {/* Desktop Table */}
                                 <div className="hidden sm:block overflow-x-auto">
@@ -878,16 +876,16 @@ export default function PoolDetail() {
                         <AlertDialogDescription className="text-sm">
                             {t('pools.detailPage.confirmStakeMessage').replace('{amount}', formatNumber(stakeAmount)).replace('{poolName}', poolDetail.name)}
                             <div className="flex items-start gap-2 mt-2">
-                            <Checkbox
-                                id="pool-required"
-                                checked={required}
-                                onCheckedChange={(checked) => setRequired(checked === true)}
-                            />
-                            <div className="flex flex-col items-start gap-2 ">
-                                <div className="text-[10px] text-red-500 dark:text-red-400 italic leading-[9px]">{t('pools.lockNote')}</div>
-                                <div className="text-[10px] text-red-500 dark:text-red-400 italic leading-[9px]">{t('pools.required')}</div>
+                                <Checkbox
+                                    id="pool-required"
+                                    checked={required}
+                                    onCheckedChange={(checked) => setRequired(checked === true)}
+                                />
+                                <div className="flex flex-col items-start gap-2 ">
+                                    <div className="text-[10px] text-red-500 dark:text-red-400 italic leading-[9px]">{t('pools.lockNote')}</div>
+                                    <div className="text-[10px] text-red-500 dark:text-red-400 italic leading-[9px]">{t('pools.required')}</div>
+                                </div>
                             </div>
-                        </div>
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter className="flex-col sm:flex-row gap-2">

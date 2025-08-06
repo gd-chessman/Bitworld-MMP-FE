@@ -23,9 +23,8 @@ axiosClient.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 401) {
-      // console.error("Lỗi 401: Unauthorized");
-      // localStorage.removeItem("auth_token");
-      // window.location.href = "/login";
+      console.error("Lỗi 401: Unauthorized");
+      localStorage.removeItem("auth_token");
     } else if (error.code === "ERR_NETWORK") {
       console.log("Server is not responding. Please try again later.");
     }
