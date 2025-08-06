@@ -273,6 +273,11 @@ const Connect = () => {
         setForgotPasswordCode('');
     };
 
+    const handleGoogleSignIn = async () => {
+        window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI}&response_type=code&scope=email%20profile&access_type=offline`
+        console.log("handleGoogleSignIn")
+    }
+
     return (
         <div className="h-[93vh] flex flex-col justify-center items-center gap-2 xl:gap-4 px-4 lg:px-0 relative z-40 2xl:pt-4 pt-2">
             <Card className="w-full max-w-md">
@@ -550,8 +555,22 @@ const Connect = () => {
                                 </form>
                             )}
                         </TabsContent>}
-
                     </Tabs>
+                    <div className='w-full px-4 pb-5 flex flex-col gap-4'>
+                        <div className='text-xs text-center mx-auto dark:text-white text-black'>{t('or')}</div>
+                        <button
+                            onClick={handleGoogleSignIn}
+                            className={`text-center text-gray-900 h-10 min-w-48 text-sm font-normal leading-tight flex items-center w-full gap-2 justify-center rounded-md bg-theme-primary-500 dark:text-white`}
+                        >
+                            {t('modalSignin.loginWithGoogle')} <div className="w-8 h-8 overflow-hidden cursor-pointer rounded-full flex items-center justify-center bg-gray-100 dark:bg-gray-800" onClick={handleGoogleSignIn}>
+                                <img
+                                    src="https://img.icons8.com/color/48/google-logo.png"
+                                    alt="google"
+                                    className="w-6 h-6 object-cover"
+                                />
+                            </div>
+                        </button>
+                    </div>
                 </CardContent>
             </Card>
             <TermsOfServiceModal

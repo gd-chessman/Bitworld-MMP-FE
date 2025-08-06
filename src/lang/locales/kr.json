@@ -1,5 +1,6 @@
 {
   "connect": "로그인",
+  "or": "또는",
   "errors": {
     "notFound": "페이지를 찾을 수 없습니다",
     "goHome": "홈으로 이동"
@@ -1116,7 +1117,7 @@
     "link_now": "지금 연결",
     "enter_telegram_code": "Telegram 코드를 입력하세요",
     "verification_code_google": "Google 인증 코드",
-    "sign_in_with_google": "Google로 로그인",
+    "sign_in_with_google": "Google 로 로그인",
     "account_linking_error": "계정 연결 중 오류가 발생했습니다",
     "linking": "계정 연결 중...",
     "account_linked_success": "계정이 성공적으로 연결되었습니다",
@@ -1315,7 +1316,7 @@
     "agreeToTerms": "Bittworld 이용약관에 동의합니다",
     "termsOfService": "",
     "ofBittworld": "",
-    "loginWithGoogle": "Google로 로그인"
+    "loginWithGoogle": "Google 로 로그인"
   },
   "connectPage": {
     "title": "계정 연결",
