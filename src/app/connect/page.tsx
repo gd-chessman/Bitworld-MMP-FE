@@ -556,7 +556,7 @@ const Connect = () => {
                             )}
                         </TabsContent>}
                     </Tabs>
-                    <div className='w-full px-4 pb-5 flex flex-col gap-4'>
+                    {/* <div className='w-full px-4 pb-5 flex flex-col gap-4'>
                         <div className='text-xs text-center mx-auto dark:text-white text-black'>{t('or')}</div>
                         <button
                             onClick={handleGoogleSignIn}
@@ -570,7 +570,7 @@ const Connect = () => {
                                 />
                             </div>
                         </button>
-                    </div>
+                    </div> */}
                 </CardContent>
             </Card>
             <TermsOfServiceModal

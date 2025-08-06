@@ -461,7 +461,10 @@ const Header = () => {
                                             <>
                                                 {!isAuthenticated && !phantomConnected ? (
                                                     <button
-                                                        onClick={() => router.push('/connect?tab=login')}
+                                                        onClick={() => {
+                                                            router.push('/connect?tab=login');
+                                                            setIsMobileMenuOpen(false);
+                                                        }}
                                                         className="linear-gradient-light bg-theme-primary-500 text-black font-medium px-6 py-3 rounded-md transition-colors"
                                                     >
                                                         {t('connect')}
