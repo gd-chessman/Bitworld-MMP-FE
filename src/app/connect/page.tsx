@@ -164,7 +164,13 @@ const Connect = () => {
                 throw new Error('Invalid response format');
             }
         } catch (error: any) {
-            toast.error(error.response?.data?.message || t('connectPage.messages.loginError'));
+            if (error.response?.data?.message === 'Invalid or expired verification code') {
+                toast.error(t('connectPage.messages.invalidVerificationCode'));
+            } else if (error.response?.data?.message === 'User not found') {
+                toast.error(t('connectPage.messages.userNotFound'));
+            } else {
+                toast.error(error.response?.data?.message || t('connectPage.messages.loginError'));
+            }
         } finally {
             setIsLoading(false);
         }

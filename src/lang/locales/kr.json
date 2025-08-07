@@ -1229,7 +1229,7 @@
       "staking": "스테이킹 중...",
       "youAreCreator": "당신은 이 풀의 생성자입니다",
       "managePool": "풀 관리",
-      "balanceBitt": "BITT 토큰 잔액",
+      "balanceBitt": "내 잔액(BITT)",
       "copy": "복사",
       "share": "공유",
       "manage": "관리",
@@ -1401,7 +1401,8 @@
       "invalidVerificationCode": "재설정 코드가 유효하지 않거나 만료되었습니다",
       "minPasswordLength": "(최소 4자 이상 입니다)",
       "nicknameAlreadyExists": "이미 존재하는 닉네임입니다. 다른 닉네임을 사용하거나 로그인을 시도하세요",
-      "bittworldUidAlreadyExists": "이미 존재하는 BITTWORLD UID입니다. 다른 BITTWORLD UID를 사용하거나 로그인을 시도하세요"
+      "bittworldUidAlreadyExists": "이미 존재하는 BITTWORLD UID입니다. 다른 BITTWORLD UID를 사용하거나 로그인을 시도하세요",
+      "invalidEmailOrPassword": "이메일 또는 비밀번호가 올바르지 않습니다"
     }
   }
 }

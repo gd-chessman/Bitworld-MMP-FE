@@ -539,7 +539,7 @@ export default function PoolDetail() {
                                                             {t('pools.detailPage.minimumAmount')}
                                                         </p>
                                                         <p className="text-xs text-theme-primary-500 mt-1">
-                                                            {t('pools.detailPage.balanceBitt')}: {balance?.bitt?.token_balance}
+                                                            {t('pools.detailPage.balanceBitt')}: {balance?.bitt?.token_balance ?? 0}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -586,7 +586,7 @@ export default function PoolDetail() {
                                                             {t('pools.detailPage.minimumAmount')}
                                                         </p>
                                                         <p className="text-xs text-theme-primary-500 mt-1">
-                                                            {t('pools.detailPage.balanceBitt')}: {balance?.bitt?.token_balance}
+                                                            {t('pools.detailPage.balanceBitt')}: {balance?.bitt?.token_balance ?? 0}
                                                         </p>
                                                     </div>
                                                 </div>
