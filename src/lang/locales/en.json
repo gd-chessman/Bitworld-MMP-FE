@@ -1356,7 +1356,7 @@
       "passwordChangeError": "An error occurred while changing password",
       "emailAlreadyExists": "Email already exists. Please use a different email or try to login",
       "invalidVerificationCode": "Invalid or expired reset code",
-      "minPasswordLength": "Minimum 4 characters"
+      "minPasswordLength": "(Minimum 4 characters)"
     }
   }
 }
