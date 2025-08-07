@@ -281,7 +281,7 @@ const Connect = () => {
 
     return (
         <div className="h-[93vh] flex flex-col justify-center items-center gap-2 xl:gap-4 px-4 lg:px-0 relative z-40 2xl:pt-4 pt-2">
-            <Card className="w-full max-w-md">
+            <Card className="w-full max-w-lg">
                 <CardHeader className="text-center">
                     <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white p-0">
                         {t('connectPage.title')}
@@ -436,7 +436,7 @@ const Connect = () => {
                                             id="register-password"
                                             type="password"
                                             minLength={4}
-                                            placeholder={t('connectPage.register.passwordPlaceholder')}
+                                            placeholder={t('connectPage.register.passwordPlaceholder') + " " + t('connectPage.messages.minPasswordLength')}
                                             value={registerData.password}
                                             onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
                                             required
@@ -546,7 +546,7 @@ const Connect = () => {
                                             id="new-password"
                                             type="password"
                                             minLength={4}
-                                            placeholder={t('connectPage.forgotPassword.newPasswordPlaceholder')}
+                                            placeholder={t('connectPage.forgotPassword.newPasswordPlaceholder') + " " + t('connectPage.messages.minPasswordLength')}
                                             value={newPassword}
                                             onChange={(e) => setNewPassword(e.target.value)}
                                             required
