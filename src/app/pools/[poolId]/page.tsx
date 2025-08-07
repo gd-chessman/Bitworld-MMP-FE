@@ -536,9 +536,7 @@ export default function PoolDetail() {
                                                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                                                         {t('pools.detailPage.minimumAmount')}
                                                     </p>
-                                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                                        {t('pools.detailPage.balance')} {balance?.bitt?.balance}
-                                                    </p>
+                                                  
                                                 </div>
 
                                                 <Button
