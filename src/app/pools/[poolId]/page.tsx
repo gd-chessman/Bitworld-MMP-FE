@@ -441,68 +441,70 @@ export default function PoolDetail() {
                                             {t('pools.detailPage.description')} &ensp; <span className="font-mono italic text-gray-500 dark:text-gray-400 text-xs sm:text-sm">{poolDetail.describe || "This is a community-driven liquidity pool focused on providing sustainable returns to its members through strategic token staking and yield farming opportunities."}</span>
                                         </p>
 
-                                        <div className="flex flex-row justify-between sm:items-center gap-2 sm:gap-0 mb-3">
-                                            <span className="text-sm sm:text-base text-gray-500 dark:text-gray-400">{t('pools.detailPage.creatorAddress')}</span>
-                                            <div className="flex items-center gap-2">
-                                                <span className="font-mono text-yellow-500 italic text-sm sm:text-base">{truncateString(poolDetail.creatorAddress, 12)}</span>
-                                                <Copy className="w-3 h-3 sm:w-4 sm:h-4 cursor-pointer" onClick={() => {
-                                                    navigator.clipboard.writeText(poolDetail.creatorAddress)
-                                                    toast.success(t('pools.detailPage.copiedToClipboard'))
-                                                }} />
-                                            </div>
-                                        </div>
-                                        <div className="space-y-2 sm:space-y-3 text-sm sm:text-base">
-                                            <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
-                                                <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.poolId')}</span>
-                                                <span className="font-mono">{poolDetail.poolId}</span>
-                                            </div>
-                                            <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
-                                                <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.creationDate')}</span>
-                                                <span>{formatDate(poolDetail.creationDate)}</span>
-                                            </div>
-                                            {poolDetail.endDate && (
-                                                <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
-                                                    <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.endDate')}</span>
-                                                    <span>{formatDate(poolDetail.endDate)}</span>
+                                        <div className="md:flex hidden space-y-2 sm:space-y-3 text-sm sm:text-base">
+                                            <div className="flex flex-row justify-between sm:items-center gap-2 sm:gap-0 mb-3">
+                                                <span className="text-sm sm:text-base text-gray-500 dark:text-gray-400">{t('pools.detailPage.creatorAddress')}</span>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="font-mono text-yellow-500 italic text-sm sm:text-base">{truncateString(poolDetail.creatorAddress, 12)}</span>
+                                                    <Copy className="w-3 h-3 sm:w-4 sm:h-4 cursor-pointer" onClick={() => {
+                                                        navigator.clipboard.writeText(poolDetail.creatorAddress)
+                                                        toast.success(t('pools.detailPage.copiedToClipboard'))
+                                                    }} />
                                                 </div>
-                                            )}
-                                            <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
-                                                <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.status')}</span>
-                                                <span className={`px-2 sm:px-3 py-1 rounded text-xs uppercase font-semibold ${poolDetail.status === 'active' ? 'bg-green-100 text-green-800' :
-                                                    poolDetail.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                                                        'bg-red-100 text-red-800'
-                                                    }`}>
-                                                    {t(`pools.detailPage.${poolDetail.status}`)}
-                                                </span>
                                             </div>
-                                            {poolDetail.transactionHash && (
+                                            <div className="space-y-2 sm:space-y-3 text-sm sm:text-base">
                                                 <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
-                                                    <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.transactionHash')}</span>
-                                                    <div className="flex items-center gap-2">
-                                                        <span className="font-mono text-yellow-500 italic text-xs">{truncateString(poolDetail.transactionHash, 16)}</span>
-                                                        <Copy className="w-3 h-3 cursor-pointer" onClick={() => {
-                                                            navigator.clipboard.writeText(poolDetail.transactionHash)
-                                                            toast.success(t('pools.detailPage.copiedToClipboard'))
-                                                        }} />
-                                                    </div>
+                                                    <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.poolId')}</span>
+                                                    <span className="font-mono">{poolDetail.poolId}</span>
                                                 </div>
-                                            )}
-                                            {poolDetail.userStakeInfo && (
-                                                <>
+                                                <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
+                                                    <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.creationDate')}</span>
+                                                    <span>{formatDate(poolDetail.creationDate)}</span>
+                                                </div>
+                                                {poolDetail.endDate && (
                                                     <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
-                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.poolStake')}</span>
-                                                        <span className="font-mono text-[#53DAE6]">{formatNumber(poolDetail.userStakeInfo.totalStaked)}</span>
+                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.endDate')}</span>
+                                                        <span>{formatDate(poolDetail.endDate)}</span>
                                                     </div>
+                                                )}
+                                                <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
+                                                    <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.status')}</span>
+                                                    <span className={`px-2 sm:px-3 py-1 rounded text-xs uppercase font-semibold ${poolDetail.status === 'active' ? 'bg-green-100 text-green-800' :
+                                                        poolDetail.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                                                            'bg-red-100 text-red-800'
+                                                        }`}>
+                                                        {t(`pools.detailPage.${poolDetail.status}`)}
+                                                    </span>
+                                                </div>
+                                                {poolDetail.transactionHash && (
                                                     <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
-                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.stakeCount')}</span>
-                                                        <span>{poolDetail.userStakeInfo.stakeCount}</span>
+                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.transactionHash')}</span>
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="font-mono text-yellow-500 italic text-xs">{truncateString(poolDetail.transactionHash, 16)}</span>
+                                                            <Copy className="w-3 h-3 cursor-pointer" onClick={() => {
+                                                                navigator.clipboard.writeText(poolDetail.transactionHash)
+                                                                toast.success(t('pools.detailPage.copiedToClipboard'))
+                                                            }} />
+                                                        </div>
                                                     </div>
-                                                    <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
-                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.joinDate')}</span>
-                                                        <span className="text-gray-500 dark:text-gray-400 italic text-xs sm:text-sm">{formatDate(poolDetail.userStakeInfo.joinDate)}</span>
-                                                    </div>
-                                                </>
-                                            )}
+                                                )}
+                                                {poolDetail.userStakeInfo && (
+                                                    <>
+                                                        <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
+                                                            <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.poolStake')}</span>
+                                                            <span className="font-mono text-[#53DAE6]">{formatNumber(poolDetail.userStakeInfo.totalStaked)}</span>
+                                                        </div>
+                                                        <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
+                                                            <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.stakeCount')}</span>
+                                                            <span>{poolDetail.userStakeInfo.stakeCount}</span>
+                                                        </div>
+                                                        <div className="flex flex-row justify-between sm:items-center gap-1 sm:gap-0">
+                                                            <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.joinDate')}</span>
+                                                            <span className="text-gray-500 dark:text-gray-400 italic text-xs sm:text-sm">{formatDate(poolDetail.userStakeInfo.joinDate)}</span>
+                                                        </div>
+                                                    </>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

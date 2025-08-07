@@ -1236,7 +1236,7 @@
       "overview": "개요",
       "members": "멤버",
       "transactions": "거래",
-      "totalVolume": "총 거래량",
+      "totalVolume": "총스테이킹수량",
       "membersCount": "멤버",
       "created": "생성일",
       "active": "활동",
@@ -1386,6 +1386,7 @@
       "en": "영어"
     },
     "messages": {
+      "userNotFound": "사용자를 찾을 수 없습니다. 이메일을 확인하세요",
       "verificationCodeSent": "인증 코드가 전송되었습니다. 이메일을 확인하고 인증 코드를 입력하세요",
       "verificationCodeResent": "인증 코드가 재전송되었습니다. 이메일을 확인하세요",
       "loginSuccess": "로그인 성공! {name}님 환영합니다!",

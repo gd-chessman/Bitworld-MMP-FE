@@ -7,6 +7,7 @@ import { useLang } from '@/lang/useLang';
 import { Button } from '@/ui/button';
 import { Input } from '@/ui/input';
 import { Label } from '@/ui/label';
+import { PasswordInput } from '@/ui/password-input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/ui/select';
@@ -34,8 +35,6 @@ const Connect = () => {
         email: '',
         password: ''
     });
-
-    console.log("isTermsChecked", isTermsChecked)
 
     // Email verification state
     const [emailForVerification, setEmailForVerification] = useState('');
@@ -116,7 +115,7 @@ const Connect = () => {
             setRegistrationStep('form');
             setRegisterData({ ...registerData, email: emailForVerification });
         } catch (error: any) {
-            if (error.response?.data?.message === 'Email already exists. Please use a different email or try to login') {
+            if (error.response?.data?.message === 'Email already exists. Please use a different email or try to login.') {
                 toast.error(t('connectPage.messages.emailAlreadyExists'));
             } else {
                 toast.error(t('connectPage.messages.verificationCodeError'));
@@ -133,7 +132,7 @@ const Connect = () => {
             await sendVerificationCode({ email: emailForVerification });
             toast.success(t('connectPage.messages.verificationCodeResent'));
         } catch (error: any) {
-            if (error.response?.data?.message === 'Email already exists. Please use a different email or try to login') {
+            if (error.response?.data?.message === 'Email already exists. Please use a different email or try to login.') {
                 toast.error(t('connectPage.messages.emailAlreadyExists'));
             } else {
                 toast.error(t('connectPage.messages.verificationCodeError'));
@@ -217,11 +216,6 @@ const Connect = () => {
         }
     };
 
-    const handleBackToEmail = () => {
-        setRegistrationStep('email');
-        setVerificationCode('');
-    };
-
     // Forgot password handlers
     const handleSendForgotPasswordCode = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -232,7 +226,11 @@ const Connect = () => {
             toast.success(t('connectPage.messages.verificationCodeSent'));
             setForgotPasswordStep('code');
         } catch (error: any) {
-            toast.error(error.response?.data?.message || t('connectPage.messages.verificationCodeError'));
+            if (error.response?.data?.message === 'User not found or email not verified') {
+                toast.error(t('connectPage.messages.userNotFound'));
+            } else {
+                toast.error(error.response?.data?.message || t('connectPage.messages.verificationCodeError'));
+            }
         } finally {
             setIsLoading(false);
         }
@@ -346,9 +344,8 @@ const Connect = () => {
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="login-password">{t('connectPage.login.password')}</Label>
-                                    <Input
+                                    <PasswordInput
                                         id="login-password"
-                                        type="password"
                                         minLength={4}
                                         placeholder={t('connectPage.login.passwordPlaceholder')}
                                         value={loginData.password}
@@ -430,9 +427,8 @@ const Connect = () => {
                                     </div>
                                     <div className="space-y-1">
                                         <Label htmlFor="register-password">{t('connectPage.register.password')}</Label>
-                                        <Input
+                                        <PasswordInput
                                             id="register-password"
-                                            type="password"
                                             minLength={4}
                                             placeholder={t('connectPage.register.passwordPlaceholder') + " " + t('connectPage.messages.minPasswordLength')}
                                             value={registerData.password}
@@ -543,9 +539,8 @@ const Connect = () => {
 
                                     <div className="space-y-2">
                                         <Label htmlFor="new-password">{t('connectPage.forgotPassword.newPassword')}</Label>
-                                        <Input
+                                        <PasswordInput
                                             id="new-password"
-                                            type="password"
                                             minLength={4}
                                             placeholder={t('connectPage.forgotPassword.newPasswordPlaceholder') + " " + t('connectPage.messages.minPasswordLength')}
                                             value={newPassword}

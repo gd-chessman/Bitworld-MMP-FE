@@ -289,22 +289,18 @@ export default function LiquidityPools() {
             return "bg-gradient-to-r from-[#569200] to-[#1C5400]";
         } else if (activeFilter === 'ranking' && index === 2) {
             return "bg-gradient-to-r from-[#0059D0] to-[#002F92]";
-        } else if (activeFilter === 'ranking' && index === 3) {
-            return "bg-gradient-to-r from-[#A68807] to-[#A46104]";
         }
         return "";
     }
     const getImgRanking = (index: number) => {
         if (activeFilter === 'ranking' && index === 0) {
-            return  <img src={"/firsth.png"} alt="ranking" className="w-10 h-12" />
+            return <img src={"/firsth.png"} alt="ranking" className="w-10 h-12" />
         } else if (activeFilter === 'ranking' && index === 1) {
             return <img src={"/sectionth.png"} alt="ranking" className="w-10 h-12" />
         } else if (activeFilter === 'ranking' && index === 2) {
             return <img src={"/threeth.png"} alt="ranking" className="w-10 h-12" />
-        } else if (activeFilter === 'ranking' && index === 3) {
-            return <img src={"/fourth.png"} alt="ranking" className="w-10 h-12" />
-        }else{
-            return index + 1
+        } else {
+            return <div className="md:w-10 md:h-12 w-8 h-8 flex items-center justify-center">{index + 1}</div>
         }
     }
 
@@ -395,6 +391,7 @@ export default function LiquidityPools() {
                             <div key={pool.poolId} className={`bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm dark:shadow-none ${getColorRanking(index)}`}>
                                 <div className="flex items-center justify-between mb-3">
                                     <div className="flex items-center gap-3">
+                                        {getImgRanking(index)}
                                         <img
                                             src={pool.logo || "/logo.png"}
                                             alt={pool.name}
@@ -527,7 +524,7 @@ export default function LiquidityPools() {
                                         <tr key={pool.poolId} className={`border-t border-gray-200 dark:border-gray-700 ${getColorRanking(index)} ${index % 2 === 0 ? "bg-white dark:bg-[#171717]" : "bg-gray-50 dark:bg-[#525252]/60"}`}>
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
                                                 <div className="flex items-center gap-3">
-                                                <div className="w-10 h-12 flex items-center justify-center">{getImgRanking(index)}</div>
+                                                    {getImgRanking(index)}
                                                 </div>
                                             </td>
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
