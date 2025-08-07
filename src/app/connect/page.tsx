@@ -27,7 +27,7 @@ const Connect = () => {
     const [showTermsModal, setShowTermsModal] = useState(false);
     const [isTermsChecked, setIsTermsChecked] = useState(false);
     const { t } = useLang();
-    const refCodeLocalStorage = sessionStorage.getItem('ref')
+    const [refCodeLocalStorage, setRefCodeLocalStorage] = useState<string | null>(null);
 
     // Login form state
     const [loginData, setLoginData] = useState({
@@ -61,6 +61,14 @@ const Connect = () => {
             if (interval) clearInterval(interval);
         };
     }, [resendCooldown]);
+
+    // Get refCode from sessionStorage on client side
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const refCode = sessionStorage.getItem('ref');
+            setRefCodeLocalStorage(refCode);
+        }
+    }, []);
 
     // Auto-fill refCode from localStorage if it exists
     useEffect(() => {
