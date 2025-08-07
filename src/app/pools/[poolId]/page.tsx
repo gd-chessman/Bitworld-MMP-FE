@@ -74,6 +74,7 @@ export default function PoolDetail() {
         queryKey: ["wallet-infor"],
         queryFn: getInforWallet,
         enabled: isAuthenticated,
+        refetchOnMount: true,
     })
 
     // Query để lấy chi tiết pool
@@ -81,18 +82,33 @@ export default function PoolDetail() {
         queryKey: ["pool-detail", poolId],
         queryFn: () => getAirdropPoolDetail(parseInt(poolId)),
         enabled: isAuthenticated && !!poolId,
+        refetchOnMount: true,
+        staleTime: 0,
+        refetchOnWindowFocus: false,
     })
 
     const { data: poolDetailV1, isLoading: isLoadingPoolV1 } = useQuery({
         queryKey: ["pool-detail-v1", poolId],
         queryFn: () => getAirdropPoolDetailV1(parseInt(poolId)),
         enabled: isAuthenticated && !!poolId,
+        refetchOnMount: true,
+        staleTime: 0,
+        refetchOnWindowFocus: false,
     })
+
+    // Invalidate queries when poolId changes
+    useEffect(() => {
+        if (poolId) {
+            queryClient.invalidateQueries({ queryKey: ["pool-detail", poolId] })
+            queryClient.invalidateQueries({ queryKey: ["pool-detail-v1", poolId] })
+        }
+    }, [poolId, queryClient])
 
     const { data: balance, isLoading: isBalanceLoading } = useQuery({
         queryKey: ['balance'],
         queryFn: getBalanceInfo,
-        refetchInterval: 5000
+        refetchInterval: 5000,
+        refetchOnMount: true,
     })
 
     console.log("balance", balance)
