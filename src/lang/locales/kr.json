@@ -1051,7 +1051,7 @@
     "namePlaceholder": "이름을 입력하세요",
     "nicknamePlaceholder": "닉네임을 입력하세요",
     "submit": "제출",
-    "uid": "Bittworld UID 입력",
+    "uid": "BITTWORLD UID 입력",
     "nameRequired": "이름은 필수입니다",
     "nicknameRequired": "닉네임은 필수입니다",
     "submitFailed": "제출에 실패했습니다",
@@ -1313,7 +1313,7 @@
     "enterValidNumbers": "유효한 숫자를 입력해 주세요"
   },
   "modalSignin": {
-    "agreeToTerms": "Bittworld 이용약관에 동의합니다",
+    "agreeToTerms": "BITTWORLD 이용약관에 동의합니다",
     "termsOfService": "",
     "ofBittworld": "",
     "loginWithGoogle": "Google 로 로그인"
@@ -1351,8 +1351,8 @@
       "nicknamePlaceholder": "닉네임을 입력하세요",
       "country": "국가",
       "countryPlaceholder": "국가를 선택하세요",
-      "bitworldUid": "Bitworld UID",
-      "bitworldUidPlaceholder": "Bitworld UID를 입력하세요",
+      "bitworldUid": "BITTWORLD UID",
+      "bitworldUidPlaceholder": "BITTWORLD UID를 입력하세요",
       "referralCode": "추천 코드 (선택사항)",
       "referralCodePlaceholder": "추천 코드를 입력하세요",
       "password": "비밀번호",

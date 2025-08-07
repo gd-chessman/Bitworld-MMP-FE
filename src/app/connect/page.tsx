@@ -392,15 +392,6 @@ const Connect = () => {
                                         <div className="text-sm text-gray-600 dark:text-white">
                                             {t('connectPage.register.emailDisplay', { email: emailForVerification })}
                                         </div>
-                                        <Button
-                                            type="button"
-                                            variant="outline"
-                                            size="sm"
-                                            onClick={handleBackToEmail}
-                                            className="text-xs"
-                                        >
-                                            {t('connectPage.register.changeEmail')}
-                                        </Button>
                                     </div>
 
                                     <div className="space-y-1">
@@ -438,18 +429,6 @@ const Connect = () => {
                                         />
                                     </div>
                                     <div className="space-y-1">
-                                        <Label htmlFor="register-uid">{t('connectPage.register.bitworldUid')}</Label>
-                                        <Input
-                                            id="register-uid"
-                                            type="text"
-                                            minLength={6}
-                                            placeholder={t('connectPage.register.bitworldUidPlaceholder')}
-                                            value={registerData.bittworld_uid}
-                                            onChange={(e) => setRegisterData({ ...registerData, bittworld_uid: e.target.value })}
-                                            required
-                                        />
-                                    </div>
-                                    <div className="space-y-1">
                                         <Label htmlFor="register-password">{t('connectPage.register.password')}</Label>
                                         <Input
                                             id="register-password"
@@ -462,6 +441,18 @@ const Connect = () => {
                                         />
                                     </div>
                                     <div className="space-y-1">
+                                        <Label htmlFor="register-uid">{t('connectPage.register.bitworldUid')}</Label>
+                                        <Input
+                                            id="register-uid"
+                                            type="text"
+                                            minLength={6}
+                                            placeholder={t('connectPage.register.bitworldUidPlaceholder')}
+                                            value={registerData.bittworld_uid}
+                                            onChange={(e) => setRegisterData({ ...registerData, bittworld_uid: e.target.value })}
+                                            required
+                                        />
+                                    </div>
+                                    {/* <div className="space-y-1">
                                         <Label htmlFor="register-refcode">{t('connectPage.register.referralCode')}</Label>
                                         <Input
                                             id="register-refcode"
@@ -470,7 +461,7 @@ const Connect = () => {
                                             value={registerData.refCode}
                                             onChange={(e) => setRegisterData({ ...registerData, refCode: e.target.value })}
                                         />
-                                    </div>
+                                    </div> */}
                                     <div className="flex justify-center items-center gap-2">
                                     <Checkbox
                                         id="terms-of-service"
@@ -525,15 +516,6 @@ const Connect = () => {
                                         <div className="text-sm text-gray-600 dark:text-white">
                                             {t('connectPage.register.emailDisplay', { email: forgotPasswordEmail })}
                                         </div>
-                                        <Button
-                                            type="button"
-                                            variant="outline"
-                                            size="sm"
-                                            onClick={handleBackToForgotPasswordEmail}
-                                            className="text-xs"
-                                        >
-                                            {t('connectPage.register.changeEmail')}
-                                        </Button>
                                     </div>
 
                                     <div className="space-y-2">
