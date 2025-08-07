@@ -330,30 +330,17 @@ const Connect = () => {
                                     <Input
                                         id="login-password"
                                         type="password"
+                                        minLength={4}
                                         placeholder={t('connectPage.login.passwordPlaceholder')}
                                         value={loginData.password}
                                         onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                                         required
                                     />
                                 </div>
-                                <div className="flex justify-center items-center gap-2">
-                                    <Checkbox
-                                        id="terms-of-service"
-                                        className="w-4 h-4"
-                                        checked={isTermsChecked}
-                                        onClick={handleCheckboxClick}
-                                    />
-                                    <button
-                                        className="text-xs"
-                                        onClick={handleCheckboxClick}
-                                    >
-                                        {t('modalSignin.agreeToTerms')} <span className="text-theme-primary-500">{t('modalSignin.termsOfService')}</span> {t('modalSignin.ofBittworld')}
-                                    </button>
-                                </div>
                                 <div className='text-xs text-gray-500'>
                                     <span className='cursor-pointer hover:text-blue-600 text-black dark:text-white' onClick={() => setIsForgot(true)}>{t('connectPage.login.forgotPassword')}</span>
                                 </div>
-                                <Button type="submit" className="w-full bg-theme-primary-500/80 hover:bg-theme-primary-500" disabled={isLoading || !isTermsChecked}>
+                                <Button type="submit" className="w-full bg-theme-primary-500/80 hover:bg-theme-primary-500" disabled={isLoading}>
                                     {isLoading ? t('connectPage.login.loggingIn') : t('connectPage.login.loginButton')}
                                 </Button>
                             </form>
@@ -448,6 +435,7 @@ const Connect = () => {
                                         <Input
                                             id="register-password"
                                             type="password"
+                                            minLength={4}
                                             placeholder={t('connectPage.register.passwordPlaceholder')}
                                             value={registerData.password}
                                             onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
@@ -464,7 +452,21 @@ const Connect = () => {
                                             onChange={(e) => setRegisterData({ ...registerData, refCode: e.target.value })}
                                         />
                                     </div>
-                                    <Button type="submit" className="w-full bg-theme-primary-500/80 hover:bg-theme-primary-500" disabled={isLoading}>
+                                    <div className="flex justify-center items-center gap-2">
+                                    <Checkbox
+                                        id="terms-of-service"
+                                        className="w-4 h-4"
+                                        checked={isTermsChecked}
+                                        onClick={handleCheckboxClick}
+                                    />
+                                    <button
+                                        className="text-xs"
+                                        onClick={handleCheckboxClick}
+                                    >
+                                        {t('modalSignin.agreeToTerms')} <span className="text-theme-primary-500">{t('modalSignin.termsOfService')}</span> {t('modalSignin.ofBittworld')}
+                                    </button>
+                                </div>
+                                    <Button type="submit" className="w-full bg-theme-primary-500/80 hover:bg-theme-primary-500" disabled={isLoading || !isTermsChecked}>
                                         {isLoading ? t('connectPage.register.registering') : t('connectPage.register.registerButton')}
                                     </Button>
                                 </form>
@@ -543,6 +545,7 @@ const Connect = () => {
                                         <Input
                                             id="new-password"
                                             type="password"
+                                            minLength={4}
                                             placeholder={t('connectPage.forgotPassword.newPasswordPlaceholder')}
                                             value={newPassword}
                                             onChange={(e) => setNewPassword(e.target.value)}
