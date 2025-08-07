@@ -38,6 +38,7 @@ interface PoolMember {
     totalStaked: number
     stakeCount: number
     status: 'pending' | 'active' | 'withdraw' | 'error'
+    bittworldUid: string
 }
 
 interface PoolTransaction {
@@ -92,7 +93,7 @@ export default function PoolDetail() {
         queryKey: ['balance'],
         queryFn: getBalanceInfo,
         refetchInterval: 5000
-      })
+    })
 
     console.log("balance", balance)
 
@@ -438,7 +439,7 @@ export default function PoolDetail() {
                     <div className="space-y-4 sm:space-y-6">
                         {/* Overview Tab */}
                         {activeTab === 'overview' && (
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+                            <div className="md:grid flex flex-col-reverse grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
                                 {/* Pool Description */}
                                 <div className="lg:col-span-2">
                                     <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6 border border-gray-200 dark:border-gray-700">
@@ -533,10 +534,14 @@ export default function PoolDetail() {
                                                         className="w-full px-3 outline-none py-3 sm:py-2 text-base border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-theme-primary-500 focus:border-transparent"
                                                         placeholder={t('pools.detailPage.enterAmount')}
                                                     />
-                                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                                        {t('pools.detailPage.minimumAmount')}
-                                                    </p>
-                                                  
+                                                    <div className="flex flex-row justify-between mt-1">
+                                                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                                            {t('pools.detailPage.minimumAmount')}
+                                                        </p>
+                                                        <p className="text-xs text-theme-primary-500 mt-1">
+                                                            {t('pools.detailPage.balanceBitt')}: {balance?.bitt?.token_balance}
+                                                        </p>
+                                                    </div>
                                                 </div>
 
                                                 <Button
@@ -552,7 +557,7 @@ export default function PoolDetail() {
                                             </div>
                                         ) : (
                                             <div className="text-center">
-                                                <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 mb-4">
+                                                <p className="text-sm sm:text-base text-yellow-500 italic mb-4">
                                                     {t('pools.detailPage.youAreCreator')}
                                                 </p>
                                                 <div className="space-y-2 mb-4 text-sm sm:text-base">
@@ -576,9 +581,14 @@ export default function PoolDetail() {
                                                         className="w-full px-3 py-3 sm:py-2 text-base outline-none border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-theme-primary-500 focus:border-transparent"
                                                         placeholder={t('pools.detailPage.enterAmount')}
                                                     />
-                                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                                        {t('pools.detailPage.minimumAmount')}
-                                                    </p>
+                                                    <div className="flex flex-row justify-between mt-1">
+                                                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                                            {t('pools.detailPage.minimumAmount')}
+                                                        </p>
+                                                        <p className="text-xs text-theme-primary-500 mt-1">
+                                                            {t('pools.detailPage.balanceBitt')}: {balance?.bitt?.token_balance}
+                                                        </p>
+                                                    </div>
                                                 </div>
 
                                                 <Button
@@ -611,6 +621,9 @@ export default function PoolDetail() {
                                                     {t('pools.detailPage.member')}
                                                 </th>
                                                 <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                    BITTWORLD UID
+                                                </th>
+                                                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                                     {t('pools.detailPage.stakeAmount')}
                                                 </th>
                                                 <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -640,6 +653,14 @@ export default function PoolDetail() {
                                                                     <Copy className="w-3 h-3" />
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
+                                                        <div className="text-sm text-yellow-500 font-mono flex items-center gap-1 cursor-pointer" onClick={() => {
+                                                            navigator.clipboard.writeText(member.bittworldUid)
+                                                            toast.success(t('pools.detailPage.copiedToClipboard'))
+                                                        }} >
+                                                            {member.bittworldUid} <Copy className="w-3 h-3" />
                                                         </div>
                                                     </td>
                                                     <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
@@ -693,38 +714,49 @@ export default function PoolDetail() {
                                                             <Copy className="w-3 h-3" />
                                                         </div>
                                                     </div>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${member.isCreator
+                                                            ? 'bg-purple-100 text-purple-800'
+                                                            : 'bg-gray-100 text-gray-800'
+                                                            }`}>
+                                                            {member.isCreator ? t('pools.detailPage.creator') : t('pools.detailPage.member')}
+                                                        </span>
+                                                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${member.status === 'active' ? 'bg-green-100 text-green-800' :
+                                                            member.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                                                                member.status === 'withdraw' ? 'bg-blue-100 text-blue-800' :
+                                                                    'bg-red-100 text-red-800'
+                                                            }`}>
+                                                            {t(`pools.detailPage.${member.status}`)}
+                                                        </span>
+                                                    </div>
                                                 </div>
 
-                                                <div className="grid grid-cols-2 gap-3 text-sm">
-                                                    <div>
-                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.stakeAmount')}</span>
+                                                <div className="flex flex-col gap-3 text-sm">
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <span className="text-gray-500 dark:text-white">BITTWORLD UID</span>
+                                                        <div className="text-yellow-500 font-mono flex items-center gap-1 cursor-pointer" onClick={() => {
+                                                            navigator.clipboard.writeText(member.bittworldUid)
+                                                            toast.success(t('pools.detailPage.copiedToClipboard'))
+                                                        }}>
+                                                            {member.bittworldUid}
+                                                            <Copy className="w-3 h-3" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <span className="text-gray-500 dark:text-white">{t('pools.detailPage.stakeAmount')}</span>
                                                         <div className="font-mono text-gray-900 dark:text-white">
                                                             {formatNumber(member.totalStaked)}
                                                         </div>
                                                     </div>
-                                                    <div>
-                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.joinDate')}:</span>
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <span className="text-gray-500 dark:text-white">{t('pools.detailPage.joinDate')}:</span>
                                                         <div className="text-gray-900 dark:text-white">
                                                             {formatDate(member.joinDate)}
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div className="flex flex-wrap gap-2">
-                                                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${member.isCreator
-                                                        ? 'bg-purple-100 text-purple-800'
-                                                        : 'bg-gray-100 text-gray-800'
-                                                        }`}>
-                                                        {member.isCreator ? t('pools.detailPage.creator') : t('pools.detailPage.member')}
-                                                    </span>
-                                                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${member.status === 'active' ? 'bg-green-100 text-green-800' :
-                                                        member.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                                                            member.status === 'withdraw' ? 'bg-blue-100 text-blue-800' :
-                                                                'bg-red-100 text-red-800'
-                                                        }`}>
-                                                        {member.status}
-                                                    </span>
-                                                </div>
+
                                             </div>
                                         ))}
                                     </div>
