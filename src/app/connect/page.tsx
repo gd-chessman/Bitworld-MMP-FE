@@ -166,8 +166,12 @@ const Connect = () => {
         } catch (error: any) {
             if (error.response?.data?.message === 'Invalid or expired verification code') {
                 toast.error(t('connectPage.messages.invalidVerificationCode'));
+            }if (error.response?.data?.message === 'Invalid password') {
+                toast.error(t('connectPage.messages.invalidPassword'));
             } else if (error.response?.data?.message === 'User not found') {
                 toast.error(t('connectPage.messages.userNotFound'));
+            } else if (error.response?.data?.message === 'User not verified') {
+                toast.error(t('connectPage.messages.userNotVerified'));
             } else {
                 toast.error(error.response?.data?.message || t('connectPage.messages.loginError'));
             }

@@ -1224,6 +1224,7 @@
       "poolNotFound": "Pool not found",
       "aboutPool": "About this Pool",
       "stakeInPool": "Staking in Pool",
+      "address": "Address",
       "amountToStake": "Amount to Staking",
       "minimumAmount": "Minimum: 1,000,000 tokens",
       "stakeNow": "Staking Now",
@@ -1360,7 +1361,10 @@
       "minPasswordLength": "(Minimum 4 characters)",
       "userNotFound": "User not found. Please check your email",
       "nicknameAlreadyExists": "Nickname already exists. Please use a different nickname or try to login",
-      "bittworldUidAlreadyExists": "Bittworld UID already exists. Please use a different Bittworld UID or try to login"
+      "bittworldUidAlreadyExists": "Bittworld UID already exists. Please use a different Bittworld UID or try to login",
+      "invalidPassword": "Invalid password. Please try again.",
+      "userNotVerified": "User not verified. Please check your email",
+      "invalidEmailOrPassword": "Invalid email or password"
     }
   }
 }

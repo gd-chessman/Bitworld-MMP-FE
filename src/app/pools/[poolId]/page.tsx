@@ -878,27 +878,43 @@ export default function PoolDetail() {
                                                     </div>
                                                 </div>
 
-                                                <div className="grid grid-cols-2 gap-3 text-sm">
-                                                    <div>
-                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.amount')}:</span>
+                                                <div className="flex flex-col gap-2">
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <span className="text-black dark:text-white">BITTWORLD UID:</span>
+                                                        <div className="text-yellow-500 truncate flex items-center gap-1 cursor-pointer text-sm" onClick={() => {
+                                                            navigator.clipboard.writeText(tx.bittworldUid)
+                                                            toast.success(t('pools.detailPage.copiedToClipboard'))
+                                                        }} >
+                                                            {tx.bittworldUid} <Copy className="w-3 h-3" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <span className="text-black dark:text-white">{t('pools.detailPage.amount')}:</span>
                                                         <div className="font-mono text-gray-900 dark:text-white">
                                                             {formatNumber(tx.stakeAmount)}
                                                         </div>
                                                     </div>
-                                                    <div>
-                                                        <span className="text-gray-500 dark:text-gray-400">{t('pools.detailPage.user')}:</span>
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <span className="text-black dark:text-white">{t('pools.detailPage.user')}:</span>
                                                         <div className="text-gray-900 dark:text-white truncate">
                                                             {tx.nickname}
                                                         </div>
                                                     </div>
-                                                </div>
-
-                                                <div className="text-xs text-yellow-500 italic">
-                                                    {truncateString(tx.solanaAddress, 16)}
-                                                </div>
-
-                                                <div className="text-xs text-gray-400">
-                                                    {t('pools.detailPage.status')}: {t(`pools.detailPage.${tx.status}`)}
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <span className="text-black dark:text-white">{t('pools.detailPage.address')}:</span>
+                                                        <div className="text-yellow-500 truncate flex items-center gap-1 cursor-pointer text-sm" onClick={() => {
+                                                            navigator.clipboard.writeText(tx.solanaAddress)
+                                                            toast.success(t('pools.detailPage.copiedToClipboard'))
+                                                        }} >
+                                                            {truncateString(tx.solanaAddress, 12)} <Copy className="w-3 h-3" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <span className="text-black dark:text-white">{t('pools.detailPage.transactionHash')}:</span>
+                                                        <div className="text-gray-900 dark:text-white truncate">
+                                                            {truncateString(tx.transactionHash || '', 12) ?? '-'}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         ))}
