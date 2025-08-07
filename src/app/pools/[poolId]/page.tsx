@@ -6,7 +6,7 @@ import { ArrowLeft, Star, Users, TrendingUp, Calendar, Settings, Copy, Share2, M
 import { Button } from "@/app/components/ui/button"
 import { toast } from 'react-hot-toast'
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import { getInforWallet } from "@/services/api/TelegramWalletService"
+import { getBalanceInfo, getInforWallet } from "@/services/api/TelegramWalletService"
 import { useAuth } from "@/hooks/useAuth"
 import { useLang } from '@/lang/useLang'
 import {
@@ -88,7 +88,13 @@ export default function PoolDetail() {
         enabled: isAuthenticated && !!poolId,
     })
 
-    console.log("poolDetailV1", poolDetailV1)
+    const { data: balance, isLoading: isBalanceLoading } = useQuery({
+        queryKey: ['balance'],
+        queryFn: getBalanceInfo,
+        refetchInterval: 5000
+      })
+
+    console.log("balance", balance)
 
     // Lấy dữ liệu members từ API response
     const members = poolDetail?.members || []
@@ -441,7 +447,7 @@ export default function PoolDetail() {
                                             {t('pools.detailPage.description')} &ensp; <span className="font-mono italic text-gray-500 dark:text-gray-400 text-xs sm:text-sm">{poolDetail.describe || "This is a community-driven liquidity pool focused on providing sustainable returns to its members through strategic token staking and yield farming opportunities."}</span>
                                         </p>
 
-                                        <div className="md:flex hidden space-y-2 sm:space-y-3 text-sm sm:text-base">
+                                        <div className="md:block hidden space-y-2 sm:space-y-3 text-sm sm:text-base">
                                             <div className="flex flex-row justify-between sm:items-center gap-2 sm:gap-0 mb-3">
                                                 <span className="text-sm sm:text-base text-gray-500 dark:text-gray-400">{t('pools.detailPage.creatorAddress')}</span>
                                                 <div className="flex items-center gap-2">
@@ -527,8 +533,11 @@ export default function PoolDetail() {
                                                         className="w-full px-3 outline-none py-3 sm:py-2 text-base border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-theme-primary-500 focus:border-transparent"
                                                         placeholder={t('pools.detailPage.enterAmount')}
                                                     />
-                                                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                                                         {t('pools.detailPage.minimumAmount')}
+                                                    </p>
+                                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                                        {t('pools.detailPage.balance')} {balance?.bitt?.balance}
                                                     </p>
                                                 </div>
 
@@ -569,7 +578,7 @@ export default function PoolDetail() {
                                                         className="w-full px-3 py-3 sm:py-2 text-base outline-none border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-theme-primary-500 focus:border-transparent"
                                                         placeholder={t('pools.detailPage.enterAmount')}
                                                     />
-                                                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                                                         {t('pools.detailPage.minimumAmount')}
                                                     </p>
                                                 </div>

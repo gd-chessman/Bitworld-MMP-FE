@@ -382,10 +382,10 @@ const SwapModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
         day: '2-digit', 
         year: 'numeric' 
       }),
-      sellAmount: order.swap_type === "sol_to_usdt" ? parseFloat(order.input_amount) : parseFloat(order.output_amount),
-      sellToken: order.swap_type === "sol_to_usdt" ? "SOL" : "USDT",
-      buyAmount: order.swap_type === "sol_to_usdt" ? parseFloat(order.output_amount) : parseFloat(order.input_amount),
-      buyToken: order.swap_type === "sol_to_usdt" ? "USDT" : "SOL",
+      sellAmount: parseFloat(order.output_amount),
+      sellToken: order.swap_type === "sol_to_usdt" ? "USDT" : "SOL",
+      buyAmount: parseFloat(order.input_amount),
+      buyToken: order.swap_type === "sol_to_usdt" ? "SOL" : "USDT",
       status: order.status,
       transactionHash: order.transaction_hash
     }))
@@ -455,6 +455,7 @@ const SwapModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
   }, [isMobile])
 
   const swapHistory = swapHistoryData?.data ? formatSwapHistory(swapHistoryData.data) : []
+  console.log("swapHistory", swapHistory)
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
