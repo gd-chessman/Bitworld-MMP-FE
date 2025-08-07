@@ -325,7 +325,10 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                             </DropdownMenuItem>
-                                            <DropdownMenuItem className="dropdown-item cursor-pointer text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20" onClick={logout}>
+                                            <DropdownMenuItem className="dropdown-item cursor-pointer text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20" onClick={() => {
+                                                logout();
+                                                refetch();
+                                            }}>
                                                 <LogOut className="mr-2 h-4 w-4" />
                                                 <span>{t('header.wallet.logout')}</span>
                                             </DropdownMenuItem>
