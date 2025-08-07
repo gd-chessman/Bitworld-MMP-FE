@@ -208,7 +208,14 @@ const Connect = () => {
         } catch (error: any) {
             if (error.response?.data?.message === 'Invalid or expired verification code') {
                 toast.error(t('connectPage.messages.invalidVerificationCode'));
-            } else {
+            }
+            if (error.response?.data?.message === 'Nickname already exists') {
+                toast.error(t('connectPage.messages.nicknameAlreadyExists'));
+            }
+            if (error.response?.data?.message === 'Bittworld UID already exists') {
+                toast.error(t('connectPage.messages.bittworldUidAlreadyExists'));
+            }
+            else {
                 toast.error(error.response?.data?.message || t('connectPage.messages.registerError'));
             }
         } finally {

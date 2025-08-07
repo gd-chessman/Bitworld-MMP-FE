@@ -1399,7 +1399,9 @@
       "passwordChangeError": "비밀번호 변경 중 오류가 발생했습니다",
       "emailAlreadyExists": "이미 존재하는 이메일입니다. 다른 이메일을 사용하거나 로그인을 시도하세요",
       "invalidVerificationCode": "재설정 코드가 유효하지 않거나 만료되었습니다",
-      "minPasswordLength": "(최소 4자 이상 입니다)"
+      "minPasswordLength": "(최소 4자 이상 입니다)",
+      "nicknameAlreadyExists": "이미 존재하는 닉네임입니다. 다른 닉네임을 사용하거나 로그인을 시도하세요",
+      "bittworldUidAlreadyExists": "이미 존재하는 BITTWORLD UID입니다. 다른 BITTWORLD UID를 사용하거나 로그인을 시도하세요"
     }
   }
 }
