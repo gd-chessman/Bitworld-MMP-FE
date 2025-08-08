@@ -67,6 +67,25 @@ export interface StakePoolResponse {
   transactionHash: string;
 }
 
+// Interface cho API cập nhật pool
+export interface UpdatePoolRequest {
+  logo?: File | string;
+  describe?: string;
+}
+
+export interface UpdatePoolResponse {
+  success: boolean;
+  message: string;
+  data: {
+    poolId: number;
+    name: string;
+    slug: string;
+    logo: string;
+    describe: string;
+    status: string;
+  };
+}
+
 // API Endpoints theo tài liệu thiết kế
 
 /**
@@ -168,6 +187,42 @@ export const stakeAirdropPool = async (data: StakePoolRequest) => {
     return response.data;
   } catch (error) {
     console.error("Error staking pool:", error);
+    throw error;
+  }
+};
+
+/**
+ * Cập nhật logo và mô tả của pool airdrop
+ * @param idOrSlug id hoặc slug của pool
+ * @param data dữ liệu cập nhật (logo và/hoặc describe)
+ */
+export const updateAirdropPool = async (idOrSlug: string | number, data: UpdatePoolRequest): Promise<UpdatePoolResponse> => {
+  try {
+    let response;
+    
+    // Nếu có logo là File, sử dụng FormData
+    if (data.logo instanceof File) {
+      const formData = new FormData();
+      if (data.logo) formData.append('logo', data.logo);
+      if (data.describe) formData.append('describe', data.describe);
+      
+      response = await axiosClient.put(`/airdrops/pool/${idOrSlug}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    } else {
+      // Nếu logo là string (URL) hoặc chỉ có describe, gửi JSON
+      const requestData: any = {};
+      if (data.logo) requestData.logo = data.logo;
+      if (data.describe) requestData.describe = data.describe;
+      
+      response = await axiosClient.put(`/airdrops/pool/${idOrSlug}`, requestData);
+    }
+    
+    return response.data;
+  } catch (error) {
+    console.error("Error updating airdrop pool:", error);
     throw error;
   }
 };

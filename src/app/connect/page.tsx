@@ -88,7 +88,8 @@ const Connect = () => {
         refCode: '',
         password: '',
         email: '',
-        verificationCode: ''
+        verificationCode: '',
+        referrer_bittworld_uid: ''
     });
 
     const handleCheckboxClick = () => {
@@ -213,7 +214,8 @@ const Connect = () => {
                 refCode: '',
                 password: '',
                 email: '',
-                verificationCode: ''
+                verificationCode: '',
+                referrer_bittworld_uid: ''
             });
         } catch (error: any) {
             if (error.response?.data?.message === 'Invalid or expired verification code') {
@@ -414,6 +416,7 @@ const Connect = () => {
                                             <Input
                                                 id="verification-code"
                                                 type="text"
+                                                maxLength={6}
                                                 placeholder={t('connectPage.register.verificationCodePlaceholder')}
                                                 value={verificationCode}
                                                 onChange={(e) => setVerificationCode(e.target.value)}
@@ -465,16 +468,16 @@ const Connect = () => {
                                             required
                                         />
                                     </div>
-                                    {/* <div className="space-y-1">
-                                        <Label htmlFor="register-refcode">{t('connectPage.register.referralCode')}</Label>
+                                    <div className="space-y-1">
+                                        <Label htmlFor="ref-bittworld-uid">{t('connectPage.register.referralCodeBittworldUid')}</Label>
                                         <Input
-                                            id="register-refcode"
+                                            id="ref-bittworld-uid"
                                             type="text"
                                             placeholder={t('connectPage.register.referralCodePlaceholder')}
-                                            value={registerData.refCode}
-                                            onChange={(e) => setRegisterData({ ...registerData, refCode: e.target.value })}
+                                            value={registerData.referrer_bittworld_uid}
+                                            onChange={(e) => setRegisterData({ ...registerData, referrer_bittworld_uid: e.target.value })}
                                         />
-                                    </div> */}
+                                    </div>
                                     <div className="flex justify-center items-center gap-2">
                                     <Checkbox
                                         id="terms-of-service"

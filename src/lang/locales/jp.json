@@ -1216,6 +1216,7 @@
     "uploadFormats": "PNG、JPG、WEBP、最大2MB",
     "uploadImageFile": "画像ファイルをアップロードしてください",
     "uploadImageSize": "画像サイズは2MB未満である必要があります",
+    "fileInputPlaceholder": "ファイルを選択",
     "poolNameRequired": "プール名は必須です",
     "poolDescRequired": "プールの説明は必須です",
     "poolImageRequired": "プールの画像は必須です",

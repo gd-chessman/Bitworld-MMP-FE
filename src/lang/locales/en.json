@@ -1214,6 +1214,7 @@
     "uploadFormats": "PNG, JPG, WEBP up to 2MB",
     "uploadImageFile": "Please upload an image file",
     "uploadImageSize": "Image size should be less than 2MB",
+    "fileInputPlaceholder": "Choose file",
     "poolNameRequired": "Pool name is required",
     "poolDescRequired": "Pool description is required",
     "poolImageRequired": "Pool image is required",
@@ -1228,6 +1229,13 @@
       "backToPools": "Back to Pools",
       "poolNotFound": "Pool not found",
       "aboutPool": "About this Pool",
+      "save": "Save",
+      "edit": "Edit",
+      "updateSuccessful": "Pool updated successfully",
+      "updateFailed": "Failed to update pool",
+      "updateFieldsRequired": "Description or logo is required",
+      "logoUpdate": "Logo Update",
+      "updating": "Updating...",
       "stakeInPool": "Staking in Pool",
       "address": "Address",
       "amountToStake": "Amount to Staking",
@@ -1326,7 +1334,8 @@
       "registerButton": "Register",
       "registering": "Registering...",
       "changeEmail": "Change",
-      "emailDisplay": "Email: {email}"
+      "emailDisplay": "Email: {email}",
+      "referralCodeBittworldUid": "BITTWORLD UID Referral Code (optional)"
     },
     "forgotPassword": {
       "title": "Forgot Password",

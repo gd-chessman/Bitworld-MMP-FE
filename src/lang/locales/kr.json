@@ -1208,6 +1208,7 @@
     "uploadFormats": "PNG, JPG, WEBP 최대 2MB",
     "uploadImageFile": "이미지 파일을 업로드해 주세요",
     "uploadImageSize": "이미지 크기는 2MB 미만이어야 합니다",
+    "fileInputPlaceholder": "파일 선택",
     "poolNameRequired": "풀 이름은 필수입니다",
     "poolDescRequired": "풀 설명은 필수입니다",
     "poolImageRequired": "풀 이미지는 필수입니다",
@@ -1230,6 +1231,13 @@
       "staking": "스테이킹 중...",
       "youAreCreator": "당신은 이 풀의 생성자입니다",
       "address": "주소",
+      "save": "저장",
+      "edit": "편집",
+      "updateSuccessful": "풀 업데이트 성공",
+      "updateFailed": "풀 업데이트 실패",
+      "updateFieldsRequired": "설명 또는 로고가 필요합니다",
+      "logoUpdate": "로고 업데이트",
+      "updating": "업데이트 중...",
       "managePool": "풀 관리",
       "balanceBitt": "내 잔액(BITT)",
       "copy": "복사",
@@ -1363,7 +1371,8 @@
       "registerButton": "회원가입",
       "registering": "회원가입 중...",
       "changeEmail": "변경",
-      "emailDisplay": "이메일: {email}"
+      "emailDisplay": "이메일: {email}",
+      "referralCodeBittworldUid": "BITTWORLD 추천인 UID (선택사항)"
     },
     "forgotPassword": {
       "title": "비밀번호 찾기",

@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
-import { ArrowLeft, Star, Users, TrendingUp, Calendar, Settings, Copy, Share2, MoreVertical, ChevronDown } from "lucide-react"
+import { ArrowLeft, Star, Users, TrendingUp, Calendar, Settings, Copy, Share2, MoreVertical, ChevronDown, X } from "lucide-react"
 import { Button } from "@/app/components/ui/button"
+import { FileInput } from "@/app/components/ui/file-input"
 import { toast } from 'react-hot-toast'
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { getBalanceInfo, getInforWallet } from "@/services/api/TelegramWalletService"
@@ -13,8 +14,10 @@ import {
     getAirdropPoolDetail,
     getAirdropPoolDetailV1,
     stakeAirdropPool,
+    updateAirdropPool,
     type AirdropPool,
-    type StakePoolRequest
+    type StakePoolRequest,
+    type UpdatePoolRequest
 } from "@/services/api/PoolServices"
 import { truncateString } from "@/utils/format"
 import {
@@ -68,6 +71,12 @@ export default function PoolDetail() {
     const [stakeAmount, setStakeAmount] = useState(1000000)
     const [isStaking, setIsStaking] = useState(false)
     const [isConfirmingStake, setIsConfirmingStake] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
+    const [editForm, setEditForm] = useState<UpdatePoolRequest>({
+        describe: '',
+        logo: undefined
+    })
+    const [logoPreview, setLogoPreview] = useState<string | null>(null)
 
     // Query để lấy thông tin wallet
     const { data: walletInfor } = useQuery({
@@ -156,6 +165,30 @@ export default function PoolDetail() {
         }
     })
 
+    // Mutation để cập nhật pool
+    const updatePoolMutation = useMutation({
+        mutationFn: async (data: UpdatePoolRequest) => {
+            return await updateAirdropPool(poolId, data)
+        },
+        onSuccess: (data) => {
+            toast.success(t('pools.detailPage.updateSuccessful'))
+            queryClient.invalidateQueries({ queryKey: ["pool-detail", poolId] })
+            queryClient.invalidateQueries({ queryKey: ["pool-detail-v1", poolId] })
+            setIsEditing(false)
+            setEditForm({ describe: '', logo: undefined })
+            setLogoPreview(null)
+        },
+        onError: (error: any) => {
+            let message = t('pools.detailPage.updateFailed')
+
+            if (error.response?.data?.message) {
+                message = error.response.data.message
+            }
+
+            toast.error(message)
+        }
+    })
+
     const handleStake = async () => {
         if (stakeAmount && stakeAmount < 1000000) {
             toast.error(t('pools.detailPage.minimumStakeAmount'))
@@ -163,6 +196,63 @@ export default function PoolDetail() {
         }
 
         setIsConfirmingStake(true)
+    }
+
+    const handleUpdatePool = async () => {
+        if (!editForm.describe?.trim() && !editForm.logo) {
+            toast.error(t('pools.detailPage.updateFieldsRequired'))
+            return
+        }
+
+        const updateData: UpdatePoolRequest = {}
+        if (editForm.describe?.trim()) {
+            updateData.describe = editForm.describe.trim()
+        }
+        if (editForm.logo) {
+            updateData.logo = editForm.logo
+        }
+
+        await updatePoolMutation.mutateAsync(updateData)
+    }
+
+    const handleEditClick = () => {
+        setEditForm({
+            describe: poolDetail?.describe || '',
+            logo: undefined
+        })
+        // Initialize logo preview with current logo if it exists
+        if (poolDetail?.logo) {
+            setLogoPreview(poolDetail.logo)
+        } else {
+            setLogoPreview(null)
+        }
+        setIsEditing(true)
+    }
+
+    const handleLogoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0]
+        if (file) {
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                toast.error(t('pools.uploadImageFile'))
+                return
+            }
+
+            // Validate file size (2MB limit)
+            if (file.size > 2 * 1024 * 1024) {
+                toast.error(t('pools.uploadImageSize'))
+                return
+            }
+
+            setEditForm({ ...editForm, logo: file })
+
+            // Create preview
+            const reader = new FileReader()
+            reader.onload = (e) => {
+                setLogoPreview(e.target?.result as string)
+            }
+            reader.readAsDataURL(file)
+        }
     }
 
     const copyPoolLink = () => {
@@ -459,10 +549,93 @@ export default function PoolDetail() {
                                 {/* Pool Description */}
                                 <div className="lg:col-span-2">
                                     <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6 border border-gray-200 dark:border-gray-700">
-                                        <h3 className="text-base sm:text-lg font-semibold mb-4">{t('pools.detailPage.aboutPool')}</h3>
-                                        <p className="leading-relaxed text-theme-primary-500 text-sm sm:text-base mb-4">
-                                            {t('pools.detailPage.description')} &ensp; <span className="font-mono italic text-gray-500 dark:text-gray-400 text-xs sm:text-sm">{poolDetail.describe || "This is a community-driven liquidity pool focused on providing sustainable returns to its members through strategic token staking and yield farming opportunities."}</span>
-                                        </p>
+                                        <div className="flex items-center justify-between mb-4">
+                                            <h3 className="text-base sm:text-lg font-semibold">{t('pools.detailPage.aboutPool')}</h3>
+                                            {isCreator && (
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={handleEditClick}
+                                                    className="text-xs sm:text-sm"
+                                                >
+                                                    <Settings className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                                                    {t('pools.detailPage.edit')}
+                                                </Button>
+                                            )}
+                                        </div>
+
+                                        {isEditing ? (
+                                            <div className="space-y-4 dark:bg-theme-neutral-900/30 bg-theme-neutral-100 rounded-lg p-4">
+                                                <div className="flex flex-row 2xl:gap-3 gap-2 justify-between w-full">
+                                                    <div className="basis-1/2">
+                                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                                            {t('pools.detailPage.description')}
+                                                        </label>
+                                                        <textarea
+                                                            value={editForm.describe || ''}
+                                                            onChange={(e) => setEditForm({ ...editForm, describe: e.target.value })}
+                                                            className="w-full outline-none px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-theme-primary-500 focus:border-transparent"
+                                                            rows={3}
+                                                            placeholder={t('pools.detailPage.enterDescription')}
+                                                        />
+                                                    </div>
+                                                    <div className="basis-1/2">
+                                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                                            {t('pools.detailPage.logoUpdate')}
+                                                        </label>
+                                                        <div className="flex flex-row gap-2 justify-around">
+                                                            <FileInput
+                                                                accept="image/*"
+                                                                onChange={handleLogoUpload}
+                                                                placeholder={t('pools.fileInputPlaceholder')}
+                                                                className="max-w-[200px]"
+                                                            />
+                                                            <div className="mt-2 relative inline-block bg-theme-neutral-1000 dark:bg-theme-neutral-100 rounded-full p-1">
+                                                                    <img
+                                                                        src={logoPreview ? logoPreview : (poolDetail?.logo || "/placeholder.png")}
+                                                                        alt="Logo Preview"
+                                                                        className="w-20 h-20 object-cover rounded-full border border-gray-300 dark:border-gray-600"
+                                                                    />
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => {
+                                                                            setLogoPreview(null)
+                                                                            setEditForm({ ...editForm, logo: undefined })
+                                                                        }}
+                                                                        className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-1"
+                                                                    >
+                                                                        <X className="w-3 h-3" />
+                                                                    </button>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-2 justify-end">
+                                                    <Button
+                                                        onClick={handleUpdatePool}
+                                                        disabled={updatePoolMutation.isPending}
+                                                        className="text-xs sm:text-sm bg-theme-primary-500 hover:bg-green-500 text-white py-3 sm:py-2 px-4 max-h-8"
+                                                    >
+                                                        {updatePoolMutation.isPending ? t('pools.detailPage.updating') : t('pools.detailPage.save')}
+                                                    </Button>
+                                                    <Button
+                                                        variant="outline"
+                                                        onClick={() => {
+                                                            setIsEditing(false)
+                                                            setEditForm({ describe: '', logo: undefined })
+                                                            setLogoPreview(null)
+                                                        }}
+                                                        className="text-xs sm:text-sm max-h-8"
+                                                    >
+                                                        {t('pools.detailPage.cancel')}
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <p className="leading-relaxed text-theme-primary-500 text-sm sm:text-base mb-4">
+                                                {t('pools.detailPage.description')} &ensp; <span className="font-mono italic text-gray-500 dark:text-gray-400 text-xs sm:text-sm">{poolDetail.describe || "This is a community-driven liquidity pool focused on providing sustainable returns to its members through strategic token staking and yield farming opportunities."}</span>
+                                            </p>
+                                        )}
 
                                         <div className="md:block hidden space-y-2 sm:space-y-3 text-sm sm:text-base">
                                             <div className="flex flex-row justify-between sm:items-center gap-2 sm:gap-0 mb-3">

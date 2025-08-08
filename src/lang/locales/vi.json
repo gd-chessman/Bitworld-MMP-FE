@@ -1262,6 +1262,7 @@
     "uploadFormats": "PNG, JPG, WEBP tối đa 2MB",
     "uploadImageFile": "Vui lòng tải lên file hình ảnh",
     "uploadImageSize": "Kích thước hình ảnh phải nhỏ hơn 2MB",
+    "fileInputPlaceholder": "Chọn tệp",
     "poolNameRequired": "Tên pool là bắt buộc",
     "poolDescRequired": "Mô tả pool là bắt buộc",
     "poolImageRequired": "Hình ảnh pool là bắt buộc",
