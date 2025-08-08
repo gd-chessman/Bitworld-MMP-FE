@@ -216,6 +216,10 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
     });
   }, [dataInfo, theme, statsButtons]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [dataInfo]);
+
   return (
     <div 
       ref={containerRef}

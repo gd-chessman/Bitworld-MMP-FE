@@ -364,7 +364,7 @@ export default function TradingPanel({
                     <button
                         onClick={handleSubmit}
                         disabled={isButtonDisabled || isLoading}
-                        className={`w-full 2xl:py-2 py-1 rounded-full text-white font-semibold text-sm transition-colors relative ${isButtonDisabled || isLoading
+                        className={`w-full 2xl:py-2 py-1 mt-2 rounded-full text-white font-semibold text-sm transition-colors relative ${isButtonDisabled || isLoading
                             ? "bg-gray-400 cursor-not-allowed dark:bg-gray-600"
                             : mode === "buy"
                                 ? "bg-green-500 hover:bg-green-600 dark:bg-theme-green-200 dark:hover:bg-theme-green-200/90"

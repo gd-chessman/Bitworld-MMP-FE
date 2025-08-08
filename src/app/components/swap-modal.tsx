@@ -174,7 +174,6 @@ const HistoryInterface = React.memo(({
   classes: any
 }) => {
   const { t } = useLang()
-  console.log("swapHistory", swapHistory)
   return (
     <div className={`bg-[#000000] rounded-md ${classes.padding} pr-0 flex-1 min-h-[43vh]`}>
       <h2 className={`${classes.subtitle} font-semibold mb-6 text-center`}>{t('swap.swapHistory')}</h2>
@@ -455,11 +454,10 @@ const SwapModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
   }, [isMobile])
 
   const swapHistory = swapHistoryData?.data ? formatSwapHistory(swapHistoryData.data) : []
-  console.log("swapHistory", swapHistory)
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className={`${classes.modal} outline-none overflow-y-auto bg-[#121619] max-h-[55vh] md:max-h-[80vh] border-gray-700 text-white`} onPointerDownOutside={(e) => e.preventDefault()}>
+      <DialogContent className={`${classes.modal} outline-none overflow-y-auto bg-[#121619] max-h-auto md:max-h-[80vh] h-fit border-gray-700 text-white`} onPointerDownOutside={(e) => e.preventDefault()}>
         <DialogHeader className="flex flex-row items-center justify-between max-h-10">
           <DialogTitle className={`${classes.title} font-bold text-white max-h-10`}>{t('swap.swap')}</DialogTitle>
         </DialogHeader>

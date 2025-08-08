@@ -664,7 +664,11 @@
         "marketCap": "Market Cap",
         "volume24h": "24h Volume",
         "holders": "Holders",
-        "liquidity": "Liquidity"
+        "liquidity": "Liquidity",
+        "vol": "Vol",
+        "buy": "Buy",
+        "sells": "Sells",
+        "netBuy": "Net Buy"
       },
       "error": {
         "loadingFailed": "Failed to load token information",
