@@ -349,7 +349,7 @@ export default function WalletPage() {
                             </>
                         ) : (
                             <>
-                                <div className={`${walletCardStyles} dark:!bg-gray-800 !bg-gray-300`}>
+                                <div className={`${walletCardStyles} !gap-1 dark:!bg-gray-800 !bg-gray-300`}>
                                     <div className="inline-flex justify-start items-center gap-2 w-full ">
                                         <div className="w-6 h-6 sm:w-8 sm:h-8 relative overflow-hidden flex-shrink-0">
                                             <img src="/solana.png" alt="Solana" className="w-full h-full object-cover" />
@@ -359,6 +359,7 @@ export default function WalletPage() {
                                             <span className={walletTitleStyles}> {t('wallet.wallet')}</span>
                                         </div>
                                     </div>
+                                    <div className="text-xs text-yellow-500 italic w-full">{t('wallet.warning')}</div>
                                     <div className="flex flex-col justify-start items-center gap-2 w-full">
                                         <div className="w-full h-8 lg:h-[36px] pl-3 sm:pl-4 pr-4 sm:pr-6 relative rounded-md outline outline-1 outline-offset-[-1px] outline-gray-500 flex justify-between items-center">
                                             <div className={walletAddressStyles}>

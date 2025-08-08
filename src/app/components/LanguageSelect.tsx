@@ -29,7 +29,7 @@ export function LangToggle({ className, showArrow = false, onLanguageChange }: {
         <Button 
           variant="ghost" 
           size="icon" 
-          className="w-full dark:bg-transparent bg-gray-100 text-theme-neutral-100 px-2 flex justify-start gap-2 touch-manipulation"
+          className="w-full dark:bg-transparent bg-gray-100 text-theme-neutral-100 xl:px-2 xl:max-h-auto max-h-[30px] px-1 flex justify-start gap-2 touch-manipulation"
           onClick={(e) => {
             console.log('Dropdown trigger clicked');
             e.stopPropagation();
@@ -39,12 +39,12 @@ export function LangToggle({ className, showArrow = false, onLanguageChange }: {
             e.stopPropagation();
           }}
         >
-          {currentLang && <img src={currentLang.flag} alt={t(currentLang.translationKey)} className="w-7 h-5" />}
+          {currentLang && <img src={currentLang.flag} alt={t(currentLang.translationKey)} className="xl:w-7 w-5 xl:h-5 h-4" />}
           <span>{currentLang && t(currentLang.translationKey)}</span>
           {showArrow && <ChevronDown className="h-6 w-6 ml-auto" />}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" side={showArrow ? "bottom" : "bottom"} className={`${showArrow ? '!bg-theme-primary-500/40 border-t border-neutral-200 dark:border-transparent rounded-md box-shadow-none rounded-t-none !z-[60] !max-h-[80vh] !overflow-y-auto' : ''}`}>
+      <DropdownMenuContent align="end" side={showArrow ? "bottom" : "bottom"} className={`${showArrow ? '!bg-theme-primary-500/40 border-t border-neutral-200 dark:border-transparent rounded-md box-shadow-none rounded-t-none !z-[60] md:!max-h-[80vh] !max-h-[50vh] !overflow-y-auto' : ''}`}>
         <div className="flex flex-col pr-2 gap-1 overflow-x-hidden">
           {langConfig.listLangs.map((language) => (
             <DropdownMenuItem 
@@ -59,8 +59,8 @@ export function LangToggle({ className, showArrow = false, onLanguageChange }: {
                 console.log('Touch end on language item:', language.code);
                 handleLanguageChange(language.code);
               }}
-              className="flex dark: text-theme-neutral-100 items-center gap-2 lg:ml-0 ml-5 cursor-pointer hover:bg-theme-neutral-100 dark:hover:bg-theme-neutral-900 touch-manipulation min-h-[44px]" 
-              style={{ width: showArrow ? 'calc(100vw - 40px)' : '180px', marginRight: showArrow ? '0' : '-10px' }}
+              className="flex dark: text-theme-neutral-100 items-center gap-2 ml-0 cursor-pointer hover:bg-theme-neutral-100 dark:hover:bg-theme-neutral-900 touch-manipulation xl:min-h-[44px] min-h-[30px]" 
+              style={{ width: showArrow ? 'calc(100vw - 40px)' : '140px', marginRight: showArrow ? '0' : '-10px' }}
             >
               <img src={language.flag} alt={t(language.translationKey)} className="w-7 h-5 rounded" />
               <span>{t(language.translationKey)}</span>

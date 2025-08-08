@@ -473,6 +473,7 @@
     "active": "활성",
     "success": "성공",
     "switch": "전환",
+    "warning": "경고: 외부에서 입금시 필히 solana 네트워크를 선택",
     "noTokens": "토큰 없음",
     "deleteConfirm": {
       "title": "지갑 삭제 확인",

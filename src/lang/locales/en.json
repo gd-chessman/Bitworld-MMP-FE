@@ -422,6 +422,7 @@
     "passwordMustContainAtLeastOneNumber": "Password must contain at least one number",
     "passwordMustContainAtLeastOneSpecialCharacter": "Password must contain at least one special character",
     "passwordMustBeAtLeast8CharactersLong": "Password must be at least 8 characters long",
+    "warning": "Warning: When depositing from external sources, please make sure to select the SOLANA network",
     "switchFailed": "Failed to switch wallet",
     "deleteSuccess": "Wallet deleted successfully",
     "deleteFailed": "Failed to delete wallet",

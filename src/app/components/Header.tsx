@@ -232,13 +232,13 @@ const Header = () => {
                         {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
 
-                    <div className='hidden lg:flex items-center gap-2 2xl:gap-6'>
+                    <div className='hidden md:flex items-center gap-2 2xl:gap-6'>
                         {isAuthenticated && walletInfor && (
-                            <button className=' bg-theme-primary-500 2xl:text-sm text-xs linear-gradient-blue text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 lg:px-3.5 py-[6px] rounded-md transition-colors whitespace-nowrap flex flex-col'>
+                            <button className=' bg-theme-primary-500 2xl:text-sm text-[10px] linear-gradient-blue text-theme-neutral-100 dark:text-neutral-100 font-medium px-3 lg:px-3.5 py-[6px] rounded-md transition-colors whitespace-nowrap flex flex-col'>
                                {t("myWallet")} {walletInfor.solana_balance} SOL &ensp; {'$' + formatNumberWithSuffix3(walletInfor.solana_balance_usd)}
                             </button>
                         )}
-                        <div className="relative ml-4">
+                        <div className="relative xl:ml-4 ml-2">
                             <input
                                 type="text"
                                 value={searchQuery}
@@ -252,9 +252,9 @@ const Header = () => {
                                     }
                                 }}
                                 placeholder={t('searchPlaceholder')}
-                                className="rounded-md py-1.5 pl-10 pr-4 w-[16vw] 2xl:w-[13vw] text-sm focus:outline-none bg-gray-100 dark:bg-black text-gray-900 dark:text-neutral-200 focus:ring-1 focus:ring-blue-500 dark:focus:ring-[hsl(var(--ring))] max-h-[30px] border border-gray-500 placeholder:text-gray-500 dark:placeholder:text-neutral-400 placeholder:text-xs"
+                                className="rounded-md py-1.5 xl:pl-10 pl-6 pr-4 w-[13vw] 2xl:w-[13vw] text-sm focus:outline-none bg-gray-100 dark:bg-black text-gray-900 dark:text-neutral-200 focus:ring-1 focus:ring-blue-500 dark:focus:ring-[hsl(var(--ring))] max-h-[30px] border border-gray-500 placeholder:text-gray-500 dark:placeholder:text-neutral-400 placeholder:text-[10px] xl:placeholder:text-xs"
                             />
-                            <Search className="absolute left-3 top-2 2xl:top-2 h-4 w-4 text-gray-500 dark:text-muted-foreground" />
+                            <Search className="absolute xl:left-3 left-2 top-2 2xl:top-2 xl:h-4 h-3 w-3 text-gray-500 dark:text-muted-foreground" />
                         </div>
 
                         <Display />
