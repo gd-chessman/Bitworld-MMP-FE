@@ -1378,7 +1378,8 @@
       "bittworldUidAlreadyExists": "Bittworld UID already exists. Please use a different Bittworld UID or try to login",
       "invalidPassword": "Invalid password. Please try again.",
       "userNotVerified": "User not verified. Please check your email",
-      "invalidEmailOrPassword": "Invalid email or password"
+      "invalidEmailOrPassword": "Invalid email or password",
+      "emailNotVerified": "Email is not verified. Please verify your email first."
     }
   }
 }

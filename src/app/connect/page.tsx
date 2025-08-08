@@ -173,7 +173,10 @@ const Connect = () => {
                 toast.error(t('connectPage.messages.userNotFound'));
             } else if (error.response?.data?.message === 'User not verified') {
                 toast.error(t('connectPage.messages.userNotVerified'));
-            } else {
+            }else if (error.response?.data?.message === 'Email is not verified. Please verify your email first.') {
+                toast.error(t('connectPage.messages.emailNotVerified'));
+            }
+            else {
                 toast.error(error.response?.data?.message || t('connectPage.messages.loginError'));
             }
         } finally {
@@ -304,16 +307,6 @@ const Connect = () => {
             setIsLoading(false);
         }
     };
-
-    const handleBackToForgotPasswordEmail = () => {
-        setForgotPasswordStep('email');
-        setForgotPasswordCode('');
-    };
-
-    const handleGoogleSignIn = async () => {
-        window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI}&response_type=code&scope=email%20profile&access_type=offline`
-        console.log("handleGoogleSignIn")
-    }
 
     return (
         <div className="h-[93vh] flex flex-col justify-center items-center gap-2 xl:gap-4 px-4 lg:px-0 relative z-40 2xl:pt-4 pt-2">
