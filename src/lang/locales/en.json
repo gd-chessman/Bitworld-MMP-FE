@@ -46,14 +46,14 @@
   "trade": "Trade",
   "create coin": "Create Coin",
   "listWalletss": {
-      "walletType": {
-        "main": "Main",
-        "import": "Imported",
-        "other": "Other",
-        "master": "Master",
-        "member": "Member"
-      }
-    },
+    "walletType": {
+      "main": "Main",
+      "import": "Imported",
+      "other": "Other",
+      "master": "Master",
+      "member": "Member"
+    }
+  },
   "createCoin": {
     "title": "CREATE NEW COIN",
     "subtitle": "Create a new coin on Pumpfun",
@@ -136,13 +136,13 @@
       }
     },
     "tabs": {
-        "today": "Today",
-        "last8days": "Last 8 Days",
-        "lastMonth": "Last Month",
-        "noCoins": "No coins created recently",
-        "seeAll": "See all my coins",
-        "trade": "Trade"
-      },
+      "today": "Today",
+      "last8days": "Last 8 Days",
+      "lastMonth": "Last Month",
+      "noCoins": "No coins created recently",
+      "seeAll": "See all my coins",
+      "trade": "Trade"
+    },
     "myCoins": {
       "title": "MY COINS",
       "createCoin": "CREATE COIN",
@@ -159,7 +159,7 @@
         "copy": "Copy address",
         "copied": "Address copied to clipboard",
         "convert": "Convert"
-      }   
+      }
     },
     "guide": {
       "title": "GUIDE",
@@ -1202,6 +1202,7 @@
     "filterJoined": "Joined",
     "filterRanking": "Ranking",
     "loadingPools": "Loading pools...",
+    "round": "1st Round",
     "poolName": "Pool Name",
     "uidLeader": "UID Leader",
     "leaderAddress": "Leader Address",
@@ -1215,6 +1216,8 @@
     "uploadImageFile": "Please upload an image file",
     "uploadImageSize": "Image size should be less than 2MB",
     "fileInputPlaceholder": "Choose file",
+    "chooseFromSystem": "Choose from gallery",
+    "noSystemImages": "No system images found",
     "poolNameRequired": "Pool name is required",
     "poolDescRequired": "Pool description is required",
     "poolImageRequired": "Pool image is required",
@@ -1235,6 +1238,8 @@
       "updateFailed": "Failed to update pool",
       "updateFieldsRequired": "Description or logo is required",
       "logoUpdate": "Logo Update",
+      "chooseFromSystem": "Choose from gallery",
+      "noSystemImages": "No system images found",
       "updating": "Updating...",
       "stakeInPool": "Staking in Pool",
       "address": "Address",

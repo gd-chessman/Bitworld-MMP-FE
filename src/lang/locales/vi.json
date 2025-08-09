@@ -1263,6 +1263,8 @@
     "uploadImageFile": "Vui lòng tải lên file hình ảnh",
     "uploadImageSize": "Kích thước hình ảnh phải nhỏ hơn 2MB",
     "fileInputPlaceholder": "Chọn tệp",
+      "chooseFromSystem": "Chọn từ hệ thống",
+      "noSystemImages": "Không có ảnh hệ thống",
     "poolNameRequired": "Tên pool là bắt buộc",
     "poolDescRequired": "Mô tả pool là bắt buộc",
     "poolImageRequired": "Hình ảnh pool là bắt buộc",

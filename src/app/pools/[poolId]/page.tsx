@@ -20,6 +20,8 @@ import {
     type UpdatePoolRequest
 } from "@/services/api/PoolServices"
 import { truncateString } from "@/utils/format"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/ui/dialog"
+import { listBoxLogos } from "@/services/other"
 import {
     AlertDialog,
     AlertDialogAction,
@@ -77,6 +79,9 @@ export default function PoolDetail() {
         logo: undefined
     })
     const [logoPreview, setLogoPreview] = useState<string | null>(null)
+    const [isLogoPickerOpen, setIsLogoPickerOpen] = useState(false)
+    const [boxLogos, setBoxLogos] = useState<string[]>([])
+    const [isLoadingBoxLogos, setIsLoadingBoxLogos] = useState(false)
 
     // Query để lấy thông tin wallet
     const { data: walletInfor } = useQuery({
@@ -227,6 +232,21 @@ export default function PoolDetail() {
             setLogoPreview(null)
         }
         setIsEditing(true)
+    }
+
+    const openLogoPicker = async () => {
+        setIsLogoPickerOpen(true)
+        if (boxLogos.length === 0) {
+            try {
+                setIsLoadingBoxLogos(true)
+                const logos = await listBoxLogos()
+                setBoxLogos(logos)
+            } catch (e) {
+                toast.error('Failed to load system logos')
+            } finally {
+                setIsLoadingBoxLogos(false)
+            }
+        }
     }
 
     const handleLogoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -566,7 +586,7 @@ export default function PoolDetail() {
 
                                         {isEditing ? (
                                             <div className="space-y-4 dark:bg-theme-neutral-900/30 bg-theme-neutral-100 rounded-lg p-4">
-                                                <div className="flex flex-row 2xl:gap-3 gap-2 justify-between w-full">
+                                                <div className="flex md:flex-row flex-col 2xl:gap-3 gap-2 justify-between w-full">
                                                     <div className="basis-1/2">
                                                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                                             {t('pools.detailPage.description')}
@@ -583,30 +603,39 @@ export default function PoolDetail() {
                                                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                                             {t('pools.detailPage.logoUpdate')}
                                                         </label>
-                                                        <div className="flex flex-row gap-2 justify-around">
-                                                            <FileInput
-                                                                accept="image/*"
-                                                                onChange={handleLogoUpload}
-                                                                placeholder={t('pools.fileInputPlaceholder')}
-                                                                className="max-w-[200px]"
-                                                            />
-                                                            <div className="mt-2 relative inline-block bg-theme-neutral-1000 dark:bg-theme-neutral-100 rounded-full p-1">
-                                                                    <img
-                                                                        src={logoPreview ? logoPreview : (poolDetail?.logo || "/placeholder.png")}
-                                                                        alt="Logo Preview"
-                                                                        className="w-20 h-20 object-cover rounded-full border border-gray-300 dark:border-gray-600"
-                                                                    />
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            setLogoPreview(null)
-                                                                            setEditForm({ ...editForm, logo: undefined })
-                                                                        }}
-                                                                        className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-1"
-                                                                    >
-                                                                        <X className="w-3 h-3" />
-                                                                    </button>
-                                                                </div>
+                                                        <div className="flex flex-row  gap-2 justify-around">
+                                                            <div className="flex flex-col justify-around gap-2">
+                                                                <FileInput  
+                                                                    accept="image/*"
+                                                                    onChange={handleLogoUpload}
+                                                                    placeholder={t('pools.fileInputPlaceholder')}
+                                                                    className="max-w-[200px] max-h-10"
+                                                                />
+                                                                <Button
+                                                                    variant="outline"
+                                                                    onClick={openLogoPicker}
+                                                                    className="text-xs sm:text-sm border !border-white/50"
+                                                                >
+                                                                    {t('pools.chooseFromSystem') ?? 'Choose from system'}
+                                                                </Button>
+                                                            </div>
+                                                            <div className="mt-2 h-fit relative inline-block bg-theme-neutral-1000 dark:bg-theme-neutral-100 rounded-full p-1">
+                                                                <img
+                                                                    src={logoPreview ? logoPreview : (poolDetail?.logo || "/placeholder.png")}
+                                                                    alt="Logo Preview"
+                                                                    className="w-20 h-20 object-cover rounded-full border border-gray-300 dark:border-gray-600"
+                                                                />
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => {
+                                                                        setLogoPreview(null)
+                                                                        setEditForm({ ...editForm, logo: undefined })
+                                                                    }}
+                                                                    className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-1"
+                                                                >
+                                                                    <X className="w-3 h-3" />
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -899,7 +928,7 @@ export default function PoolDetail() {
                                                             {member.nickname}
                                                         </div>
                                                         <div className="text-xs text-yellow-500 italic flex items-center gap-1">
-                                                            {member.solanaAddress.slice(0, 8)}...{member.solanaAddress.slice(-8)}
+                                                            {member.solanaAddress.slice(0, 4)}...{member.solanaAddress.slice(-4)}
                                                             <Copy className="w-3 h-3" />
                                                         </div>
                                                     </div>
@@ -1152,6 +1181,38 @@ export default function PoolDetail() {
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
+
+            <Dialog open={isLogoPickerOpen} onOpenChange={setIsLogoPickerOpen}>
+                <DialogContent className="bg-white dark:bg-gray-800 max-w-2xl w-[90vw]">
+                    <DialogHeader>
+                        <DialogTitle className="text-base sm:text-lg">{t('pools.detailPage.logoUpdate')}</DialogTitle>
+                    </DialogHeader>
+                    <div className="py-2 max-h-[74vh] overflow-y-auto">
+                        {isLoadingBoxLogos ? (
+                            <div className="text-sm text-gray-500 dark:text-gray-400">{t('common.loading')}</div>
+                        ) : boxLogos.length === 0 ? (
+                            <div className="text-sm text-gray-500 dark:text-gray-400">{t('pools.detailPage.noSystemImages')}</div>
+                        ) : (
+                            <div className="grid grid-cols-4 md:grid-cols-5 gap-3">
+                                {boxLogos.map((url) => (
+                                    <button
+                                        key={url}
+                                        type="button"
+                                        className="border border-gray-200 dark:border-gray-700 rounded-lg p-2 flex items-center justify-center hover:border-theme-primary-500 focus:outline-none"
+                                        onClick={() => {
+                                            setLogoPreview(url)
+                                            setEditForm({ ...editForm, logo: url })
+                                            setIsLogoPickerOpen(false)
+                                        }}
+                                    >
+                                        <img src={url} alt="logo" className="w-10 h-10 md:w-20 md:h-20 object-cover rounded-md" />
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 } 

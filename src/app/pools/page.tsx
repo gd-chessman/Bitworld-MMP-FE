@@ -14,6 +14,7 @@ import { Input } from "@/ui/input"
 import { Textarea } from "@/ui/textarea"
 import { Label } from "@/ui/label"
 import { useLang } from '@/lang/useLang'
+import { listBoxLogos } from "@/services/other"
 import {
     getAirdropPools,
     createAirdropPool,
@@ -79,6 +80,9 @@ export default function LiquidityPools() {
     })
     const [imagePreview, setImagePreview] = useState<string | null>(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isLogoPickerOpen, setIsLogoPickerOpen] = useState(false)
+    const [boxLogos, setBoxLogos] = useState<string[]>([])
+    const [isLoadingBoxLogos, setIsLoadingBoxLogos] = useState(false)
 
     // Mutation để tạo pool
     const createPoolMutation = useMutation({
@@ -148,6 +152,21 @@ export default function LiquidityPools() {
                 setImagePreview(e.target?.result as string)
             }
             reader.readAsDataURL(file)
+        }
+    }
+
+    const openLogoPicker = async () => {
+        setIsLogoPickerOpen(true)
+        if (boxLogos.length === 0) {
+            try {
+                setIsLoadingBoxLogos(true)
+                const logos = await listBoxLogos()
+                setBoxLogos(logos)
+            } catch (e) {
+                toast.error('Failed to load system logos')
+            } finally {
+                setIsLoadingBoxLogos(false)
+            }
         }
     }
 
@@ -416,7 +435,22 @@ export default function LiquidityPools() {
 
                                 <div className="space-y-2 text-xs mb-3">
                                     <div className="flex justify-between">
+                                        <span className="text-gray-500 dark:text-white">{t('pools.uidLeader')}:</span>
+                                        <span className="font-mono text-gray-900 dark:text-white">{pool?.creatorBittworldUid || "N/A"}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-gray-500 dark:text-white">{t('pools.leaderAddress')}:</span>
+                                        <span className="font-mono text-yellow-500 flex items-center gap-1">{truncateString(pool.creatorAddress, 12)} <Copy className="w-3 h-3 cursor-pointer" onClick={() => {
+                                            navigator.clipboard.writeText(pool.creatorAddress)
+                                            toast.success(t('pools.detailPage.copiedToClipboard'))
+                                        }} /></span>
+                                    </div>
+                                    <div className="flex justify-between">
                                         <span className="text-gray-500 dark:text-white">{t('pools.volume')}:</span>
+                                        <span className="font-mono text-gray-900 dark:text-white">{formatNumber(pool.totalVolume)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-gray-500 dark:text-white">{t('pools.round')}:</span>
                                         <span className="font-mono text-gray-900 dark:text-white">{formatNumber(pool.totalVolume)}</span>
                                     </div>
                                     <div className="flex justify-between">
@@ -446,8 +480,11 @@ export default function LiquidityPools() {
                                     <tr>
                                         <th className="px-2 py-2 text-left text-xs font-medium text-gray-700 dark:text-gray-300 w-[5%]">&ensp;</th>
                                         <th className="px-2 py-2 text-left text-xs font-medium text-gray-700 dark:text-gray-300 w-[30%]">{t('pools.poolName')}</th>
-                                        <th className="px-2 py-2 text-left text-xs font-medium text-gray-700 dark:text-gray-300 w-[20%]">{t('pools.members')}</th>
-                                        <th className="px-2 py-2 text-left text-xs font-medium text-gray-700 dark:text-gray-300 w-[20%]">{t('pools.volume')}</th>
+                                        <th className="px-2 py-2 text-left text-xs font-medium text-gray-700 dark:text-gray-300 w-[10%]">{t('pools.uidLeader')}</th>
+                                        <th className="px-2 py-2 text-left text-xs font-medium text-gray-700 dark:text-gray-300 w-[10%]">{t('pools.leaderAddress')}</th>
+                                        <th className="px-2 py-2 text-left text-xs font-medium text-gray-700 dark:text-gray-300 w-[10%]">{t('pools.members')}</th>
+                                        <th className="px-2 py-2 text-left text-xs font-medium text-gray-700 dark:text-gray-300 w-[10%]">{t('pools.round')}</th>
+                                        <th className="px-2 py-2 text-left text-xs font-medium text-gray-700 dark:text-gray-300 w-[10%]">{t('pools.volume')}</th>
                                         <th className="px-2 py-2 text-left text-xs font-medium text-gray-700 dark:text-gray-300 w-[10%]">{t('pools.action')}</th>
                                     </tr>
                                 </thead>
@@ -482,6 +519,15 @@ export default function LiquidityPools() {
                                                 </div>
                                             </td>
                                             <td className="px-2 py-2 text-xs text-gray-900 dark:text-gray-300">
+                                                {pool?.creatorBittworldUid || "N/A"}
+                                            </td>
+                                            <td className="px-2 py-2 text-xs text-gray-900 dark:text-gray-300">
+                                                {truncateString(pool.creatorAddress, 12)} <Copy className="w-3 h-3 cursor-pointer" onClick={() => {
+                                                    navigator.clipboard.writeText(pool.creatorAddress)
+                                                    toast.success(t('pools.detailPage.copiedToClipboard'))
+                                                }} />
+                                            </td>
+                                            <td className="px-2 py-2 text-xs text-gray-900 dark:text-gray-300">
                                                 {pool.memberCount}
                                             </td>
                                             <td className="px-2 py-2 text-xs text-gray-900 dark:text-gray-300">
@@ -513,10 +559,11 @@ export default function LiquidityPools() {
                                         <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-auto">{t('pools.poolName')}</th>
                                         <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-auto">{t('pools.uidLeader')}</th>
                                         <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-auto">{t('pools.leaderAddress')}</th>
-                                        <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-[16%]">{t('pools.members')}</th>
-                                        <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-[16%]">{t('pools.volume')}</th>
-                                        <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-[12%]">{t('pools.created')}</th>
-                                        <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-[12%]"></th>
+                                        <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-[8%]">{t('pools.members')}</th>
+                                        <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-[12%]">{t('pools.round')}</th>
+                                        <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-[12%]">{t('pools.volume')}</th>
+                                        <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-[10%]">{t('pools.created')}</th>
+                                        <th className="px-3 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 w-[10%]"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -548,14 +595,21 @@ export default function LiquidityPools() {
                                             </td>
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-yellow-500 italic flex items-center md:min-h-16 gap-2">
                                                 {truncateString(pool.creatorAddress, 12)}
-                                                <Copy className="w-3 h-3" />
+                                                <Copy className="w-3 h-3" onClick={() => {
+                                                    navigator.clipboard.writeText(pool.creatorAddress)
+                                                    toast.success(t('pools.detailPage.copiedToClipboard'))
+                                                }}/>
                                             </td>
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
                                                 {pool.memberCount}
                                             </td>
+                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
+                                                {formatNumber(pool.totalVolume)}
+                                            </td>
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-[#6ae1ec]">
                                                 <span className="font-mono font-semibold">{formatNumber(pool.totalVolume)}</span>
                                             </td>
+                                           
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm italic text-gray-900 dark:text-white">
                                                 {formatDate(pool.creationDate)}
                                             </td>
@@ -594,7 +648,7 @@ export default function LiquidityPools() {
 
             {/* Create Pool Modal */}
             <Dialog open={isCreateModalOpen} onOpenChange={handleCloseModal}>
-                <DialogContent className="w-[95vw] sm:max-w-[500px] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-4 sm:p-5 mx-2">
+                <DialogContent className="w-[95vw] sm:max-w-[500px] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-4 sm:p-5">
                     <DialogHeader>
                         <DialogTitle className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
                             {t('pools.createTitle')}
@@ -640,6 +694,11 @@ export default function LiquidityPools() {
                                     </p>
                                 </div>
                             )}
+                            <div className="flex justify-center mt-4">
+                                <Button className="text-xs sm:text-sm !border-white/50" variant="outline" size="sm" onClick={openLogoPicker}>
+                                    {t('pools.chooseFromSystem') ?? 'Choose from gallery'}
+                                </Button>
+                            </div>
                         </div>
                     </div>
                     <div className="space-y-4">
@@ -711,6 +770,42 @@ export default function LiquidityPools() {
                         >
                             {(isSubmitting || createPoolMutation.isPending) ? t('pools.creating') : t('pools.createBtn')}
                         </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
+
+            {/* System Logo Picker */}
+            <Dialog open={isLogoPickerOpen} onOpenChange={setIsLogoPickerOpen}>
+                <DialogContent className="bg-white dark:bg-gray-800 lg:max-w-2xl w-[90vw]">
+                    <DialogHeader>
+                        <DialogTitle className="text-base sm:text-lg">{t('pools.createTitle')}</DialogTitle>
+                    </DialogHeader>
+                    <div className="md:max-h-[74vh] max-h-[67vh] overflow-y-auto">
+                        {isLoadingBoxLogos ? (
+                            <div className="text-sm text-gray-500 dark:text-gray-400">{t('common.loading')}</div>
+                        ) : boxLogos.length === 0 ? (
+                            <div className="text-sm text-gray-500 dark:text-gray-400">{t('pools.noSystemImages') ?? 'No images found'}</div>
+                        ) : (
+                            <div className="grid grid-cols-4 md:grid-cols-5 gap-3">
+                                {boxLogos.map((url) => (
+                                    <button
+                                        key={url}
+                                        type="button"
+                                        className="border border-gray-200 dark:border-gray-700 rounded-lg p-2 flex items-center justify-center hover:border-theme-primary-500 focus:outline-none"
+                                        onClick={() => {
+                                            setImagePreview(url)
+                                            setCreateForm(prev => ({ ...prev, image: null }))
+                                            // For create flow, we can set image via string URL by abusing CreatePoolRequest.logo which accepts File | string
+                                            // We'll temporarily store selected URL in preview and use it in handleCreatePool
+                                            ;(setCreateForm as any)((prev: any) => ({ ...prev, image: url }))
+                                            setIsLogoPickerOpen(false)
+                                        }}
+                                    >
+                                        <img src={url} alt="logo" className="w-10 h-10 md:w-20 md:h-20 object-cover rounded-md" />
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </DialogContent>
             </Dialog>
