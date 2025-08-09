@@ -29,7 +29,7 @@ export function LangToggle({ className, showArrow = false, onLanguageChange }: {
         <Button 
           variant="ghost" 
           size="icon" 
-          className="w-full dark:bg-transparent bg-gray-100 text-theme-neutral-100 xl:px-2 xl:max-h-auto max-h-[30px] px-1 flex justify-start gap-2 touch-manipulation"
+          className="w-full dark:bg-transparent bg-gray-100 dark:text-white text-theme-neutral-1000 xl:px-2 xl:max-h-auto max-h-[30px] px-1 flex justify-start gap-2 touch-manipulation"
           onClick={(e) => {
             console.log('Dropdown trigger clicked');
             e.stopPropagation();
@@ -59,7 +59,7 @@ export function LangToggle({ className, showArrow = false, onLanguageChange }: {
                 console.log('Touch end on language item:', language.code);
                 handleLanguageChange(language.code);
               }}
-              className="flex dark: text-theme-neutral-100 items-center gap-2 ml-0 cursor-pointer hover:bg-theme-neutral-100 dark:hover:bg-theme-neutral-900 touch-manipulation xl:min-h-[44px] min-h-[30px]" 
+              className="flex dark:text-white text-theme-neutral-1000 items-center gap-2 ml-0 cursor-pointer hover:bg-theme-neutral-100 dark:hover:bg-theme-neutral-900 touch-manipulation xl:min-h-[44px] min-h-[30px]" 
               style={{ width: showArrow ? 'calc(100vw - 40px)' : '140px', marginRight: showArrow ? '0' : '-10px' }}
             >
               <img src={language.flag} alt={t(language.translationKey)} className="w-7 h-5 rounded" />
