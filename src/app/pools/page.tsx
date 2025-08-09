@@ -42,6 +42,11 @@ export default function LiquidityPools() {
         queryKey: ["wallet-infor"],
         queryFn: getInforWallet,
         enabled: isAuthenticated,
+        // Always refetch when the page mounts (including route changes), when window focuses, and when reconnecting
+        refetchOnMount: 'always',
+        refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
+        staleTime: 0,
     });
 
     const queryClient = useQueryClient();
@@ -54,6 +59,11 @@ export default function LiquidityPools() {
         queryKey: ["airdrop-pools", activeFilter],
         queryFn: () => getAirdropPools('creationDate', 'desc', activeFilter === 'all' || activeFilter === 'ranking' ? undefined : activeFilter),
         enabled: isAuthenticated,
+        // Ensure automatic re-fetch on window focus, reconnect, and every mount
+        refetchOnMount: 'always',
+        refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
+        staleTime: 0,
     });
 
     const { t } = useLang();
