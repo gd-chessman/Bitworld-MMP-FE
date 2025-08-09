@@ -28,7 +28,7 @@ import { Checkbox } from "@/ui/checkbox"
 interface CreatePoolForm {
     name: string
     description: string
-    image: File | null
+    image: File | string | null
     amount: number
     required?: boolean
 }
@@ -205,9 +205,23 @@ export default function LiquidityPools() {
         setIsSubmitting(true)
 
         try {
+            let logoFile: File | null = null
+            if (createForm.image instanceof File) {
+                logoFile = createForm.image
+            } else if (typeof createForm.image === 'string') {
+                const isAbsolute = /^https?:\/\//i.test(createForm.image)
+                const absoluteUrl = isAbsolute ? createForm.image : `${window.location.origin}${createForm.image}`
+                const res = await fetch(absoluteUrl)
+                if (!res.ok) throw new Error('Failed to fetch selected image')
+                const blob = await res.blob()
+                const contentType = res.headers.get('content-type') || 'image/png'
+                const filename = (createForm.image.split('/')?.pop() || 'logo.png').split('?')[0]
+                logoFile = new File([blob], filename, { type: contentType })
+            }
+
             const poolData: CreatePoolRequest = {
                 name: createForm.name,
-                logo: createForm.image || "",
+                logo: logoFile as File,
                 describe: createForm.description,
                 initialAmount: createForm.amount,
             };
@@ -804,11 +818,8 @@ export default function LiquidityPools() {
                                         type="button"
                                         className="border border-gray-200 dark:border-gray-700 rounded-lg p-2 flex items-center justify-center hover:border-theme-primary-500 focus:outline-none"
                                         onClick={() => {
-                                            setImagePreview(url)
-                                            setCreateForm(prev => ({ ...prev, image: null }))
-                                            // For create flow, we can set image via string URL by abusing CreatePoolRequest.logo which accepts File | string
-                                            // We'll temporarily store selected URL in preview and use it in handleCreatePool
-                                            ;(setCreateForm as any)((prev: any) => ({ ...prev, image: url }))
+                                             setImagePreview(url)
+                                             setCreateForm(prev => ({ ...prev, image: url }))
                                             setIsLogoPickerOpen(false)
                                         }}
                                     >
