@@ -957,7 +957,8 @@
     "copied_description": "Đã sao chép mã giao dịch vào clipboard",
     "enter_amount": "Nhập số tiền gửi",
     "transaction_progress": "Đang xử lý giao dịch...",
-    "available": "Số dư: {amount} SOL",
+    "available": "Số dư: {amount}",
+    "select_token": "Chọn Token",
     "recipient_address": "Địa chỉ người nhận",
     "recipient_placeholder": "Nhập địa chỉ người nhận...",
     "sending": "Đang gửi...",
@@ -979,11 +980,23 @@
       "network_error": "Lỗi kết nối. Vui lòng kiểm tra kết nối của bạn.",
       "unauthorized": "Xác thực không hợp lệ",
       "recipient_required": "Vui lòng nhập địa chỉ người nhận",
-      "user_wallet_not_found": "Ví không tồn tại"
+      "user_wallet_not_found": "Ví không tồn tại",
+      "user_wallet_not_found_api": "Không tìm thấy ví người dùng",
+      "invalid_google_auth": "Mã Google Authenticator không hợp lệ",
+      "google_authenticator_text": "Google Authenticator"
     },
-    "minimum_withdrawal_amount": "Số tiền rút tối thiểu là {amount} SOL",
-    "maximum_withdrawal_amount": "Số tiền rút tối đa là {amount} SOL",
-    "amount_cannot_exceed_balance": "Số tiền không được vượt quá số dư {balance} SOL"
+    "loading": {
+      "tokens": "Đang tải danh sách token..."
+    },
+    "no_tokens": "Không có token nào khả dụng để rút tiền.",
+    "max_button": "Tối đa",
+    "minimum_withdrawal_amount": "Số tiền rút tối thiểu là {amount}",
+    "maximum_withdrawal_amount": "Số tiền rút tối đa là {amount}",
+    "amount_cannot_exceed_balance": "Số tiền không được vượt quá số dư {balance}",
+    "google_auth_required": "Mã Google Authenticator là bắt buộc",
+    "please_select_token_first": "Vui lòng chọn token trước",
+    "recipient_address_required": "Địa chỉ người nhận là bắt buộc",
+    "not_available": "Không có"
   },
   "searchModal": {
     "title": "TÌM KIẾM",

@@ -25,6 +25,7 @@ type Transaction = {
     error_message: string | null
     created_at: string
     updated_at: string
+    token_symbol: string
 }
 
 // Create a client component for the content
@@ -209,7 +210,7 @@ const UniversalAccountContent = () => {
                                             </span>
                                         </TableCell>
                                         <TableCell className="py-2 px-6 text-right dark:text-gray-300 text-black whitespace-nowrap">
-                                            {tx.amount} SOL
+                                            {tx.amount} {tx.token_symbol}
                                         </TableCell>
                                         <TableCell className="py-2 px-6 dark:text-gray-300 text-black">
                                             {truncateString(tx.wallet_address_from, 12)}
@@ -217,7 +218,7 @@ const UniversalAccountContent = () => {
                                         <TableCell className="py-2 px-6 dark:text-gray-300 text-black">
                                             {truncateString(tx.wallet_address_to, 12)}
                                         </TableCell>
-                                        <TableCell className="py-2 px-6 dark:text-gray-300 text-black">
+                                        <TableCell className="py-2 px-6 italic text-yellow-400">
                                             {tx.transaction_hash && (
                                                 <div className="flex items-center gap-2">
                                                     {truncateString(tx.transaction_hash, 12)}

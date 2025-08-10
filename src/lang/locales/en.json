@@ -885,7 +885,8 @@
     "copied_description": "Transaction hash copied to clipboard",
     "enter_amount": "Enter send amount",
     "transaction_progress": "Transaction in progress...",
-    "available": "Available: {amount} SOL",
+    "available": "Available: {amount}",
+    "select_token": "Select Token",
     "recipient_address": "Recipient Address",
     "recipient_placeholder": "Recipient address...",
     "sending": "Sending...",
@@ -907,11 +908,23 @@
       "network_error": "Network error. Please check your connection.",
       "unauthorized": "Unauthorized. Please login again.",
       "recipient_required": "Recipient address is required",
-      "user_wallet_not_found": "Wallet not found"
+      "user_wallet_not_found": "Wallet not found",
+      "user_wallet_not_found_api": "User wallet not found",
+      "invalid_google_auth": "Invalid Google Authenticator code",
+      "google_authenticator_text": "Google Authenticator"
     },
-    "minimum_withdrawal_amount": "Minimum withdrawal amount is {amount} SOL",
-    "maximum_withdrawal_amount": "Maximum withdrawal amount is {amount} SOL",
-    "amount_cannot_exceed_balance": "Amount cannot exceed your balance of {balance} SOL"
+    "loading": {
+      "tokens": "Loading available tokens..."
+    },
+    "no_tokens": "No tokens available for withdrawal.",
+    "max_button": "Max",
+    "minimum_withdrawal_amount": "Minimum withdrawal amount is {amount}",
+    "maximum_withdrawal_amount": "Maximum withdrawal amount is {amount}",
+    "amount_cannot_exceed_balance": "Amount cannot exceed your balance of {balance}",
+    "google_auth_required": "Google Authenticator code is required",
+    "please_select_token_first": "Please select a token first",
+    "recipient_address_required": "Recipient address is required",
+    "not_available": "N/A"
   },
   "chat": {
     "communityChatroom": "Community Chatroom"

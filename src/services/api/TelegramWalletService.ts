@@ -263,3 +263,27 @@ export const verifyGmail = async (telegram_code: string)=>{
         throw error;
     }
 }
+
+export const getTokenBalance = async (tokenSymbol: string) => {
+    try {
+        const temp = await axiosClient.get(`/telegram-wallets/token-balance?token_symbol=${tokenSymbol}`)
+        return temp.data.data;
+    } catch (error) {
+        console.log(error)
+        return "0";
+    }
+}
+
+export const getMultiTokenBalances = async () => {
+    try {
+        const temp = await axiosClient.get("/telegram-wallets/multi-token-balances")
+        return temp.data.data;
+    } catch (error) {
+        console.log(error)
+        return {
+            SOL: "0",
+            USDT: "0",
+            USDC: "0"
+        };
+    }
+}
