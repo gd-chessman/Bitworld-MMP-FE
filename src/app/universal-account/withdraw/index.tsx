@@ -264,6 +264,8 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
       } else if (error.response?.data?.message?.includes(t('universal_account.errors.google_authenticator_text'))) {
         toast.error(t('universal_account.errors.invalid_google_auth'));
         setGoogleAuthError(t('universal_account.errors.invalid_google_auth'));
+      } else if (error.response?.data?.message === "Error creating multi-token deposit/withdraw") {
+        toast.error(t('universal_account.errors.transaction_failed_multi_token'));
       } else {
         toast.error(error.response?.data?.message || t('universal_account.errors.transaction_failed'));
       }

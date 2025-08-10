@@ -911,7 +911,8 @@
       "user_wallet_not_found": "Wallet not found",
       "user_wallet_not_found_api": "User wallet not found",
       "invalid_google_auth": "Invalid Google Authenticator code",
-      "google_authenticator_text": "Google Authenticator"
+      "google_authenticator_text": "Google Authenticator",
+      "transaction_failed_multi_token": "Error creating multi-token deposit/withdraw"
     },
     "loading": {
       "tokens": "Loading available tokens..."
