@@ -95,7 +95,7 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
       copy: isSending || !walletInfor?.solana_address
     };
   }, [amount, walletInfor, isSending, error, selectedToken, availableTokens]);
-
+  console.log("amount", amount)
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
@@ -434,8 +434,8 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
       {/* Send Button */}
       <button
         onClick={handleSend}
-        disabled={isDisabled.send || recipientWallet.length === 0 || !selectedToken || amount === "0"}
-        className={`lg:max-w-auto min-w-[160px] group relative bg-theme-primary-500 py-1.5 md:py-2 px-3 md:px-4 lg:px-6 rounded-full text-[11px] md:text-sm text-theme-neutral-100 transition-all duration-500 hover:from-theme-blue-100 hover:to-theme-blue-200 hover:scale-105 hover:shadow-lg hover:shadow-theme-primary-500/30 active:scale-95 w-full md:w-auto ${(isDisabled.send || recipientWallet.length === 0 || !selectedToken || amount === "0") ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+        disabled={isDisabled.send || recipientWallet.length === 0 || !selectedToken || Number(amount) === 0}
+        className={`lg:max-w-auto min-w-[160px] group relative bg-theme-primary-500 py-1.5 md:py-2 px-3 md:px-4 lg:px-6 rounded-full text-[11px] md:text-sm text-theme-neutral-100 transition-all duration-500 hover:from-theme-blue-100 hover:to-theme-blue-200 hover:scale-105 hover:shadow-lg hover:shadow-theme-primary-500/30 active:scale-95 w-full md:w-auto ${(isDisabled.send || recipientWallet.length === 0 || !selectedToken || Number(amount) === 0) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
       >
         {isSending ? (
           <span className="flex items-center gap-2">
