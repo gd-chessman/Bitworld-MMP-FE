@@ -960,7 +960,8 @@
       "user_wallet_not_found_api": "사용자 지갑을 찾을 수 없습니다",
       "invalid_google_auth": "Google 인증 코드가 유효하지 않습니다",
       "google_authenticator_text": "Google Authenticator",
-      "transaction_failed_multi_token": "다중 토큰 입출금 생성 오류"
+      "transaction_failed_multi_token": "다중 토큰 입출금 생성 오류",
+      "invalid_solana_wallet_address": "유효하지 않은 솔라나 지갑 주소입니다"
     },
     "loading": {
       "tokens": "사용 가능한 토큰을 로딩 중..."

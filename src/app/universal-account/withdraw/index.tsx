@@ -25,19 +25,7 @@ interface TokenOption {
   is_verified: boolean;
 }
 
-// Helper function to get min/max amounts for tokens
-const getTokenLimits = (symbol: string) => {
-  switch (symbol) {
-    case 'SOL':
-      return { minAmount: 0, maxAmount: 1000 };
-    case 'USDT':
-      return { minAmount: 1, maxAmount: 100000 };
-    case 'USDC':
-      return { minAmount: 1, maxAmount: 100000 };
-    default:
-      return { minAmount: 0, maxAmount: 1000000 };
-  }
-};
+
 
 export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
   const { isAuthenticated } = useAuth();
@@ -97,22 +85,10 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
 
     const numAmount = Number.parseFloat(amount);
     const balance = parseFloat(getCurrentTokenBalance());
-    const { minAmount, maxAmount } = getTokenLimits(selectedToken.token_symbol);
-
-    const disabledConditions = {
-      isSending,
-      noWalletAddress: !walletInfor?.solana_address,
-      amountTooSmall: numAmount < minAmount,
-      amountTooLarge: numAmount > maxAmount,
-      exceedsBalance: numAmount > balance,
-      hasError: !!error
-    };
-
+    
     return {
       send: isSending ||
         !walletInfor?.solana_address ||
-        numAmount < minAmount ||
-        numAmount > maxAmount ||
         numAmount > balance ||
         !!error,
       input: isSending,
@@ -124,15 +100,6 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
     const value = e.target.value;
 
     if (/^\d*\.?\d*$/.test(value) || value === '') {
-      const numValue = parseFloat(value);
-      const { minAmount, maxAmount } = getTokenLimits(selectedToken?.token_symbol || 'SOL');
-
-      if (selectedToken && maxAmount && numValue > maxAmount) {
-        setAmount(maxAmount.toString());
-        setError(t('universal_account.maximum_withdrawal_amount', { amount: maxAmount }));
-        return;
-      }
-
       setAmount(value);
       setError("");
 
@@ -148,14 +115,9 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
 
     const numValue = parseFloat(amount);
     const balance = parseFloat(getCurrentTokenBalance());
-    const { minAmount, maxAmount } = getTokenLimits(selectedToken.token_symbol);
 
     if (selectedToken && numValue > balance) {
       setError(`${t('universal_account.amount_cannot_exceed_balance', { balance })}`);
-    } else if (selectedToken && minAmount && numValue < minAmount && amount !== "") {
-      setError(`${t('universal_account.minimum_withdrawal_amount', { amount: minAmount })}`);
-    } else if (selectedToken && maxAmount && numValue > maxAmount) {
-      setError(`${t('universal_account.maximum_withdrawal_amount', { amount: maxAmount })}`);
     } else {
       setError("");
     }
@@ -266,6 +228,9 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
         setGoogleAuthError(t('universal_account.errors.invalid_google_auth'));
       } else if (error.response?.data?.message === "Error creating multi-token deposit/withdraw") {
         toast.error(t('universal_account.errors.transaction_failed_multi_token'));
+      }
+      else if (error.response?.data?.message === "Invalid Solana wallet address") {
+        toast.error(t('universal_account.errors.invalid_solana_wallet_address'));
       } else {
         toast.error(error.response?.data?.message || t('universal_account.errors.transaction_failed'));
       }
@@ -274,7 +239,7 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
       setIsSending(false);
     }
   };
-
+  console.log("recipientWallet", recipientWallet)
   // Loading state for tokens
   if (!availableTokens || !availableTokens.tokens) {
     return (
@@ -469,8 +434,8 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
       {/* Send Button */}
       <button
         onClick={handleSend}
-        disabled={isDisabled.send || recipientWallet.length === 0}
-        className={`lg:max-w-auto min-w-[160px] group relative bg-theme-primary-500 py-1.5 md:py-2 px-3 md:px-4 lg:px-6 rounded-full text-[11px] md:text-sm text-theme-neutral-100 transition-all duration-500 hover:from-theme-blue-100 hover:to-theme-blue-200 hover:scale-105 hover:shadow-lg hover:shadow-theme-primary-500/30 active:scale-95 w-full md:w-auto ${(isDisabled.send || recipientWallet.length === 0) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+        disabled={isDisabled.send || recipientWallet.length === 0 || !selectedToken || amount === "0"}
+        className={`lg:max-w-auto min-w-[160px] group relative bg-theme-primary-500 py-1.5 md:py-2 px-3 md:px-4 lg:px-6 rounded-full text-[11px] md:text-sm text-theme-neutral-100 transition-all duration-500 hover:from-theme-blue-100 hover:to-theme-blue-200 hover:scale-105 hover:shadow-lg hover:shadow-theme-primary-500/30 active:scale-95 w-full md:w-auto ${(isDisabled.send || recipientWallet.length === 0 || !selectedToken || amount === "0") ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
       >
         {isSending ? (
           <span className="flex items-center gap-2">
