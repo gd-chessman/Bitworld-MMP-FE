@@ -210,7 +210,7 @@ const UniversalAccountContent = () => {
                                             </span>
                                         </TableCell>
                                         <TableCell className="py-2 px-6 text-right dark:text-gray-300 text-black whitespace-nowrap">
-                                            {tx.amount} {tx.token_symbol}
+                                            {Number(tx.amount).toFixed(5)} {tx.token_symbol}
                                         </TableCell>
                                         <TableCell className="py-2 px-6 dark:text-gray-300 text-black">
                                             {truncateString(tx.wallet_address_from, 12)}
