@@ -376,7 +376,7 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
                   {t('universal_account.max_button')}
                 </button>
               </div>
-              <span className={`absolute inset-y-0 right-0 flex items-center pr-3 transition-colors duration-300 ${error ? 'text-red-500' : 'text-gray-500 group-hover:text-gray-300'} ${isDisabled.input ? 'opacity-50' : ''}`}>
+              <span className={`absolute md:block hidden inset-y-0 right-0 flex items-center pr-3 transition-colors duration-300 ${error ? 'text-red-500' : 'text-gray-500 group-hover:text-gray-300'} ${isDisabled.input ? 'opacity-50' : ''}`}>
                 {selectedToken?.token_symbol}
               </span>
             </div>

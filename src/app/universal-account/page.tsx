@@ -63,7 +63,7 @@ const UniversalAccountContent = () => {
                 {/* Toaster removed - using the one from ClientLayout */}
                 {walletInfor?.solana_address && (
                     <div className="flex items-center justify-center flex-col gap-6">
-                        <div className="flex w-full border-gray-200 dark:border-neutral-800 max-w-[280px] sm:max-w-[320px] h-[32px] md:h-[40px] bg-gray-100 dark:bg-theme-neutral-1000 rounded-full">
+                        <div className="flex w-full border-gray-200 dark:border-neutral-600 max-w-auto sm:max-w-[320px] h-[32px] md:h-[40px] bg-gray-100 dark:bg-theme-neutral-800 rounded-full">
                             <button
                                 className={`flex-1 rounded-full text-sm sm:text-base cursor-pointer font-medium uppercase text-center ${tab === "deposit" ? "text-white bg-theme-primary-500" : "text-gray-500 dark:text-neutral-400"}`}
                                 onClick={() => setTab("deposit")}
@@ -78,7 +78,7 @@ const UniversalAccountContent = () => {
                             </button>
                         </div>
 
-                        <div className="flex-1 container">
+                        <div className="flex-1 md:container w-full">
                             {tab === "deposit" && (
                                 <DepositWallet walletAddress={walletInfor.solana_address} />
                             )}
