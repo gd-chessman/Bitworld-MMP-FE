@@ -913,7 +913,14 @@
       "invalid_google_auth": "Invalid Google Authenticator code",
       "google_authenticator_text": "Google Authenticator",
       "transaction_failed_multi_token": "Error creating multi-token deposit/withdraw",
-      "invalid_solana_wallet_address": "Invalid Solana wallet address"
+      "invalid_solana_wallet_address": "Invalid Solana wallet address",
+      "sender_and_receiver_wallet_addresses_must_be_different": "Sender and receiver wallet addresses must be different",
+      "insufficient_sol_balance": "Insufficient SOL balance for transaction fee",
+      "source_token_account_not_found": "Source token account not found",
+      "google_auth_required": "Google Authenticator code is required",
+      "token_mint_address_required": "Token mint address is required",
+      "insufficient_wallet_balance_for_transaction_fee": "Insufficient wallet balance for transaction fee",
+      "token_mint_not_found": "Token mint not found"
     },
     "loading": {
       "tokens": "Loading available tokens..."

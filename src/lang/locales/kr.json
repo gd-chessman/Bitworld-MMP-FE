@@ -1389,7 +1389,7 @@
       "registering": "회원가입 중...",
       "changeEmail": "변경",
       "emailDisplay": "이메일: {email}",
-      "referralCodeBittworldUid": "BITTWORLD 추천인 UID (선택사항)"
+      "referralCodeBittworldUid": "BITTWORLD 상위 UID (선택사항)"
     },
     "forgotPassword": {
       "title": "비밀번호 찾기",
@@ -1433,7 +1433,15 @@
       "invalidPassword": "잘못된 비밀번호입니다. 다시 시도해 주세요.",
       "invalidEmailOrPassword": "이메일 또는 비밀번호가 올바르지 않습니다",
       "emailNotVerified": "이메일이 인증되지 않았습니다. 이메일을 인증하세요.",
-      "userNotVerified": "사용자가 인증되지 않았습니다. 이메일을 확인하세요"
+      "userNotVerified": "사용자가 인증되지 않았습니다. 이메일을 확인하세요",
+      "insufficient_sol_balance": "SOL 잔액이 부족합니다. 다시 시도해 주세요.",
+      "source_token_account_not_found": "소스 토큰 계좌를 찾을 수 없습니다. 다시 시도해 주세요.",
+      "token_mint_not_found": "토큰 민트를 찾을 수 없습니다. 다시 시도해 주세요.",
+      "token_mint_address_required": "토큰 민트 주소가 필요합니다.",
+      "insufficient_wallet_balance_for_transaction_fee": "거래 수수료를 지불할 충분한 잔액이 없습니다.",
+      "google_auth_required": "Google Authenticator 코드가 필요합니다.",
+      "invalid_google_auth": "Google Authenticator 코드가 올바르지 않습니다.",
+      "sender_and_receiver_wallet_addresses_must_be_different": "보내는 주소와 받는 주소는 다르야 합니다."
     }
   }
 }

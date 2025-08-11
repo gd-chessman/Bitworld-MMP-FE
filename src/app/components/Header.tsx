@@ -53,7 +53,11 @@ const Header = () => {
         refetchInterval: 30000,
         staleTime: 30000,
         enabled: isAuthenticated,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
     });
+    console.log("walletInfor", walletInfor)
     
     const { data: balanceInfo, refetch: refetchBalanceInfo } = useQuery({
         queryKey: ["balance-info"],
@@ -91,6 +95,13 @@ const Header = () => {
             }
         }
     }, [walletInfor, router, logout, isWalletDialogOpen]);
+
+    // Auto refetch wallet info when authentication state changes
+    useEffect(() => {
+        if (isAuthenticated) {
+            refetch();
+        }
+    }, [isAuthenticated, refetch]);
 
     useEffect(() => {
         const checkMobile = () => {

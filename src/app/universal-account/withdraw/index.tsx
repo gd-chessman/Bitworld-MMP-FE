@@ -85,7 +85,7 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
 
     const numAmount = Number.parseFloat(amount);
     const balance = parseFloat(getCurrentTokenBalance());
-    
+
     return {
       send: isSending ||
         !walletInfor?.solana_address ||
@@ -226,6 +226,19 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
       } else if (error.response?.data?.message?.includes(t('universal_account.errors.google_authenticator_text'))) {
         toast.error(t('universal_account.errors.invalid_google_auth'));
         setGoogleAuthError(t('universal_account.errors.invalid_google_auth'));
+      } else if (error.response?.data?.message === "Insufficient SOL balance for transaction fee") {
+        toast.error(t('universal_account.errors.insufficient_sol_balance'));
+      } else if (error.response?.data?.message === "Source token account not found") {
+        toast.error(t('universal_account.errors.source_token_account_not_found'));
+      } else if (error.response?.data?.message === "Sender and receiver wallet addresses must be different") {
+        toast.error(t('universal_account.errors.sender_and_receiver_wallet_addresses_must_be_different'));
+      } else if (error.response?.data?.message === "Insufficient wallet balance for transaction fee") {
+        toast.error(t('universal_account.errors.insufficient_wallet_balance_for_transaction_fee'));
+      } else if (error.response?.data?.message === "Token mint address is required for SPL tokens") {
+        toast.error(t('universal_account.errors.token_mint_address_required'));
+      }
+      else if (error.response?.data?.message === "Google Auth token is required for withdrawal") {
+        toast.error(t('universal_account.errors.google_auth_required'));
       } else if (error.response?.data?.message === "Error creating multi-token deposit/withdraw") {
         toast.error(t('universal_account.errors.transaction_failed_multi_token'));
       }
@@ -348,7 +361,7 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
               </span>
             </div>
             <div className="text-center text-xs text-gray-500 mb-1 group-hover:text-gray-400 transition-colors duration-300">
-              {t('universal_account.available', { amount: getCurrentTokenBalance() })} 
+              {t('universal_account.available', { amount: getCurrentTokenBalance() })}
               {availableTokens?.tokens && selectedToken && (() => {
                 const tokenData = availableTokens.tokens.find((token: TokenOption) => token.token_symbol === selectedToken.token_symbol);
                 return tokenData?.token_balance_usd ? ` ($${tokenData.token_balance_usd.toFixed(2)})` : '';
