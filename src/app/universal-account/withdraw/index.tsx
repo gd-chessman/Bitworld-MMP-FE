@@ -374,7 +374,7 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
               const tokenData = availableTokens.tokens.find((token: TokenOption) => token.token_symbol === selectedToken.token_symbol);
               return tokenData?.token_price_usd ? (
                 <div className="text-center text-xs text-gray-400 mb-1">
-                  Price: ${tokenData.token_price_usd.toFixed(4)} USD
+                  {t('wallet.price')}: ${tokenData.token_price_usd.toFixed(4)} USD
                 </div>
               ) : null;
             })()}

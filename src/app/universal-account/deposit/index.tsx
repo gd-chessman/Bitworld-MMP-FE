@@ -21,7 +21,7 @@ const DepositWallet: React.FC<DepositWalletProps> = ({ walletAddress }) => {
     
     return (
         <div>
-            <div className="gap-5 flex flex-col justify-center items-center max-w-[600px] mx-auto bg-gray-800 p-3 rounded-md">
+            <div className="gap-5 flex flex-col justify-center items-center max-w-[600px] mx-auto dark:bg-gray-800 bg-gray-200 p-3 rounded-md">
                 <h3 className="text-sm font-bold text-center dark:text-theme-neutral-100 text-black mt-1">{t('universal_account.deposit_wallet.title')}</h3>
 
                 {/* QR Code */}
