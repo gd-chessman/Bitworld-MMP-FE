@@ -241,6 +241,8 @@ export default function WithdrawWallet({ walletInfor }: { walletInfor: any }) {
         toast.error(t('universal_account.errors.google_auth_required'));
       } else if (error.response?.data?.message === "Error creating multi-token deposit/withdraw") {
         toast.error(t('universal_account.errors.transaction_failed_multi_token'));
+      } else if (error.response?.data?.message.includes("Insufficient SOL for ATA creation")) {
+        toast.error(t('universal_account.errors.insufficient_sol_for_ata_creation'));
       }
       else if (error.response?.data?.message === "Invalid Solana wallet address") {
         toast.error(t('universal_account.errors.invalid_solana_wallet_address'));

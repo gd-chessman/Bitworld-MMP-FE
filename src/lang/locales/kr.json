@@ -968,7 +968,8 @@
       "insufficient_wallet_balance_for_transaction_fee": "거래 수수료를 지불할 충분한 잔액이 없습니다.",
       "google_auth_required": "Google Authenticator 코드가 필요합니다.",
       "invalid_google_auth": "Google Authenticator 코드가 올바르지 않습니다.",
-      "sender_and_receiver_wallet_addresses_must_be_different": "보내는 주소와 받는 주소는 다르야 합니다."
+      "sender_and_receiver_wallet_addresses_must_be_different": "보내는 주소와 받는 주소는 다르야 합니다.",
+      "insufficient_sol_for_ata_creation": "ATA 생성에 필요한 SOL 잔액이 부족합니다. 다시 시도해 주세요."
     },
     "loading": {
       "tokens": "사용 가능한 토큰을 로딩 중..."
@@ -1396,7 +1397,7 @@
       "registering": "회원가입 중...",
       "changeEmail": "변경",
       "emailDisplay": "이메일: {email}",
-      "referralCodeBittworldUid": "BITTWORLD 상위 UID (선택사항)"
+      "referralCodeBittworldUid": "BITTWORLD 상위 UID"
     },
     "forgotPassword": {
       "title": "비밀번호 찾기",

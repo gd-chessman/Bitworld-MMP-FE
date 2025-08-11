@@ -920,7 +920,8 @@
       "google_auth_required": "Google Authenticator code is required",
       "token_mint_address_required": "Token mint address is required",
       "insufficient_wallet_balance_for_transaction_fee": "Insufficient wallet balance for transaction fee",
-      "token_mint_not_found": "Token mint not found"
+      "token_mint_not_found": "Token mint not found",
+      "insufficient_sol_for_ata_creation": "Insufficient SOL for ATA creation"
     },
     "loading": {
       "tokens": "Loading available tokens..."
@@ -1362,7 +1363,7 @@
       "registering": "Registering...",
       "changeEmail": "Change",
       "emailDisplay": "Email: {email}",
-      "referralCodeBittworldUid": "BITTWORLD UID Referral Code (optional)"
+      "referralCodeBittworldUid": "BITTWORLD UID Referral Code"
     },
     "forgotPassword": {
       "title": "Forgot Password",
