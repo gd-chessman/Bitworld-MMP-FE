@@ -132,7 +132,7 @@ const UniversalAccountContent = () => {
                                     <span className="text-[11px] dark:text-gray-300 text-black">{tx.amount} SOL</span>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-[10px] dark:text-gray-400 text-black">{t('universal_account.transactionId')}</span>
+                                    <span className="text-[10px] dark:text-gray-400 text-black">{t('universal_account.transaction_id')}</span>
                                     {tx.transaction_hash && (
                                         <div className="flex items-center gap-1">
                                             <span className="text-[11px] dark:text-gray-300 text-black">{truncateString(tx.transaction_hash, 8)}</span>
