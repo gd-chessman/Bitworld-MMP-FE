@@ -14,6 +14,7 @@ export interface AirdropPool {
   creatorAddress: string;
   creatorBittworldUid: string;
   status: 'pending' | 'active' | 'end' | 'error';
+  roundVolume: number;
   userStakeInfo?: {
     isCreator: boolean;
     joinStatus: 'pending' | 'active' | 'withdraw' | 'error' | 'creator';

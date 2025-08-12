@@ -476,7 +476,7 @@ export default function LiquidityPools() {
                                     </div>
                                     <div className="flex justify-between">
                                         <span className="text-gray-500 dark:text-white">{t('pools.round')}:</span>
-                                        <span className="font-mono text-gray-900 dark:text-white">{formatNumber(pool.totalVolume)}</span>
+                                        <span className="font-mono text-gray-900 dark:text-white">{pool.roundVolume}</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span className="text-gray-500 dark:text-white">{t('pools.created')}:</span>
@@ -556,7 +556,7 @@ export default function LiquidityPools() {
                                                 {pool.memberCount}
                                             </td>
                                             <td className="px-2 py-2 text-xs text-gray-900 dark:text-gray-300">
-                                                <span className="font-mono">{formatNumber(pool.totalVolume)}</span>
+                                                <span className="font-mono">{pool.roundVolume}</span>
                                             </td>
                                             <td className="px-2 py-2 text-xs text-gray-900 dark:text-gray-300">
                                                 <Button
@@ -632,7 +632,7 @@ export default function LiquidityPools() {
                                                 {formatNumber(pool.totalVolume)}
                                             </td>
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-[#6ae1ec]">
-                                                <span className="font-mono font-semibold">{formatNumber(pool.totalVolume)}</span>
+                                                <span className="font-mono font-semibold">{pool.roundVolume}</span>
                                             </td>
                                            
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm italic text-gray-900 dark:text-white">
