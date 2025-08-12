@@ -1317,7 +1317,9 @@
       "yourStaked": "Your Staked:",
       "stakedCount": "Staked Count:",
       "enterAmount": "Enter amount",
-      "insufficient_token_balance": "Insufficient token balance. Current: {current}, Required: {required}"
+      "insufficient_token_balance": "Insufficient token balance. Current: {current}, Required: {required}",
+      "value": "My asset",
+      "valueBitt": "BITT price"
     }
   },
   "connectPage": {

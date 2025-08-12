@@ -10,6 +10,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { getBalanceInfo, getInforWallet } from "@/services/api/TelegramWalletService"
 import { useAuth } from "@/hooks/useAuth"
 import { useLang } from '@/lang/useLang'
+import { useBittPrice } from "@/hooks/useBittPrice"
 import {
     getAirdropPoolDetail,
     getAirdropPoolDetailV1,
@@ -67,6 +68,8 @@ export default function PoolDetail() {
     const { t } = useLang()
     const queryClient = useQueryClient()
     const [required, setRequired] = useState(false)
+    const { price: bittPrice } = useBittPrice()
+    console.log("bittPrice", bittPrice)
 
     // State
     const [activeTab, setActiveTab] = useState<'overview' | 'members' | 'transactions'>('overview')
@@ -82,6 +85,7 @@ export default function PoolDetail() {
     const [isLogoPickerOpen, setIsLogoPickerOpen] = useState(false)
     const [boxLogos, setBoxLogos] = useState<string[]>([])
     const [isLoadingBoxLogos, setIsLoadingBoxLogos] = useState(false)
+    const [lastBittPrice, setLastBittPrice] = useState<number | null>(null)
 
     // Query để lấy thông tin wallet
     const { data: walletInfor } = useQuery({
@@ -117,6 +121,27 @@ export default function PoolDetail() {
             queryClient.invalidateQueries({ queryKey: ["pool-detail-v1", poolId] })
         }
     }, [poolId, queryClient])
+
+    // Invalidate queries when bittPrice changes to update USD values
+    useEffect(() => {
+        if (bittPrice && poolId) {
+            // Check if price has changed significantly
+            if (lastBittPrice && Math.abs(bittPrice.price - lastBittPrice) > 0.0001) {
+                // Show toast notification for price update
+                toast.success(`Bitt price updated: $${bittPrice.price.toFixed(6)}`, {
+                    duration: 2000,
+                    position: 'top-right'
+                })
+
+                // Invalidate queries to refresh data
+                queryClient.invalidateQueries({ queryKey: ["pool-detail", poolId] })
+                queryClient.invalidateQueries({ queryKey: ["pool-detail-v1", poolId] })
+            }
+
+            // Update last known price
+            setLastBittPrice(bittPrice.price)
+        }
+    }, [bittPrice, poolId, queryClient, lastBittPrice])
 
     const { data: balance, isLoading: isBalanceLoading } = useQuery({
         queryKey: ['balance'],
@@ -605,7 +630,7 @@ export default function PoolDetail() {
                                                         </label>
                                                         <div className="flex flex-row  gap-2 justify-around">
                                                             <div className="flex flex-col justify-around gap-2">
-                                                                <FileInput  
+                                                                <FileInput
                                                                     accept="image/*"
                                                                     onChange={handleLogoUpload}
                                                                     placeholder={t('pools.fileInputPlaceholder')}
@@ -845,6 +870,16 @@ export default function PoolDetail() {
                                                     {t('pools.detailPage.stakeAmount')}
                                                 </th>
                                                 <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                    <div className="flex items-center gap-2">
+                                                        <span>{t('pools.detailPage.value')}</span>
+                                                    </div>
+                                                </th>
+                                                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                    <div className="flex items-center gap-2">
+                                                        <span>{t('pools.detailPage.valueBitt')}</span>
+                                                    </div>
+                                                </th>
+                                                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                                     {t('pools.detailPage.joinDate')}
                                                 </th>
                                                 <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -884,6 +919,16 @@ export default function PoolDetail() {
                                                     <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
                                                         <div className="text-sm text-gray-900 dark:text-white font-mono">
                                                             {formatNumber(member.totalStaked)}
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
+                                                        <div className="text-sm text-green-500 font-semibold">
+                                                            ${bittPrice ? (formatNumber(bittPrice.price * member.totalStaked)) : '0.00'}
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
+                                                        <div className="text-sm text-green-500 font-semibold">
+                                                            ${bittPrice ? bittPrice.price.toFixed(6) : '0.00'}
                                                         </div>
                                                     </td>
                                                     <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
@@ -967,6 +1012,25 @@ export default function PoolDetail() {
                                                         </div>
                                                     </div>
                                                     <div className="flex items-center justify-between gap-2">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="text-black dark:text-white">{t('pools.detailPage.value')}:</span>
+                                                        </div>
+                                                        <div className="font-mono text-green-500 text-base font-semibold">
+                                                            ${bittPrice ? (formatNumber(bittPrice.price * member.totalStaked)) : '0.00'}
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="text-black dark:text-white">{t('pools.detailPage.valueBitt')}:</span>
+                                                        </div>
+                                                        <div className="font-mono text-green-500 flex items-center gap-2">
+                                                            {bittPrice && (
+                                                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                                            )}
+                                                            ${bittPrice ? bittPrice.price.toFixed(6) : '0.00'}
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center justify-between gap-2">
                                                         <span className="text-gray-500 dark:text-white">{t('pools.detailPage.joinDate')}:</span>
                                                         <div className="text-gray-900 dark:text-white">
                                                             {formatDate(member.joinDate)}
@@ -999,11 +1063,20 @@ export default function PoolDetail() {
                                                 <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                                     {t('pools.detailPage.amount')}
                                                 </th>
-
-                                                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                    <div className="flex items-center gap-2">
+                                                        <span>{t('pools.detailPage.value')}</span>
+                                                    </div>
+                                                </th>
+                                                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                                    <div className="flex items-center gap-2">
+                                                        <span>{t('pools.detailPage.valueBitt')}</span>
+                                                    </div>
+                                                </th>
+                                                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                                     {t('pools.detailPage.date')}
                                                 </th>
-                                                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                                     {t('pools.detailPage.transactionHash')}
                                                 </th>
                                                 <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -1039,6 +1112,16 @@ export default function PoolDetail() {
                                                     <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
                                                         <div className="text-sm text-gray-900 dark:text-white font-mono">
                                                             {formatNumber(tx.stakeAmount)}
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
+                                                        <div className=" text-green-500 text-base font-semibold">
+                                                            ${bittPrice ? (formatNumber(bittPrice.price * tx.stakeAmount)) : '0.00'}
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
+                                                        <div className="text-sm text-green-500 font-semibold">
+                                                            ${bittPrice ? bittPrice.price.toFixed(6) : '0.00'}
                                                         </div>
                                                     </td>
                                                     <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
@@ -1113,24 +1196,28 @@ export default function PoolDetail() {
                                                         </div>
                                                     </div>
                                                     <div className="flex items-center justify-between gap-2">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="text-black dark:text-white">{t('pools.detailPage.value')}:</span>
+                                                        </div>
+                                                        <div className="font-mono text-green-500 text-base font-semibold">
+                                                            ${bittPrice ? (formatNumber(bittPrice.price * tx.stakeAmount)) : '0.00'}
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="text-black dark:text-white">{t('pools.detailPage.valueBitt')}:</span>
+                                                        </div>
+                                                        <div className="font-mono text-green-500 flex items-center gap-2">
+                                                            {bittPrice && (
+                                                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                                            )}
+                                                            ${bittPrice ? bittPrice.price.toFixed(6) : '0.00'}
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center justify-between gap-2">
                                                         <span className="text-black dark:text-white">{t('pools.detailPage.user')}:</span>
                                                         <div className="text-gray-900 dark:text-white truncate">
                                                             {tx.nickname}
-                                                        </div>
-                                                    </div>
-                                                    <div className="flex items-center justify-between gap-2">
-                                                        <span className="text-black dark:text-white">{t('pools.detailPage.address')}:</span>
-                                                        <div className="text-yellow-500 truncate flex items-center gap-1 cursor-pointer text-sm" onClick={() => {
-                                                            navigator.clipboard.writeText(tx.solanaAddress)
-                                                            toast.success(t('pools.detailPage.copiedToClipboard'))
-                                                        }} >
-                                                            {truncateString(tx.solanaAddress, 12)} <Copy className="w-3 h-3" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="flex items-center justify-between gap-2">
-                                                        <span className="text-black dark:text-white">{t('pools.detailPage.transactionHash')}:</span>
-                                                        <div className="text-gray-900 dark:text-white truncate">
-                                                            {truncateString(tx.transactionHash || '', 12) ?? '-'}
                                                         </div>
                                                     </div>
                                                 </div>

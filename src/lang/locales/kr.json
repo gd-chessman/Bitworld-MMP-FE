@@ -1309,7 +1309,9 @@
       "yourStaked": "당신의 스테이킹:",
       "stakedCount": "스테이킹 횟수:",
       "enterAmount": "수량 입력",
-      "insufficient_token_balance": "토큰 잔액이 부족합니다. 현재: {current}, 필요: {required}"
+      "insufficient_token_balance": "토큰 잔액이 부족합니다. 현재: {current}, 필요: {required}",
+      "value": "자산가치",
+      "valueBitt": "BITT 가격"
     }
   },
   "swap": {
