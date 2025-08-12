@@ -928,7 +928,7 @@ export default function PoolDetail() {
                                                     </td>
                                                     <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
                                                         <div className="text-sm text-green-500 font-semibold">
-                                                            ${bittPrice ? bittPrice.price.toFixed(6) : '0.00'}
+                                                            ${bittPrice ? bittPrice.price : '0.00'}
                                                         </div>
                                                     </td>
                                                     <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
@@ -1027,7 +1027,7 @@ export default function PoolDetail() {
                                                             {bittPrice && (
                                                                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                                                             )}
-                                                            ${bittPrice ? bittPrice.price.toFixed(6) : '0.00'}
+                                                            ${bittPrice ? bittPrice.price : '0.00'}
                                                         </div>
                                                     </div>
                                                     <div className="flex items-center justify-between gap-2">
@@ -1121,7 +1121,7 @@ export default function PoolDetail() {
                                                     </td>
                                                     <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
                                                         <div className="text-sm text-green-500 font-semibold">
-                                                            ${bittPrice ? bittPrice.price.toFixed(6) : '0.00'}
+                                                            ${bittPrice ? bittPrice.price : '0.00'}
                                                         </div>
                                                     </td>
                                                     <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
@@ -1211,7 +1211,7 @@ export default function PoolDetail() {
                                                             {bittPrice && (
                                                                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                                                             )}
-                                                            ${bittPrice ? bittPrice.price.toFixed(6) : '0.00'}
+                                                            ${bittPrice ? bittPrice.price : '0.00'}
                                                         </div>
                                                     </div>
                                                     <div className="flex items-center justify-between gap-2">
