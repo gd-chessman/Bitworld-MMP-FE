@@ -628,13 +628,12 @@ export default function LiquidityPools() {
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
                                                 {pool.memberCount}
                                             </td>
-                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
-                                                {formatNumber(pool.totalVolume)}
-                                            </td>
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-[#6ae1ec]">
                                                 <span className="font-mono font-semibold">{pool.roundVolume}</span>
                                             </td>
-                                           
+                                            <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
+                                                {formatNumber(pool.totalVolume)}
+                                            </td>
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm italic text-gray-900 dark:text-white">
                                                 {formatDate(pool.creationDate)}
                                             </td>
