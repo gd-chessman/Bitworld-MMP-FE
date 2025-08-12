@@ -129,7 +129,7 @@ const UniversalAccountContent = () => {
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span className="text-[10px] dark:text-gray-400 text-black">{t('universal_account.amount')}</span>
-                                    <span className="text-[11px] dark:text-gray-300 text-black">{tx.amount} SOL</span>
+                                    <span className="text-[11px] dark:text-gray-300 text-black">{tx.amount} {tx.token_symbol}</span>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span className="text-[10px] dark:text-gray-400 text-black">{t('universal_account.transaction_id')}</span>
