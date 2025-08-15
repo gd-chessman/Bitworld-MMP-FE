@@ -1161,16 +1161,17 @@ export default function PoolDetail() {
                                 {/* Mobile Card Layout */}
                                 <div className="sm:hidden">
                                     <div className="p-3 space-y-3">
-                                        {transactions.filter((tx: PoolTransaction) => tx.transactionId !== 0).map((tx: PoolTransaction) => (
+                                        {transactions.map((tx: PoolTransaction) => (
                                             <div key={tx.transactionId} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 space-y-3">
                                                 <div className="flex items-center justify-between">
                                                     <div className="flex flex-col gap-1">
-                                                        <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                                                            {t('pools.detailPage.stake')}
-                                                        </span>
-                                                        {tx.isCreator && (
+                                                        {tx.isCreator ? (
                                                             <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">
                                                                 {t('pools.detailPage.creator')}
+                                                            </span>
+                                                        ) : (
+                                                            <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                                                {t('pools.detailPage.stake')}
                                                             </span>
                                                         )}
                                                     </div>
