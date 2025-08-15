@@ -44,6 +44,7 @@ function TransactionHistoryContent() {
   const [realTimeTransactions, setRealTimeTransactions] = useState<any[]>([]);
   const [realTimeTransactionsMy, setRealTimeTransactionsMy] = useState<any[]>([]);
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
+  const [selectedToken, setSelectedToken] = useState<string>("");
 
   const searchParams = useSearchParams();
   const address = searchParams?.get("address");
@@ -268,6 +269,11 @@ function TransactionHistoryContent() {
     if (price === undefined) return '0.0';
     return price?.toFixed(6);
   };
+
+  const handleSwapToken = (tokenSymbol: string) => {
+    setIsSwapModalOpen(true)
+    setSelectedToken(tokenSymbol)
+  }
 
   const renderTransactionCard = (order: any, index: number) => {
     const { t } = useLang();
@@ -718,7 +724,7 @@ function TransactionHistoryContent() {
                       </td>
                       <td className="px-4 py-2 text-gray-600 dark:text-neutral-300 text-xs font-medium truncate">
                         {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
-                          <div className="flex justify-center items-center" onClick={() => setIsSwapModalOpen(true)}>
+                          <div className="flex justify-center items-center" onClick={() => handleSwapToken(token.token_symbol)}>
                             <ArrowLeftRight className="w-4 h-4 text-white" /> &ensp; {t('swap.swap')}
                           </div>
                         )}
@@ -760,7 +766,7 @@ function TransactionHistoryContent() {
                       </div>
                     </div>
                     {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
-                      <div className="flex justify-center items-center dark:bg-theme-neutral-800 bg-theme-neutral-200 px-3 py-1 rounded-md" onClick={() => setIsSwapModalOpen(true)}>
+                      <div className="flex justify-center items-center dark:bg-theme-neutral-800 bg-theme-neutral-200 px-3 py-1 rounded-md" onClick={() => handleSwapToken(token.token_symbol)}>
                         <ArrowLeftRight className="w-4 h-4 text-theme-primary-500" /> &ensp; {t('swap.swap')}
                       </div>
                     )}
@@ -833,7 +839,7 @@ function TransactionHistoryContent() {
                 renderAssetsTable()}
         </div>
       </div>
-      <SwapModal isOpen={isSwapModalOpen} onClose={() => setIsSwapModalOpen(false)} />
+      <SwapModal isOpen={isSwapModalOpen} onClose={() => setIsSwapModalOpen(false)} selectedToken={selectedToken} />
     </div>
   )
 }

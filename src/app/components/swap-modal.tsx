@@ -64,14 +64,14 @@ const SwapInterface = React.memo(({
       <div className="flex flex-col gap-2">
         {/* From Section */}
         <div className="">
-          <div className="bg-[#1B1A1A] rounded-xl px-4 py-2 pt-3 flex flex-col justify-between">
+          <div className="bg-[#1B1A1A] rounded-xl px-4 py-2 pt-3 flex flex-col justify-between gap-2">
             <div className="flex items-start justify-between gap-2 flex-col">
               <div className="flex items-center gap-2">
                 {getTokenIcon(fromToken)}
                 <span className={`font-semibold ${classes.bodyText}`}>{fromToken.toUpperCase()}</span>
               </div>
             </div>
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex md:items-center justify-between gap-2 flex-col md:flex-row w-full">
               <span className={`${classes.historyText} dark:text-white text-black`}>
                 {t('swap.balance')}: <span className="text-theme-primary-500 font-semibold">{fromToken === "solana" ? balance?.sol?.token_balance || "0" : balance?.usdt?.token_balance || "0"}</span>
               </span>
@@ -80,7 +80,7 @@ const SwapInterface = React.memo(({
                   type="text"
                   value={fromAmount}
                   onChange={(e) => handleFromAmountChange(e.target.value)}
-                  className={`${classes.inputText} w-[100px] md:w-auto h-8 outline-none bg-gray-1000 border-none rounded-md text-right p-0 text-white pr-3 placeholder:text-gray-400 placeholder:text-sm`}
+                  className={`${classes.inputText} w-full md:w-auto h-8 outline-none bg-gray-1000 border-none rounded-md text-right p-0 text-white pr-3 placeholder:text-gray-400 placeholder:text-sm`}
                   placeholder="0.00"
                 />
                 
@@ -476,7 +476,7 @@ const SwapModal = ({ isOpen, onClose, selectedToken }: { isOpen: boolean; onClos
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className={`${classes.modal} outline-none overflow-y-auto bg-[#121619] max-h-auto md:max-h-[80vh] h-fit border-gray-700 text-white`} >
+      <DialogContent className={`${classes.modal} outline-none overflow-y-auto bg-[#121619] max-h-auto md:max-h-[80vh] h-fit border-gray-700 text-white`} onPointerDownOutside={(e) => e.preventDefault()}>
         <DialogHeader className="flex flex-row items-center justify-between max-h-10">
           <DialogTitle className={`${classes.title} font-bold text-white max-h-10`}>{t('swap.swap')}</DialogTitle>
         </DialogHeader>
