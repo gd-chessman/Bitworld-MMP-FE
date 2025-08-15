@@ -225,7 +225,7 @@ const HistoryInterface = React.memo(({
 HistoryInterface.displayName = 'HistoryInterface'
 
 // Main SwapModal component
-const SwapModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+const SwapModal = ({ isOpen, onClose, selectedToken }: { isOpen: boolean; onClose: () => void, selectedToken: string }) => {
   const { t } = useLang()
   const isMobile = useMediaQuery('(max-width: 767px)')
   const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)')
@@ -234,8 +234,9 @@ const SwapModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
   // State
   const [fromAmount, setFromAmount] = useState("")
   const [toAmount, setToAmount] = useState("")
-  const [fromToken, setFromToken] = useState("solana")
-  const [toToken, setToToken] = useState("usdt")
+  // Fix: When selectedToken is USDT, fromToken should be usdt, toToken should be solana
+  const [fromToken, setFromToken] = useState(selectedToken === "SOL" ? "solana" : "usdt")
+  const [toToken, setToToken] = useState(selectedToken === "SOL" ? "usdt" : "solana")
   const [showHistory, setShowHistory] = useState(true)
   const [activeTab, setActiveTab] = useState<'swap' | 'history'>('swap')
   const [isLoading, setIsLoading] = useState(false)
@@ -253,6 +254,20 @@ const SwapModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
     queryFn: getSwapHistory,
     enabled: isOpen,
   })
+
+  // Update tokens when selectedToken changes
+  useEffect(() => {
+    if (selectedToken) {
+      const newFromToken = selectedToken === "SOL" ? "solana" : "usdt"
+      const newToToken = selectedToken === "SOL" ? "usdt" : "solana"
+      setFromToken(newFromToken)
+      setToToken(newToToken)
+      // Reset amounts when token changes
+      setFromAmount("")
+      setToAmount("")
+      setInsufficientBalance(false)
+    }
+  }, [selectedToken])
 
   const createSwapMutation = useMutation({
     mutationFn: createSwap,
@@ -273,7 +288,8 @@ const SwapModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
 
   // Helper function to get current balance for a token
   const getCurrentBalance = (token: string) => {
-    return token === "solana" ? balance?.sol?.token_balance || 0 : balance?.usdt?.token_balance || 0
+    const balanceValue = token === "solana" ? balance?.sol?.token_balance || 0 : balance?.usdt?.token_balance || 0
+    return balanceValue
   }
 
   // Helper function to check if amount exceeds balance
@@ -369,7 +385,7 @@ const SwapModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
 
   // Format swap history data from API
   const formatSwapHistory = (swapOrders: any[]) => {
-    return swapOrders.map((order) => ({
+    const formatted = swapOrders.map((order) => ({
       id: order.swap_order_id.toString(),
       time: new Date(order.created_at).toLocaleTimeString('en-US', { 
         hour: '2-digit', 
@@ -388,6 +404,7 @@ const SwapModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
       status: order.status,
       transactionHash: order.transaction_hash
     }))
+    return formatted
   }
 
   // Responsive classes
@@ -453,11 +470,13 @@ const SwapModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
     }
   }, [isMobile])
 
-  const swapHistory = swapHistoryData?.data ? formatSwapHistory(swapHistoryData.data) : []
+  const swapHistory = useMemo(() => {
+    return swapHistoryData?.data ? formatSwapHistory(swapHistoryData.data) : []
+  }, [swapHistoryData])
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className={`${classes.modal} outline-none overflow-y-auto bg-[#121619] max-h-auto md:max-h-[80vh] h-fit border-gray-700 text-white`} onPointerDownOutside={(e) => e.preventDefault()}>
+      <DialogContent className={`${classes.modal} outline-none overflow-y-auto bg-[#121619] max-h-auto md:max-h-[80vh] h-fit border-gray-700 text-white`} >
         <DialogHeader className="flex flex-row items-center justify-between max-h-10">
           <DialogTitle className={`${classes.title} font-bold text-white max-h-10`}>{t('swap.swap')}</DialogTitle>
         </DialogHeader>

@@ -294,14 +294,13 @@ export default function WalletPage() {
     const [copyStates, setCopyStates] = useState<{ [key: string]: boolean }>({});
     const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
     const { isAuthenticated } = useAuth();
-
+    const [selectedToken, setSelectedToken] = useState<string>("");
     const { data: tokenList, refetch: refetchTokenList, isLoading: isLoadingTokenList } = useQuery({
         queryKey: ["token-buy-list"],
         queryFn: getListBuyToken,
         enabled: isAuthenticated,
     });
 
-    console.log("tokenList", tokenList)
     // Filter tokens: SOL/USDT tokens are always shown, others need balance >= 0.005
     const filteredTokens = tokenList?.tokens?.filter((token: Token) =>
         token.token_symbol === "SOL" ||
@@ -309,7 +308,6 @@ export default function WalletPage() {
         token.token_symbol === "BITT" ||
         token.token_balance_usd >= 0.005
     ) || [];
-    console.log("filteredTokens", filteredTokens)
     const { data: walletInfor, refetch, isLoading: isLoadingWalletInfor } = useQuery({
         queryKey: ["wallet-infor"],
         queryFn: getInforWallet,
@@ -334,6 +332,11 @@ export default function WalletPage() {
             setCopyStates(prev => ({ ...prev, [address]: false }));
         }, 2000);
     };
+
+    const handleSwapToken = (tokenSymbol: string) => {
+        setIsSwapModalOpen(true)
+        setSelectedToken(tokenSymbol)
+    }
 
 
     return (
@@ -610,7 +613,7 @@ export default function WalletPage() {
                                                               
                                                                 <td>
                                                                     {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
-                                                                        <div className="flex justify-center items-center" onClick={() => setIsSwapModalOpen(true)}>
+                                                                        <div className="flex justify-center items-center" onClick={() => handleSwapToken(token.token_symbol)}>
                                                                             <ArrowLeftRight className="w-5 h-5 text-white" /> &ensp; {t('swap.swap')}
                                                                         </div>
                                                                     )}
@@ -652,7 +655,7 @@ export default function WalletPage() {
                                                             </div>
                                                             </div>
                                                             {(token.token_symbol === "SOL" || token.token_symbol === "USDT") && (
-                                                                <div className="flex justify-center items-center" onClick={() => setIsSwapModalOpen(true)}>
+                                                                <div className="flex justify-center items-center" onClick={() => handleSwapToken(token.token_symbol)}>
                                                                     <ArrowLeftRight className="w-4 h-4 text-theme-primary-500" /> &ensp; {t('swap.swap')}
                                                                 </div>
                                                             )}
@@ -660,7 +663,7 @@ export default function WalletPage() {
                                                     </div>
 
                                                     {/* Token Details */}
-                                                    <div className="flex justify-between gap-3 mt-1 lg:mt-3 lg:pt-3 pt-1 border-t border-gray-700">
+                                                    <div className="flex justify-between gap-3 mt-1 lg:mt-3 lg:pt-3 pt-1 border-t border-gray-700">              
                                                         <div>
                                                             <div className={assetLabelStyles}>{t('wallet.balance')}</div>
                                                             <div className={assetAmountStyles}>{token.token_balance.toFixed(token.token_decimals)}</div>
@@ -687,7 +690,7 @@ export default function WalletPage() {
             </div>
 
             <ModalSignin isOpen={!isAuthenticated} onClose={() => { }} />
-            <SwapModal isOpen={isSwapModalOpen} onClose={() => setIsSwapModalOpen(false)} />
+            <SwapModal isOpen={isSwapModalOpen} onClose={() => setIsSwapModalOpen(false)} selectedToken={selectedToken} />
         </>
     );
 }
