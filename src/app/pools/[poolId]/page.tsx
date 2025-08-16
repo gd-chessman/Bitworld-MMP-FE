@@ -770,18 +770,18 @@ export default function PoolDetail() {
                                                     <label className="block text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300 mb-2">
                                                         {t('pools.detailPage.amountToStake')}
                                                     </label>
-                                                    <div className="flex flex-row justify-between gap-2">
+                                                    <div className="flex flex-row justify-between gap-2 h-full">
                                                         <input
                                                             type="text"
                                                             value={formatInputNumber(stakeAmount)}
                                                             onChange={(e) => handleInputChange(e.target.value)}
-                                                            className="w-full px-3 outline-none py-3 sm:py-2 text-base border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-theme-primary-500 focus:border-transparent"
+                                                            className="w-full px-3 outline-none py-2 text-base border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-theme-primary-500 focus:border-transparent"
                                                             placeholder={t('pools.detailPage.enterAmount')}
                                                         />
-                                                        <button className="text-xs bg-theme-primary-500 text-white px-3 py-1 rounded-md" onClick={() => {
+                                                        <button className="text-xs bg-theme-primary-500 text-white px-3 py-1 whitespace-nowrap rounded-md h-10" onClick={() => {
                                                             setStakeAmount(balance?.bitt?.token_balance ?? 0)
                                                         }}>
-                                                            {t('universal_account.max_button')}
+                                                            {t('swap.max')} 
                                                         </button>
                                                     </div>
                                                     <div className="flex flex-row justify-between mt-1">
@@ -824,7 +824,7 @@ export default function PoolDetail() {
                                                     <label className="block text-sm sm:text-base text-theme-primary-500 mb-2 uppercase font-semibold">
                                                         {t('pools.detailPage.amountToStake')}
                                                     </label>
-                                                    <div className="flex items-center gap-2">
+                                                    <div className="flex items-center gap-2 h-full">
                                                         <input
                                                             type="text"
                                                             value={formatInputNumber(stakeAmount)}
@@ -832,10 +832,10 @@ export default function PoolDetail() {
                                                             className="w-full px-3 py-2 text-base outline-none border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-theme-primary-500 focus:border-transparent"
                                                             placeholder={t('pools.detailPage.enterAmount')}
                                                         />
-                                                        <button className="text-xs bg-theme-primary-500 text-white px-3 py-1 rounded-md" onClick={() => {
+                                                        <button className="text-xs bg-theme-primary-500 text-white px-3 whitespace-nowrap py-1 rounded-md h-10" onClick={() => {
                                                             setStakeAmount(balance?.bitt?.token_balance ?? 0)
                                                         }}>
-                                                            {t('universal_account.max_button')}
+                                                            {t('swap.max')}
                                                         </button></div>
                                                     <div className="flex flex-row justify-between mt-1">
                                                         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
