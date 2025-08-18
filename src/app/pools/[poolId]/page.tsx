@@ -188,6 +188,9 @@ export default function PoolDetail() {
                     })
                 }
             }
+            if (error.response?.data?.message?.includes('Minimum stake amount is 1,000,000 BITT for non-creator users')) {
+                message = t('pools.detailPage.minimumStakeAmount')
+            }
 
             toast.error(message)
             setIsStaking(false)
@@ -218,15 +221,6 @@ export default function PoolDetail() {
             toast.error(message)
         }
     })
-
-    const handleStake = async () => {
-        if (stakeAmount && stakeAmount < 1000000) {
-            toast.error(t('pools.detailPage.minimumStakeAmount'))
-            return
-        }
-
-        setIsConfirmingStake(true)
-    }
 
     const handleUpdatePool = async () => {
         if (!editForm.describe?.trim() && !editForm.logo) {
@@ -378,6 +372,15 @@ export default function PoolDetail() {
     }
 
     const isCreator = poolDetail.userStakeInfo?.isCreator || false
+
+    const handleStake = async () => {
+        if (!isCreator && stakeAmount && stakeAmount < 1000000) {
+            toast.error(t('pools.detailPage.minimumStakeAmount'))
+            return
+        }
+
+        setIsConfirmingStake(true)
+    }
 
     return (
         <div className="flex-1 bg-white dark:bg-black text-gray-900 dark:text-white">
