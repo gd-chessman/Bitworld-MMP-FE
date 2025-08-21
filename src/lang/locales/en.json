@@ -1431,7 +1431,10 @@
       "date": "Date",
       "hashTx": "Hash Tx",
       "name": "Name",
-      "mint": "Mint"
+      "mint": "Mint",
+      "leader_bonus": "Leader Bonus (10%)",
+      "participation_share": "Participation Share (90%)",
+      "top_pool_reward": "Top Pool Reward (10%)"
     },
     "status": {
       "can_withdraw": "Waiting",

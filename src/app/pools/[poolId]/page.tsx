@@ -799,10 +799,8 @@ export default function PoolDetail() {
                                                             {t('swap.max')} 
                                                         </button>
                                                     </div>
-                                                    <div className="flex flex-row justify-between mt-1">
-                                                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                                            {t('pools.detailPage.minimumAmount')}
-                                                        </p>
+                                                    <div className="flex flex-row justify-end mt-1">
+                                                        
                                                         <p className="text-xs text-theme-primary-500 mt-1">
                                                             {t('pools.detailPage.balanceBitt')}: {formatNumber(balance?.bitt?.token_balance ?? 0)}
                                                         </p>
@@ -852,10 +850,7 @@ export default function PoolDetail() {
                                                         }}>
                                                             {t('swap.max')}
                                                         </button></div>
-                                                    <div className="flex flex-row justify-between mt-1">
-                                                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                                            {t('pools.detailPage.minimumAmount')}
-                                                        </p>
+                                                    <div className="flex flex-row justify-end mt-1">
                                                         <p className="text-xs text-theme-primary-500 mt-1">
                                                             {t('pools.detailPage.balanceBitt')}: {formatNumber(balance?.bitt?.token_balance ?? 0)}
                                                         </p>
