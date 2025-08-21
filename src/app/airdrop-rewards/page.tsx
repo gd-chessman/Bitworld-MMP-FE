@@ -209,7 +209,7 @@ const page = () => {
                                     {t('airdropRewards.table.mint')}:
                                 </span>
                                 <span className="text-yellow-500 font-mono">
-                                    {reward.token_mint}
+                                    {truncateString(reward.token_mint, 20)}
                                 </span>
                             </div>
                             

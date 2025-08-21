@@ -1434,7 +1434,8 @@
       "mint": "Mint",
       "leader_bonus": "Leader Bonus (10%)",
       "participation_share": "Participation Share (90%)",
-      "top_pool_reward": "Top Pool Reward (10%)"
+      "top_pool_reward": "Top Pool Reward (10%)",
+      "volume_based_reward": "Volume-based Reward"
     },
     "status": {
       "can_withdraw": "Waiting",
