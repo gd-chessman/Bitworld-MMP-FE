@@ -238,3 +238,13 @@ export const getPoolList = async () => {
         return [];
     }
 }
+
+export const getPoolRewards = async () => {
+  try {
+    const response = await axiosClient.get(`/airdrops/reward-history`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching pool rewards:", error);
+    return [];
+  }
+}

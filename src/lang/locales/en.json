@@ -1411,5 +1411,33 @@
       "invalidEmailOrPassword": "Invalid email or password",
       "emailNotVerified": "Email is not verified. Please verify your email first."
     }
+  },
+  "airdropRewards": {
+    "title": "My Airdrop Rewards",
+    "rewardHistory": "Reward History",
+    "stats": {
+      "totalRewards": "Total Rewards",
+      "waitingRewards": "Waiting Rewards",
+      "rewarded": "Rewarded",
+      "totalAmount": "total amount",
+      "available": "available",
+      "total": "total"
+    },
+    "table": {
+      "token": "Token",
+      "amount": "Amount",
+      "type": "Type",
+      "status": "Status",
+      "date": "Date",
+      "hashTx": "Hash Tx",
+      "name": "Name",
+      "mint": "Mint"
+    },
+    "status": {
+      "can_withdraw": "Waiting",
+      "withdrawn": "Rewarded",
+      "pending": "Pending"
+    },
+    "empty": "No rewards found"
   }
 }

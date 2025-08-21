@@ -1377,5 +1377,33 @@
       "registerError": "登録中にエラーが発生しました",
       "passwordChangeError": "パスワード変更中にエラーが発生しました"
     }
+  },
+  "airdropRewards": {
+    "title": "マイエアドロップ報酬",
+    "rewardHistory": "報酬履歴",
+    "stats": {
+      "totalRewards": "合計報酬",
+      "waitingRewards": "待機中の報酬",
+      "rewarded": "受け取り済み",
+      "totalAmount": "合計数量",
+      "available": "利用可能",
+      "total": "合計"
+    },
+    "table": {
+      "token": "トークン",
+      "amount": "数量",
+      "type": "タイプ",
+      "status": "ステータス",
+      "date": "日付",
+      "hashTx": "ハッシュ Tx",
+      "name": "名前",
+      "mint": "ミント"
+    },
+    "status": {
+      "can_withdraw": "待機中",
+      "withdrawn": "受け取り済み",
+      "pending": "保留中"
+    },
+    "empty": "報酬は見つかりませんでした"
   }
 }

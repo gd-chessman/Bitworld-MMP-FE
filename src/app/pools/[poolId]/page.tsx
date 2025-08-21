@@ -16,6 +16,7 @@ import {
     getAirdropPoolDetailV1,
     stakeAirdropPool,
     updateAirdropPool,
+    getPoolRewards,
     type AirdropPool,
     type StakePoolRequest,
     type UpdatePoolRequest
@@ -72,7 +73,7 @@ export default function PoolDetail() {
     console.log("bittPrice", bittPrice)
 
     // State
-    const [activeTab, setActiveTab] = useState<'overview' | 'members' | 'transactions'>('overview')
+    const [activeTab, setActiveTab] = useState<'overview' | 'members' | 'transactions' | 'rewards'>('overview')
     const [stakeAmount, setStakeAmount] = useState(1000000)
     const [isStaking, setIsStaking] = useState(false)
     const [isConfirmingStake, setIsConfirmingStake] = useState(false)
@@ -545,6 +546,17 @@ export default function PoolDetail() {
                                         }`}
                                 >
                                     {t('pools.detailPage.transactions')}
+                                </button>
+                            )}
+                            {poolDetailV1?.data?.rewards && (
+                                <button
+                                    onClick={() => setActiveTab('rewards')}
+                                    className={`py-2 px-1 border-b-2 font-medium text-sm lg:text-base ${activeTab === 'rewards'
+                                        ? 'border-theme-primary-500 text-theme-primary-500'
+                                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                        }`}
+                                >
+                                    {t('pools.detailPage.rewards')}
                                 </button>
                             )}
                         </nav>

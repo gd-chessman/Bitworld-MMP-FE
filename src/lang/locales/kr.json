@@ -1453,5 +1453,33 @@
       "invalid_google_auth": "Google Authenticator 코드가 올바르지 않습니다.",
       "sender_and_receiver_wallet_addresses_must_be_different": "보내는 주소와 받는 주소는 다르야 합니다."
     }
+  },
+  "airdropRewards": {
+    "title": "내 에어드랍 보상",
+    "rewardHistory": "보상 내역",
+    "stats": {
+      "totalRewards": "총 보상",
+      "waitingRewards": "대기 중 보상",
+      "rewarded": "지급 완료",
+      "totalAmount": "총 금액",
+      "available": "사용 가능",
+      "total": "총"
+    },
+    "table": {
+      "token": "토큰",
+      "amount": "수량",
+      "type": "유형",
+      "status": "상태",
+      "date": "날짜",
+      "hashTx": "해시 Tx",
+      "name": "이름",
+      "mint": "민트"
+    },
+    "status": {
+      "can_withdraw": "대기",
+      "withdrawn": "지급 완료",
+      "pending": "보류"
+    },
+    "empty": "보상이 없습니다"
   }
 }

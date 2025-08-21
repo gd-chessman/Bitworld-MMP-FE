@@ -412,12 +412,22 @@ export default function LiquidityPools() {
 
 
                         <div className="flex space-x-4 w-full sm:w-auto">
-                            <Button
-                                className="bg-theme-primary-500 text-white text-xs sm:text-sm font-medium hover:bg-green-500 px-3 sm:px-4 py-2 sm:py-2 h-auto sm:max-h-[30px] w-full sm:w-auto"
-                                onClick={() => setIsCreateModalOpen(true)}
-                            >
-                                {t('pools.createPoolBtn')}
-                            </Button>
+                            <div className="flex space-x-4 w-full sm:w-auto">
+                                <Button
+                                    className="bg-theme-primary-500 text-white text-xs sm:text-sm font-medium hover:bg-green-500 px-3 sm:px-4 py-2 sm:py-2 h-auto sm:max-h-[30px] w-full sm:w-auto"
+                                    onClick={() => router.push('/airdrop-rewards')}
+                                >
+                                    {t('airdropRewards.title')} 
+                                </Button>
+                            </div>
+                            <div className="flex space-x-4 w-full sm:w-auto">
+                                <Button
+                                    className="bg-theme-primary-500 text-white text-xs sm:text-sm font-medium hover:bg-green-500 px-3 sm:px-4 py-2 sm:py-2 h-auto sm:max-h-[30px] w-full sm:w-auto"
+                                    onClick={() => setIsCreateModalOpen(true)}
+                                >
+                                    {t('pools.createPoolBtn')}
+                                </Button>
+                            </div>
                         </div>
                     </div>
 
@@ -623,7 +633,7 @@ export default function LiquidityPools() {
                                                 <Copy className="w-3 h-3" onClick={() => {
                                                     navigator.clipboard.writeText(pool.creatorAddress)
                                                     toast.success(t('pools.detailPage.copiedToClipboard'))
-                                                }}/>
+                                                }} />
                                             </td>
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
                                                 {pool.memberCount}
@@ -817,8 +827,8 @@ export default function LiquidityPools() {
                                         type="button"
                                         className="border border-gray-200 dark:border-gray-700 rounded-lg p-2 flex items-center justify-center hover:border-theme-primary-500 focus:outline-none"
                                         onClick={() => {
-                                             setImagePreview(url)
-                                             setCreateForm(prev => ({ ...prev, image: url }))
+                                            setImagePreview(url)
+                                            setCreateForm(prev => ({ ...prev, image: url }))
                                             setIsLogoPickerOpen(false)
                                         }}
                                     >

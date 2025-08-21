@@ -1432,5 +1432,33 @@
       "registerError": "Có lỗi xảy ra khi đăng ký",
       "passwordChangeError": "Có lỗi xảy ra khi đổi mật khẩu"
     }
+  },
+  "airdropRewards": {
+    "title": "Phần thưởng Airdrop của tôi",
+    "rewardHistory": "Lịch sử phần thưởng",
+    "stats": {
+      "totalRewards": "Tổng phần thưởng",
+      "waitingRewards": "Phần thưởng chờ",
+      "rewarded": "Đã nhận",
+      "totalAmount": "tổng số lượng",
+      "available": "khả dụng",
+      "total": "tổng"
+    },
+    "table": {
+      "token": "Token",
+      "amount": "Số lượng",
+      "type": "Loại",
+      "status": "Trạng thái",
+      "date": "Ngày",
+      "hashTx": "Hash Tx",
+      "name": "Tên",
+      "mint": "Mint"
+    },
+    "status": {
+      "can_withdraw": "Chờ",
+      "withdrawn": "Đã nhận",
+      "pending": "Đang chờ"
+    },
+    "empty": "Không có phần thưởng nào"
   }
 }
