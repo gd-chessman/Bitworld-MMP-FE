@@ -374,10 +374,10 @@ export default function PoolDetail() {
     const isCreator = poolDetail.userStakeInfo?.isCreator || false
 
     const handleStake = async () => {
-        if (!isCreator && stakeAmount && stakeAmount < 1000000) {
-            toast.error(t('pools.detailPage.minimumStakeAmount'))
-            return
-        }
+        // if (!isCreator && stakeAmount && stakeAmount < 1000000) {
+        //     toast.error(t('pools.detailPage.minimumStakeAmount'))
+        //     return
+        // }
 
         setIsConfirmingStake(true)
     }
