@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import token from '@/assets/svgs/token.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { getNewCoins, getSearchTokenInfor, getTopCoins } from '@/services/api/OnChainService'
+import { getNewCoins, getSearchTokenInfor, getTokenNew, getTopCoins } from '@/services/api/OnChainService'
 import { formatNumberWithSuffix } from '@/utils/format'
 import { SolonaTokenService } from '@/services/api'
 import { useDebounce } from '@/hooks/useDebounce'
@@ -65,6 +65,12 @@ const ListToken = () => {
         refetchOnMount: true,
     });
 
+    const { data: tokenNew, isLoading: isLoadingTokenNew } = useQuery({
+        queryKey: ["tokenNews"],
+        queryFn: getTokenNew,
+    });
+    console.log("tokenNew", tokenNew)
+
     const { data: listToken, isLoading: isQueryLoading } = useQuery({
         queryKey: ["searchTokens", debouncedSearchQuery],
         queryFn: () => getSearchTokenInfor(debouncedSearchQuery),
@@ -107,17 +113,27 @@ const ListToken = () => {
                 filteredList = topCoins;
                 break;
             case "new":
-                // filteredList = newCoins?.map(token => ({
-                //     ...token,
-                //     market_cap: token.marketCap * 100,
-                //     volume_24h_usd: token.marketCap * 100,
-                //     volume_24h_change_percent: 0,
-                //     volume_1h_change_percent: 0,
-                //     volume_4h_change_percent: 0,
-                //     volume_5m_change_percent: 0,
-                //     poolAddress: token.address
-                // }));
-                filteredList= []
+                filteredList = tokenNew?.tokens?.map((token: any) => ({
+                    ...token,
+                    market_cap: token.market_cap,
+                    volume_24h_usd: token.volume_24h_usd,
+                    volume_24h_change_percent: token.volume_24h_change_percent,
+                    volume_1h_change_percent: token.volume_1h_change_percent,
+                    volume_4h_change_percent: token.volume_4h_change_percent,
+                    volume_5m_change_percent: token.volume_5m_change_percent,
+                    logo_uri: token.logo_url,
+                    createdAt: new Date(token.recent_listing_time * 1000).toISOString(),
+                    poolAddress: token.address,
+                    price: token.price,
+                    price_change_24h_percent: token.price_change_24h_percent,
+                    holder: token.holder,
+                    buys: token.buys,
+                    sells: token.sells,
+                    txns: token.txns,
+                    trade_24h_count: token.trade_24h_count,
+                    fdv: token.fdv,
+                    liquidity: token.liquidity
+                })) || [];
                 break;
             case "favorite":
                 filteredList = myWishlist?.tokens || [];
@@ -336,22 +352,22 @@ const ListToken = () => {
     const handleStarClick = async (token: any) => {
         const status = myWishlist?.tokens?.some((t: { address: string }) => t.address === token.address) ? "off" : "on";
         const data = {
-          token_address: token.address,
-          status: status,
+            token_address: token.address,
+            status: status,
         };
-        
+
         try {
-          // First call getTokenInforByAddress
-          await SolonaTokenService.getTokenInforByAddress(token.address);
-          
-          // Only after getTokenInforByAddress succeeds, call toggleWishlist
-          await SolonaTokenService.toggleWishlist(data);
-          refetchMyWishlist();
-          notify({ message: status === "on" ? `${t("tableDashboard.toast.add")} ${t("tableDashboard.toast.wishlist")} ${t("tableDashboard.toast.success")}` : `${t("tableDashboard.toast.remove")} ${t("tableDashboard.toast.wishlist")} ${t("tableDashboard.toast.success")}`, type: 'success' });
+            // First call getTokenInforByAddress
+            await SolonaTokenService.getTokenInforByAddress(token.address);
+
+            // Only after getTokenInforByAddress succeeds, call toggleWishlist
+            await SolonaTokenService.toggleWishlist(data);
+            refetchMyWishlist();
+            notify({ message: status === "on" ? `${t("tableDashboard.toast.add")} ${t("tableDashboard.toast.wishlist")} ${t("tableDashboard.toast.success")}` : `${t("tableDashboard.toast.remove")} ${t("tableDashboard.toast.wishlist")} ${t("tableDashboard.toast.success")}`, type: 'success' });
         } catch (error) {
-          notify({ message: status === "on" ? `${t("tableDashboard.toast.add")} ${t("tableDashboard.toast.wishlist")} ${t("tableDashboard.toast.failed")}` : `${t("tableDashboard.toast.remove")} ${t("tableDashboard.toast.wishlist")} ${t("tableDashboard.toast.failed")}`, type: 'error' });
+            notify({ message: status === "on" ? `${t("tableDashboard.toast.add")} ${t("tableDashboard.toast.wishlist")} ${t("tableDashboard.toast.failed")}` : `${t("tableDashboard.toast.remove")} ${t("tableDashboard.toast.wishlist")} ${t("tableDashboard.toast.failed")}`, type: 'error' });
         }
-      };
+    };
 
     return (
         <div className='dark:bg-theme-neutral-1000 bg-white shadow-inset rounded-md pr-0 pb-0 flex-1 pt-1 overflow-hidden'>
@@ -440,7 +456,7 @@ const ListToken = () => {
                                     <div className='flex-1 flex items-center justify-between cursor-pointer' onClick={() => handleChangeToken(address)}>
                                         <div className="flex items-center gap-2 ">
                                             <img
-                                                src={item?.logo_uri || item?.logoUrl || "/logo.png"}
+                                                src={item?.logo_uri || item?.logoUrl || item?.logo_url || "/logo.png"}
                                                 alt=""
                                                 width={24}
                                                 height={24}
@@ -486,19 +502,13 @@ const ListToken = () => {
                                         </div>
                                         <div className="text-right pr-3 flex flex-col sm:gap-1 cursor-pointer" onClick={() => handleChangeToken(address)}>
                                             <span className='dark:text-theme-neutral-100 text-theme-neutral-800 text-xs font-medium'>${formatNumberWithSuffix(item.volume_usd)}</span>
-                                            {activeTab === "new" ? (
-                                                <span className="text-xs font-medium dark:text-theme-neutral-100 text-theme-neutral-800">
-                                                    {getRelativeTime(item.createdAt)}
-                                                </span>
-                                            ) : (
-                                                item.volume_change_percent !== undefined && (
-                                                    <span className={`text-xs font-medium ${item.volume_change_percent > 0
-                                                        ? 'text-theme-green-200'
-                                                        : item.volume_change_percent < 0
-                                                            ? 'text-theme-red-100'
-                                                            : 'dark:text-theme-neutral-100 text-theme-neutral-800'
-                                                        }`}>{formatNumberWithSuffix(item.volume_change_percent) ?? 0}%</span>
-                                                )
+                                            {item.volume_change_percent !== undefined && (
+                                                <span className={`text-xs font-medium ${item.volume_change_percent > 0
+                                                    ? 'text-theme-green-200'
+                                                    : item.volume_change_percent < 0
+                                                        ? 'text-theme-red-100'
+                                                        : 'dark:text-theme-neutral-100 text-theme-neutral-800'
+                                                    }`}>{formatNumberWithSuffix(item.volume_change_percent) ?? 0}%</span>
                                             )}
                                         </div>
 
