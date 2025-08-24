@@ -152,6 +152,7 @@ const ListToken = () => {
             default:
                 filteredList = topCoins;
         }
+        console.log("tokenNew", tokenNew)
 
         // Apply time filter if data exists
         if (Array.isArray(filteredList)) {

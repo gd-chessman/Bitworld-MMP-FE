@@ -117,7 +117,7 @@ export const getHolders = async (address: string) => {
 export const getTokenNew = async () => {
   try {
     const temp = await axiosClient.get(`/bittworlds/token-list`);
-    return temp.data;
+    return temp.data.data;
   } catch (error) {
     console.log(error);
     return { tokens: [], total: 0, page: 1, limit: 20 };
