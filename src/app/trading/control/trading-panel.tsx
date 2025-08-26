@@ -288,15 +288,19 @@ export default function TradingPanel({
             <div className="rounded-lg flex flex-col md:justify-between gap-2 lg:gap-3 h-full overflow-y-auto pr-2">
                 {/* Amount Input */}
                 <div className="relative mt-3 flex flex-col gap-2">
-                    <div className={`bg-gray-50 dark:bg-neutral-900 rounded-md flex items-center border ${amountError ? 'border-red-500' : 'border-blue-200 dark:border-gray-600'} px-3 flex justify-between items-center ${height > 700 ? 'py-1.5' : 'h-[30px]'}`}>
-                        <input
-                            type="number"
-                            value={amount}
-                            onChange={handleAmountChange}
-                            className="bg-transparent w-full text-gray-900 dark:text-neutral-200 font-medium text-base focus:outline-none"
-                        />
+                    <div className={`bg-gray-50 dark:bg-neutral-900 rounded-md flex items-center border ${amountError ? 'border-red-500' : 'border-blue-200 dark:border-gray-600'} px-3 flex justify-between items-center ${height > 700 ? 'py-1.5' : 'h-[30px]'} relative`}>
+                        <div className="flex items-center gap-2 w-full">
+                            <span className="text-gray-500 dark:text-neutral-400 text-base pointer-events-none">{mode === "buy" ? "SOL:" : tokenInfor?.symbol + ":"}</span>
+                            <input
+                                type="number"
+                                value={amount}
+                                onChange={handleAmountChange}
+                                placeholder="0.00"
+                                className="bg-transparent text-gray-900 dark:text-neutral-200 font-medium text-base focus:outline-none max-w-[120px]"
+                            />
+                        </div>
                         {mode === "buy" ? (
-                            <div className={`${STYLE_TEXT_BASE} flex items-center !text-theme-primary-500 font-semibold`}>${amountUSD}</div>
+                            <div className={`${STYLE_TEXT_BASE} flex items-center !text-theme-primary-500 !text-base font-semibold`}>${amountUSD}</div>
                         ) : (
                             <div className={STYLE_TEXT_BASE}>&ensp;</div>
                         )}
@@ -309,7 +313,7 @@ export default function TradingPanel({
 
                     {/* USD Value and Balance */}
                     <div className="flex flex-wrap justify-between text-sm mt-2">
-                    {!isDirectAmountInput && (
+                        {!isDirectAmountInput && (
                             <span className={`${STYLE_TEXT_BASE} text-theme-primary-500 font-semibold ml-1`}>
                                 {percentage}%
                             </span>
