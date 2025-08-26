@@ -302,7 +302,7 @@ export default function TradingPanel({
                         {mode === "buy" ? (
                             <div className={`${STYLE_TEXT_BASE} flex items-center !text-theme-primary-500 !text-base font-semibold`}>${amountUSD}</div>
                         ) : (
-                            <div className={STYLE_TEXT_BASE}>&ensp;</div>
+                            <div className={`${STYLE_TEXT_BASE} flex items-center !text-theme-primary-500 !text-base font-semibold`}>${(tokenInfor?.price * Number(amount)).toFixed(4)}</div>
                         )}
                     </div>
                     {amountError && (
