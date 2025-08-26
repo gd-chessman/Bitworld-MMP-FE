@@ -311,7 +311,7 @@ export default function TradingPanel({
                     <div className="flex flex-wrap justify-between text-sm mt-2">
                     {!isDirectAmountInput && (
                             <span className={`${STYLE_TEXT_BASE} text-theme-primary-500 font-semibold ml-1`}>
-                                {percentage.toFixed(2)}%
+                                {percentage}%
                             </span>
                         )}
                         <div className={STYLE_TEXT_BASE}>
