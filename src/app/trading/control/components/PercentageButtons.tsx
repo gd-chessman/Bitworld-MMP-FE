@@ -25,7 +25,7 @@ export const PercentageButtons: React.FC<PercentageButtonsProps> = ({
     onEditKeyPress,
 }) => {
     return (
-        <div className="flex items-center justify-between 2xl:gap-2 gap-1 mt-5">
+        <div className="flex items-center justify-between 2xl:gap-2 gap-1 mt-3">
             {percentageValues.map((percent, index) => (
                 <div key={index} className="relative w-full">
                     {editingIndex === index ? (

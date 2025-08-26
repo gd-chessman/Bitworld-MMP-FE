@@ -54,7 +54,7 @@ export const CustomRangeSlider: React.FC<CustomRangeSliderProps> = ({
                 />
                 
                 {/* Labels positioned over the slider track */}
-                <ul className="range-labels absolute top-3 2xl:top-3 left-0 2xl:left-[-1px] right-0 flex justify-between pointer-events-none z-20">
+                <ul className="range-labels absolute top-3 md:top-2.5 2xl:top-3 left-0 2xl:left-[-1px] right-0 flex justify-between pointer-events-none z-20">
                     {marks.map((mark, index) => {
                         const isActive = activeMarks.includes(mark);
                         const isSelected = value >= mark;
