@@ -149,14 +149,16 @@ const page = () => {
         const isExpanded = expandedItems.has(reward.ar_id)
         const translate = (text: string) => {
             switch (text) {
-                case 'Leader Bonus (10%)':
+                case 'leader_bonus':
                     return t('airdropRewards.table.leader_bonus')
-                case 'Participation Share (90%)':
+                case 'participation_share':
                     return t('airdropRewards.table.participation_share')
-                case 'Top Pool Reward':
+                case 'top_pool_reward':
                     return t('airdropRewards.table.top_pool_reward')
-                case 'Volume-based Reward':
+                case 'volume_based_reward':
                     return t('airdropRewards.table.volume_based_reward')
+                case 'airdrop_reward':
+                    return t('airdropRewards.table.airdrop_reward')
                 default:
                     return text
             }
@@ -212,7 +214,7 @@ const page = () => {
                                     {truncateString(reward.token_mint, 20)}
                                 </span>
                             </div>
-                            
+
                             {reward.ar_hash && (
                                 <div className="flex items-center justify-between">
                                     <div className="text-xs">
@@ -247,14 +249,16 @@ const page = () => {
     }
     const translate = (text: string) => {
         switch (text) {
-            case 'Leader Bonus (10%)':
+            case 'leader_bonus':
                 return t('airdropRewards.table.leader_bonus')
-            case 'Participation Share (90%)':
+            case 'participation_share':
                 return t('airdropRewards.table.participation_share')
-            case 'Top Pool Reward':
+            case 'top_pool_reward':
                 return t('airdropRewards.table.top_pool_reward')
-            case 'Volume-based Reward':
+            case 'volume_based_reward':
                 return t('airdropRewards.table.volume_based_reward')
+            case 'airdrop_reward':
+                return t('airdropRewards.table.airdrop_reward')
             default:
                 return text
         }
@@ -322,7 +326,7 @@ const page = () => {
             {/* Rewards Section */}
             <div>
                 <h2 className="text-lg md:text-xl font-semibold mb-4">{t('airdropRewards.rewardHistory')}</h2>
-                
+
                 {isMobile ? (
                     // Mobile Card View
                     <div className="space-y-4">
@@ -376,7 +380,7 @@ const page = () => {
                                             <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-300">
                                                 <div className="flex items-center gap-2">
                                                     {getRewardTypeIcon(reward.ar_sub_type)}
-                                                    <span>{translate(reward.reward_description)}</span>
+                                                    <span>{translate(reward.ar_sub_type)}</span>
                                                 </div>
                                             </td>
                                             <td className="px-4 py-3 text-sm text-gray-900 dark:text-gray-300">

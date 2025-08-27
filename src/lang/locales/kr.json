@@ -1474,9 +1474,10 @@
       "hashTx": "해시 Tx",
       "name": "이름",
       "mint": "민트",
-      "leader_bonus": "리더 보상 (10%)",
-      "participation_share": "참여 공유 (90%)",
-      "top_pool_reward": "상위 풀 보상",
+      "leader_bonus": "풀장",
+      "participation_share": "참여",
+      "top_pool_reward": "시상",
+      "airdrop_reward": "에어드랍 보상",
       "volume_based_reward": "볼륨 기반 보상"
     },
     "status": {
