@@ -417,7 +417,7 @@ export default function LiquidityPools() {
                                     className="bg-theme-primary-500 text-white text-xs sm:text-sm font-medium hover:bg-green-500 px-3 sm:px-4 py-2 sm:py-2 h-auto sm:max-h-[30px] w-full sm:w-auto"
                                     onClick={() => router.push('/airdrop-rewards')}
                                 >
-                                    {t('airdropRewards.title')} 
+                                    {t('airdropRewards.title')}
                                 </Button>
                             </div>
                             <div className="flex space-x-4 w-full sm:w-auto">
@@ -431,13 +431,7 @@ export default function LiquidityPools() {
                         </div>
                     </div>
 
-                    {/* Loading State */}
-                    {isLoadingPools && (
-                        <div className="text-center py-12">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-theme-primary-500 mx-auto"></div>
-                            <p className="mt-2 text-gray-500">{t('pools.loadingPools')}</p>
-                        </div>
-                    )}
+
 
                     {/* Mobile Card Layout */}
                     <div className="sm:hidden space-y-3">
@@ -664,6 +658,13 @@ export default function LiquidityPools() {
                             </table>
                         </div>
                     </div>
+                    {/* Loading State */}
+                    {isLoadingPools && (
+                        <div className="text-center py-12">
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-theme-primary-500 mx-auto"></div>
+                            <p className="mt-2 text-gray-500">{t('pools.loadingPools')}</p>
+                        </div>
+                    )}
 
                     {filteredPools.length === 0 && !isLoadingPools && (
                         <div className="text-center py-12 text-gray-500 dark:text-gray-400">
