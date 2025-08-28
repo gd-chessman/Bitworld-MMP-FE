@@ -289,7 +289,7 @@ export default function LiquidityPools() {
 
     // Sort pools by totalVolume if ranking filter is active
     if (activeFilter === 'ranking') {
-        filteredPools = [...filteredPools].sort((a, b) => b.totalVolume - a.totalVolume);
+        filteredPools = [...filteredPools].sort((a, b) => b.roundVolume - a.roundVolume);
     }
 
     // Tính số lượng pools cho mỗi tab (sẽ được cập nhật khi có API riêng cho từng tab)
@@ -596,7 +596,7 @@ export default function LiquidityPools() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {filteredPools.sort((a: AirdropPool, b: AirdropPool) => b.roundVolume - a.roundVolume).map((pool: AirdropPool, index: number) => (
+                                    {filteredPools.map((pool: AirdropPool, index: number) => (
                                         <tr key={pool.poolId} className={`border-t border-gray-200 dark:border-gray-700 ${getColorRanking(index)} ${index % 2 === 0 ? "bg-white dark:bg-[#171717]" : "bg-gray-50 dark:bg-[#525252]/60"}`}>
                                             <td className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-900 dark:text-white">
                                                 <div className="flex items-center gap-3">
