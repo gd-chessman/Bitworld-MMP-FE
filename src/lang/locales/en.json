@@ -1301,7 +1301,7 @@
       "confirmStake": "Confirm Stake",
       "confirmStakeMessage": "Do you confirm staking {amount} tokens into pool {poolName}?",
       "cancel": "Cancel",
-      "minimumStakeAmount": "Minimum stake amount is 1,000,000 tokens",
+      "minimumStakeAmount": "First-time participants must stake at least 500,000 BITT",
       "poolLinkCopied": "Pool link copied to clipboard!",
       "stakeSuccessful": "Stake successful!",
       "stakeFailed": "Failed to stake pool. Please try again.",

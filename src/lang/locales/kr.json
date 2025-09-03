@@ -1293,7 +1293,7 @@
       "confirmStake": "스테이킹 확인",
       "confirmStakeMessage": "풀 {poolName}에 {amount} 토큰을 스테이킹하는 것을 확인하시겠습니까?",
       "cancel": "취소",
-      "minimumStakeAmount": "최소 스테이킹 수량은 1,000,000 토큰입니다",
+      "minimumStakeAmount": "최초 참가자는 최소 500,000 BITT를 스테이킹해야 합니다.",
       "poolLinkCopied": "풀 링크가 클립보드에 복사되었습니다!",
       "stakeSuccessful": "스테이킹 성공!",
       "stakeFailed": "풀 스테이킹에 실패했습니다. 다시 시도해 주세요.",

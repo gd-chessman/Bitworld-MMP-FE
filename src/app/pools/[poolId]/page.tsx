@@ -189,7 +189,7 @@ export default function PoolDetail() {
                     })
                 }
             }
-            if (error.response?.data?.message?.includes('Minimum stake amount is 1,000,000 BITT for non-creator users')) {
+            if (error.response?.data?.message?.includes('must stake at least 500,000 BITT')) {
                 message = t('pools.detailPage.minimumStakeAmount')
             }
 
