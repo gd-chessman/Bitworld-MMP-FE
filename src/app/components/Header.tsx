@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link';
-import { ChevronDown, LogOut, Search, Wallet2, Menu, X, LayoutDashboard, Coins, LineChart, Wallet as WalletIcon, Moon, Sun, EyeOff, ShieldCheck, FileCheck, LinkIcon, Shield, Store, Copy, Divide, ArrowDownToLine, ArrowUpFromLine, Link2 } from 'lucide-react';
+import { ChevronDown, LogOut, Search, Wallet2, Menu, X, LayoutDashboard, Coins, LineChart, Wallet as WalletIcon, Moon, Sun, EyeOff, ShieldCheck, FileCheck, LinkIcon, Shield, Store, Copy, Divide, ArrowDownToLine, ArrowUpFromLine, Link2, Twitter } from 'lucide-react';
 import { useLang } from '@/lang/useLang';
 import Display from '@/app/components/Display';
 import {
@@ -159,6 +159,12 @@ const Header = () => {
             name: "BITTWORLD CEX",
             icon: Link2,
             href: "https://www.bittworld.com",
+            logoPump: false,
+        },
+        {
+            name: "BITTWORLD TWITTER",
+            icon: Twitter,
+            href: "https://x.com/BittWorld776",
             logoPump: false,
         }
     ]
